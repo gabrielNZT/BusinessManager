@@ -80,6 +80,7 @@ label{
 
 .button-submit-form{
     color: aliceblue;
+    font-weight: 600;
     margin-top: 35px;
     margin-bottom: 5px;
     height: 50px;

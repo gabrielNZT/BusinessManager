@@ -1,8 +1,8 @@
-import Login from "./pages/login/index.js";
+import PagesRoutes from "./routes.js";
 
 
 function App() {
-  return <Login/>
+  return <PagesRoutes/>
 }
 
 export default App;

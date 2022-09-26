@@ -1,6 +1,6 @@
 import Background from "../../assets";
-import LoginForm from "./form";
-import './style.css'
+import LoginForm from "./component/form";
+import './style/style.css'
 
 function Login() {
     return (

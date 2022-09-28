@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { LogIn } from '../reducer/actions.js'
 import { useDispatch } from 'react-redux';
 import { ToastNotify } from '../../../global/toast/index.js';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   const dispatch = useDispatch()
@@ -13,6 +14,11 @@ function LoginForm() {
     name: '',
     password: ''
   })
+  let navigate = useNavigate()
+
+  const handleNavigate = () => {
+    navigate('../forget-password', {replace: true})
+  }
 
   function callBack(){
     const access_token = JSON.parse(localStorage.getItem('auth'))?.access_token
@@ -56,7 +62,7 @@ function LoginForm() {
         </Form.Text>
       </Form.Group>
 
-      <i className='i-loginform-forget-password'>Esqueci a senha</i>
+      <i className='i-loginform-forget-password' onClick={handleNavigate}>Esqueci a senha</i>
 
       <div className='div-buttons'>
         <Button className='button-submit-form' variant="primary" type="submit">

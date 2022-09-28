@@ -2,18 +2,27 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useState } from 'react';
-import { SignIn } from '../../../services/security/auth';
+import { LogIn } from '../reducer/actions.js'
+import { useDispatch } from 'react-redux';
+import { ToastNotify } from '../../../global/toast/index.js';
 
 function LoginForm() {
+  const dispatch = useDispatch()
   const [visibleIcon, setVisibleIcon] = useState('password')
   const [user, setUser] = useState({
     name: '',
     password: ''
   })
 
+  function callBack(){
+    const access_token = JSON.parse(localStorage.getItem('auth'))?.access_token
+    dispatch(LogIn({...user, access_token: access_token}))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    SignIn(user)
+    ToastNotify({type: 'LOGIN_PROMISE', payload: {user: {name: user.name, password: user.password}}}, callBack)
+    setUser({name: '', password: ''})
   }
 
   return (
@@ -23,6 +32,7 @@ function LoginForm() {
         <Form.Label>Usuário ou email</Form.Label>
         <Form.Control
           required
+          value={user.name}
           type="text"
           placeholder="Digite seu nome de usuário ao seu email"
           onChange={(event) => setUser({ ...user, name: event.target.value })}
@@ -36,6 +46,7 @@ function LoginForm() {
             : <EyeTwoTone onClick={() => setVisibleIcon('password')} className='sufix-icon'></EyeTwoTone>}
           <Form.Control
             required
+            value={user.password}
             onChange={(event) => setUser({ ...user, password: event.target.value })}
             onBlur={() => setVisibleIcon('password')}
             type={visibleIcon}

@@ -1,0 +1,6 @@
+.modalBackground{
+    position: fixed;
+    top: 20%;
+    background: white;
+    border-radius: 40px;
+}

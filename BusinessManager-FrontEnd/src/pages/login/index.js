@@ -13,7 +13,7 @@ function Login() {
                     <h1 className="h1-login-header">Login</h1>
                     <p className="p-login-header">Bem vindo ao <span className="span-company-name">BM</span></p>
                 </div>
-                <LoginForm />
+                <LoginForm/>
             </div>
         </>
     )

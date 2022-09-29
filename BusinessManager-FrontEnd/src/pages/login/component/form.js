@@ -77,7 +77,7 @@ function LoginForm() {
 
         <i className='i-ou'>ou</i>
 
-        <Button className='button-register' variant="primary">
+        <Button className='button-register' variant="primary" onClick={() => navigate("../register-company", {replace: true})}>
           CADASTRE SUA EMPRESA
         </Button>
 

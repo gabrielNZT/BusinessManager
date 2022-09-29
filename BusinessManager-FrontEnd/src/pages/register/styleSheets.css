@@ -1,0 +1,43 @@
+@media only screen and (max-height: 700px) {
+    .div-register-form{
+        height: 750px !important;
+        width: 900px !important;   
+    }
+  }
+
+.div-register-form{
+    position: fixed;
+    top: 8%;
+    right: 12%;
+
+    background: white;
+    opacity: 80%;
+
+    height: 670px;
+    width: 850px;
+    border-radius: 5%;
+    box-shadow: 5px 2px 30px 10px rgba(0, 0, 0, 0.2);
+}
+
+.div-form{  
+   padding: 20px;
+   width: 400px;
+   float: right;
+}
+
+.form-label{
+    width: 300px !important;
+}
+
+.div-button-register{
+    padding: 30px;
+}
+.button-submit-form{
+    margin-top: 0% !important;
+    width: 40% !important;
+    margin-left: 5px !important;
+}
+
+.button-register{
+    width: 40%;
+}

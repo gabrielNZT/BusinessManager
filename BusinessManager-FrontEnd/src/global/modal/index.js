@@ -1,34 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
-import { ModalDialog } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal'
 import './styleSheets.css'
 
-function ModalNotification({setOpenModal}) {
-    return (
-        <div className="modalBackground">
-          <div className="modalContainer">
-            <div className="titleCloseBtn">
-            </div>
-            <div className="title">
-              <h1>Are You Sure You Want to Continue?</h1>
-            </div>
-            <div className="body">
-              <p>The next page looks amazing. Hope you want to go there!</p>
-            </div>
-            <div className="footer">
-              <button
-                onClick={() => {
-                  setOpenModal(false);
-                }}
-                id="cancelBtn"
-              >
-                Cancel
-              </button>
-              <button>Continue</button>
-            </div>
+function ModalNotification({ setModalOpen }) {
+  return (
+    <>
+      <div className="modalBackground" />
+      <div className='modal-todo'>
+        <div className="modalContainer">
+          <div className="title">
+            <h5>Verifique seu email</h5>
+          </div>
+          <div className="body">
+            <p style={{ marginLeft: '4%' }}>Caso o email informado esteja cadastrado no sistema, você
+              receberá uma mensagem com a nova senha temporária</p>
+          </div>
+          <div className="footer">
+            <Button className='button-submit-form' variant="primary" onClick={() => setModalOpen(false)} >Confirmar</Button>
           </div>
         </div>
-      );
+      </div>
+    </>
+  );
 }
 export default ModalNotification

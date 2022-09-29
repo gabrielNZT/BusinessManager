@@ -1,6 +1,50 @@
 .modalBackground{
-    position: fixed;
-    top: 20%;
+    z-index: 2;
+    position: absolute;
+    top: 0%;
+    background: gray;
+    opacity: 40%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-todo{
+    position: absolute;
+    top: 0%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContainer{
+    z-index: 3;
     background: white;
-    border-radius: 40px;
+    width: 29%;
+    height: 32%;
+    padding: 2%;
+    border-radius: 20px;
+}
+
+.title{
+    margin-top: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.body{
+    margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: gray;
 }

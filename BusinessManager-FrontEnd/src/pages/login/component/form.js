@@ -17,18 +17,22 @@ function LoginForm() {
   let navigate = useNavigate()
 
   const handleNavigate = () => {
-    navigate('../forget-password', {replace: true})
+    navigate('../forget-password', { replace: true })
   }
 
-  function callBack(){
+  function callBack() {
     const access_token = JSON.parse(localStorage.getItem('auth'))?.access_token
-    dispatch(LogIn({...user, access_token: access_token}))
+    dispatch(LogIn({ ...user, access_token: access_token }))
+  }
+
+  async function handleToast(){
+    await ToastNotify({ type: 'LOGIN_PROMISE', payload: { user: { name: user.name, password: user.password } } }, callBack)
+    .finally(() => setUser({ name: '', password: '' })) 
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    ToastNotify({type: 'LOGIN_PROMISE', payload: {user: {name: user.name, password: user.password}}}, callBack)
-    setUser({name: '', password: ''})
+    handleToast()
   }
 
   return (
@@ -45,7 +49,7 @@ function LoginForm() {
         />
       </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      <Form.Group className="group-password" controlId="formBasicPassword">
         <Form.Label>Senha</Form.Label>
         <div className='div-input-password'>
           {visibleIcon === 'password' ? <EyeInvisibleOutlined onClick={() => setVisibleIcon('text')} className='sufix-icon' />
@@ -62,7 +66,9 @@ function LoginForm() {
         </Form.Text>
       </Form.Group>
 
-      <i className='i-loginform-forget-password' onClick={handleNavigate}>Esqueci a senha</i>
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginTop: '20px'}}>
+        <i className='i-loginform-forget-password' onClick={handleNavigate}>Esqueci a senha</i>
+      </div>
 
       <div className='div-buttons'>
         <Button className='button-submit-form' variant="primary" type="submit">

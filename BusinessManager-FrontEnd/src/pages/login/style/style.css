@@ -6,11 +6,15 @@
     background: white;
     opacity: 80%;
 
-    height: 82%;
-    width: 35%;
+    height: 700px;
+    width: 600px;
     border-radius: 5%;
     box-shadow: 5px 2px 30px 10px rgba(0, 0, 0, 0.2);
     
+}
+
+.group-password{
+    margin-top: 40px;
 }
 
 .span-company-name{
@@ -105,13 +109,13 @@ label{
     right: 10%;
 }
 
-.i-loginform-forget-password{
-    margin-left: 78%;
+.i-loginform-forget-password{   
     cursor: pointer;
     color: #0a53be;
 }
 
 .div-buttons{
+    margin-top: 30px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

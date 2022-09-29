@@ -14,10 +14,21 @@ export function ForgetPassword() {
         navigate('../', { replace: true })
     }
 
+    function ModalNotify(){
+        return(
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+                    <ModalNotification setModalOpen={setModalOpen}/>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <>
             <Background />
             <Logo />
+            {modalOpen && ModalNotify()}
             <div className="div-login-form">
                 <div className="div-login-form-header">
                     <div className="prefix-icon">
@@ -42,13 +53,6 @@ export function ForgetPassword() {
                     </div>
                 </div>
             </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                    <ModalNotification />
-                </div>
-            </div>
-
         </>
     )
 }

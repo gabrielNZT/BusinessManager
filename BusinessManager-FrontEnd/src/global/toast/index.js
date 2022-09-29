@@ -1,4 +1,5 @@
 import { toast } from "react-toastify"
+import { PasswordRecover } from "../../services/request"
 import { SignIn } from "../../services/security/auth"
 
 export function ToastNotify(action, callBack) {
@@ -15,6 +16,16 @@ export function ToastNotify(action, callBack) {
                     }
                 )
             )
+        case 'FORGET_PASSWORD_PROMISE':
+            return (
+                toast.promise(
+                    PasswordRecover(action.payload.email),
+                    {
+                        pending: "...loading"
+                    }
+                )
+            )
+
         default:
             return
     }

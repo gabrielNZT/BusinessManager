@@ -9,11 +9,11 @@ function ModalNotification({ setModalOpen }) {
       <div className='modal-todo'>
         <div className="modalContainer">
           <div className="title">
-            <h5>Verifique seu email</h5>
+            <h5><b>Verifique seu email</b></h5>
           </div>
           <div className="body">
-            <p style={{ marginLeft: '4%' }}>Caso o email informado esteja cadastrado no sistema, você
-              receberá uma mensagem com a nova senha temporária</p>
+            <p>Caso o email informado esteja cadastrado no sistema, você
+              receberá uma mensagem com a nova senha temporária.</p>
           </div>
           <div className="footer">
             <Button className='button-submit-form' variant="primary" onClick={() => setModalOpen(false)} >Confirmar</Button>

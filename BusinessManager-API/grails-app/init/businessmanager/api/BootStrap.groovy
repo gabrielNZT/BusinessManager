@@ -21,7 +21,7 @@ class BootStrap {
         Role.findByAuthority('ROLE_ADMIN')?: new Role(authority: 'ROLE_ADMIN').save(flush: true)
 
         if(User.findByUsername('gabrielAdmin') == null){
-            new User(username: 'gabrielAdmin', password: 'admin', email: 'gabriel@gmail.com', enabled: true, passwordExpired: false,
+            new User(username: 'gabrielAdmin', password: 'admin', email: 'gabrielnunescesarino@gmail.com', enabled: true, passwordExpired: false,
             accountLocked: false, accountExpired: false).save(flush: true)
         }
 

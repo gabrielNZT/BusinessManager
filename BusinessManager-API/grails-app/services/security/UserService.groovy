@@ -1,18 +1,42 @@
 package security
 
-import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
 
-@Service(User)
-interface UserService {
+@Transactional
+class UserService{
 
-    User get(Serializable id)
+    Long count(){
+        return User.count
+    }
 
-    List<User> list(Map args)
+    User get(Long id){
+        return User.get(id)
+    }
 
-    Long count()
+    def delete(Long id){
+        User.findById(id).delete()
+    }
 
-    User delete(Serializable id)
+    List<User> list(){
+        return User.list()
+    }
 
-    User save(User user)
+    def save(User user){
+        user.save()
+    }
 
+    String generatePassword(){
+        ArrayList<String> validCharacters = new ArrayList<>(Arrays.asList("A", "a", "B", "b", "1", "3", "V", "#",
+        "v", "G", "g", "&", "@", "T", "h", "H", "J", "j", "L", "l", "x", "X"))
+
+        Integer passwordSize = 6
+        StringBuilder password = new StringBuilder()
+
+        for(int i in 1..passwordSize) {
+            String value = validCharacters.get(Math.floor(Math.random() * validCharacters.size()) as int)
+            password.append(value)
+        }
+
+        return password.toString()
+    }
 }

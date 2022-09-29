@@ -1,5 +1,6 @@
 package security
 
+import grails.plugins.mail.MailService
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
@@ -14,6 +15,7 @@ import grails.gorm.transactions.Transactional
 class UserController {
 
     UserService userService
+    MailService mailService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -21,6 +23,32 @@ class UserController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond userService.list(params), model:[userCount: userService.count()]
+    }
+
+    @Transactional
+    def recoverPassword(){
+        def request = request.getJSON()
+        User user = new User()
+        if( request != null ){
+            user = User.findByEmail(request.email)
+            if(user == null){
+                respond NOT_FOUND
+            }
+        } else {
+            respond UNPROCESSABLE_ENTITY
+        }
+
+        String newPassword = userService.generatePassword()
+        user.setPassword(newPassword)
+        user.setVersion((user.version + 1))
+
+        mailService.sendMail {
+            to user.email
+            subject "NOVA SENHA"
+            text "Sua senha de acesso temporária é: $newPassword"
+        }
+
+        respond user, [status: OK, view: "show"]
     }
 
     def show(Long id) {

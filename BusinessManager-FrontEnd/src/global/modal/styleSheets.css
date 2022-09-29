@@ -24,14 +24,14 @@
 .modalContainer{
     z-index: 3;
     background: white;
-    width: 29%;
-    height: 32%;
-    padding: 2%;
+    width: 430px;
+    height: 260px;
+    padding: 1%;
     border-radius: 20px;
 }
 
 .title{
-    margin-top: none;
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -41,7 +41,7 @@
 
 .body{
     margin-top: 10%;
-    display: flex;
+    display: flex;  
     flex-direction: row;
     justify-content: center;
     align-items: center;

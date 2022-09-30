@@ -29,15 +29,19 @@
     width: 300px !important;
 }
 
-.div-button-register{
-    padding: 30px;
-}
-.button-submit-form{
-    margin-top: 0% !important;
-    width: 40% !important;
-    margin-left: 5px !important;
-}
 
 .button-register{
+    margin-top: 0px;
+    height: 50px;
+    background: #9f309d;
     width: 40%;
+    margin-left: 25px;
+}
+
+.button-back-login{
+    background: #b3b3b3;
+    font-weight: 600;
+    width: 40%;
+    height: 50px;
+    margin-right: 40px;
 }

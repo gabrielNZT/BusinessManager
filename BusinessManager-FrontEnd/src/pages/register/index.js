@@ -60,15 +60,18 @@ function Register() {
                         ))}
                     </Form>
                 </div>
-                <div className='div-buttons'>
-                    <Button className='button-submit-form' variant="primary" type="submit">
-                        ENTRAR
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', marginTop: '25px' }}>
+                    <Button className='button-register' variant="primary" type="submit">
+                        CADASTRE-SE
                     </Button>
 
-                    <i className='i-ou'>ou</i>
+                    <div style={{height: '60px', width: '3%', marginTop: '10px'}}>
+                        <i style={{height: '100%'}} className='i-ou'>ou</i>
+                    </div>
 
-                    <Button className='button-register' variant="primary" onClick={() => navigate("../register-company", { replace: true })}>
-                        CADASTRE SUA EMPRESA
+
+                    <Button className='button-back-login' variant="primary" onClick={() => navigate("../register-company", { replace: true })}>
+                        VOLTAR PARA O LOGIN
                     </Button>
 
                 </div>

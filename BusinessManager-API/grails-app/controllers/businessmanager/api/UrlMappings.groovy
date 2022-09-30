@@ -11,6 +11,7 @@ class UrlMappings {
         patch "/api/$controller/$id(.$format)?"(action:"patch")
 
         "/api/recoverPassword"(controller: 'user', action: 'recoverPassword')
+        "/api/registerCompany"(controller: 'userCompany', action: 'registerCompany')
 
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')

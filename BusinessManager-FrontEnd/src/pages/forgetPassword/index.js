@@ -15,9 +15,9 @@ export function ForgetPassword() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        ToastNotify({type: 'FORGET_PASSWORD_PROMISE', payload: {email}}).finally(() => {
-        setEmail('');
-        setModalOpen(true)
+        ToastNotify({ type: 'FORGET_PASSWORD_PROMISE', payload: { email } }).finally(() => {
+            setEmail('');
+            setModalOpen(true)
         })
     }
 
@@ -29,7 +29,11 @@ export function ForgetPassword() {
         return (
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                    <ModalNotification setModalOpen={setModalOpen} />
+                    <ModalNotification
+                        title='Verifique seu email'
+                        body='Caso o email informado esteja cadastrado no sistema, você
+              receberá uma mensagem com a nova senha temporária.'
+                        setModalOpen={setModalOpen} />
                 </div>
             </div>
         )
@@ -54,11 +58,11 @@ export function ForgetPassword() {
                     <Form onSubmit={handleSubmit} style={{ marginTop: '10%' }}>
                         <Form.Group>
                             <Form.Label>Email</Form.Label>
-                            <Form.Control 
-                            onChange={ (event) => setEmail(event.target.value) }
-                            value={email}
-                            type="email" 
-                            placeholder="Digite seu email" />
+                            <Form.Control
+                                onChange={(event) => setEmail(event.target.value)}
+                                value={email}
+                                type="email"
+                                placeholder="Digite seu email" />
                         </Form.Group>
                         <div className='div-buttons' style={{ marginTop: '10%' }}>
                             <Button className='button-submit-form' variant="primary" type="submit">RECUPERAR A SENHA</Button>

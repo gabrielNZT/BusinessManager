@@ -1,7 +1,12 @@
 package security
 
+import businessmanager.api.Company
+import businessmanager.api.CompanyService
 import grails.validation.ValidationException
+
+import static org.springframework.http.HttpStatus.CONFLICT
 import static org.springframework.http.HttpStatus.CREATED
+import static org.springframework.http.HttpStatus.EXPECTATION_FAILED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
@@ -14,6 +19,8 @@ import grails.gorm.transactions.Transactional
 class UserCompanyController {
 
     UserCompanyService userCompanyService
+    UserService userService
+    CompanyService companyService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -25,6 +32,45 @@ class UserCompanyController {
 
     def show(Long id) {
         respond userCompanyService.get(id)
+    }
+
+    @Transactional
+    def registerCompany(){
+        def request = request.getJSON()
+
+        Company company = new Company()
+        String email = request.user.email
+        String phone = request.user.phone
+
+        if(request.company == null){
+            respond status: UNPROCESSABLE_ENTITY
+            return
+        }
+        else company = request.company
+
+        if(User.findByEmail(email) != null){
+            respond(status: EXPECTATION_FAILED)
+            return
+        }
+
+        if(Company.findByCnpj(company.cnpj) != null){
+            respond(status: CONFLICT)
+            return
+        }
+
+        try{
+            companyService.save(company)
+        } catch (ValidationException e){
+            respond company.errors
+            return
+        }
+        String password = userService.generatePassword()
+        User user = new User(username: email, email: email, password: password, phone: phone, enabled: true,
+        accountExpired: false, accountLocked: false, passwordExpired: false).save(flush: true)
+
+        UserCompany userCompany = new UserCompany(user: user, company: company).save(flush: true)
+        userService.sendEmailPassword(email, password)
+        respond userCompany, [status: CREATED, view: "show"]
     }
 
     @Transactional

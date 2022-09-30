@@ -13,7 +13,7 @@
     background: white;
     opacity: 80%;
 
-    height: 670px;
+    height: 640px;
     width: 850px;
     border-radius: 5%;
     box-shadow: 5px 2px 30px 10px rgba(0, 0, 0, 0.2);
@@ -34,14 +34,16 @@
     margin-top: 0px;
     height: 50px;
     background: #9f309d;
-    width: 40%;
-    margin-left: 25px;
+    width: 37%;
+    margin-left: 20px;
+    color: aliceblue;
+    font-weight: 600;
 }
 
 .button-back-login{
     background: #b3b3b3;
     font-weight: 600;
-    width: 40%;
+    width: 37%;
     height: 50px;
-    margin-right: 40px;
+    margin-right: 60px;
 }

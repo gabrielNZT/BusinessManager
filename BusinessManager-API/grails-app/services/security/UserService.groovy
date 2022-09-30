@@ -1,9 +1,12 @@
 package security
 
 import grails.gorm.transactions.Transactional
+import grails.plugins.mail.MailService
 
 @Transactional
 class UserService{
+
+    MailService mailService
 
     Long count(){
         return User.count
@@ -38,5 +41,14 @@ class UserService{
         }
 
         return password.toString()
+    }
+
+    def sendEmailPassword(String email, String password){
+
+        email?: mailService.sendMail {
+            to email
+            subject "NOVA SENHA"
+            text "Sua senha de acesso temporária é: $password"
+        }
     }
 }

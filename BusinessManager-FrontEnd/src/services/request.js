@@ -9,9 +9,9 @@ export function PasswordRecover(email) {
 
 export function RegisterCompany(company, user) {
     const userCompany = {
-        ...company,
-        ...user
+        company: company,
+        user: user
     }
     return api
-        .post("/api/userCompany", userCompany).then()
+        .post("/api/registerCompany", userCompany).then()
 }

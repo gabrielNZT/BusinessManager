@@ -6,7 +6,6 @@ class Company {
 
     String cnpj
     String name
-    String phone
     String fantasyName
     String corporateName
 

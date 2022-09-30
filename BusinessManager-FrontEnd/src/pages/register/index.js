@@ -3,12 +3,42 @@ import { ArrowLeftOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import './styleSheets.css'
 import { Form, Button } from 'react-bootstrap';
+import { useState } from 'react';
 
 
 function Register() {
-    let navigate = useNavigate();
 
-    const handleNavigate = () => navigate("../register-company", { replace: true });
+    const [company, setCompany] = useState({
+        cnpj: '',
+        name: '',
+        phone: '',
+        email: '',
+        corporateName: '',
+        fantasyName: '',
+    })
+    let navigate = useNavigate();
+    console.log(company)
+
+    const handleNavigate = () => navigate("../", { replace: true });
+    const handleState = (event, key) => {
+        const value = event.target.value
+        switch(key){
+            case 1:
+                return {...company, name: value}
+            case 2:
+                return {...company, cnpj: value}
+            case 3:
+                return {...company, email: value}
+            case 4:
+                return {...company, phone: value}
+            case 5:
+                return {...company, fantasyName: value}
+            case 6:
+                return {...company, corporateName: value}
+            default:
+                return company
+        }
+    }
 
     const formGroups = [
         {
@@ -42,38 +72,45 @@ function Register() {
                     </div>
                 </div>
                 <div >
-                    <Form style={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
-                        {formGroups.map(row => (
-                            <div>
-                                <Form.Group key={row.elements[0].key} className={row.elements[0].className}>
-                                    <Form.Label key={row.elements[0].key}> {row.elements[0].text}
-                                        <Form.Control key={row.elements[0].key} placeholder={row.elements[0].placeHolder} />
-                                    </Form.Label>
-                                </Form.Group>
+                    <Form >
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
+                            {formGroups.map(row => (
+                                <div>
+                                    <Form.Group key={row.elements[0].key} className={row.elements[0].className}>
+                                        <Form.Label key={row.elements[0].key}> {row.elements[0].text}
+                                            <Form.Control
+                                            onChange={(event) => setCompany( () =>  handleState(event, row.elements[0].key))} 
+                                            key={row.elements[0].key} 
+                                            placeholder={row.elements[0].placeHolder} />
+                                        </Form.Label>
+                                    </Form.Group>
 
-                                <Form.Group key={row.elements[1].key} className={row.elements[1].className}>
-                                    <Form.Label key={row.elements[1].key}> {row.elements[1].text}
-                                        <Form.Control key={row.elements[1].key} placeholder={row.elements[1].placeHolder} />
-                                    </Form.Label>
-                                </Form.Group>
+                                    <Form.Group key={row.elements[1].key} className={row.elements[1].className}>
+                                        <Form.Label key={row.elements[1].key}> {row.elements[1].text}
+                                            <Form.Control
+                                            onChange={(event) => setCompany( () =>  handleState(event, row.elements[1].key))} 
+                                            key={row.elements[1].key}
+                                            placeholder={row.elements[1].placeHolder} />
+                                        </Form.Label>
+                                    </Form.Group>
+                                </div>
+                            ))}
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', marginTop: '25px' }}>
+                            <Button className='button-register-company' variant="primary" type="submit">
+                                CADASTRE-SE
+                            </Button>
+
+                            <div style={{ height: '60px', width: '3%', marginTop: '10px' }}>
+                                <i style={{ height: '100%' }} className='i-ou'>ou</i>
                             </div>
-                        ))}
+
+                            <Button className='button-back-login' variant="primary" onClick={handleNavigate}>
+                                VOLTAR PARA O LOGIN
+                            </Button>
+
+                        </div>
                     </Form>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', marginTop: '25px' }}>
-                    <Button className='button-register' variant="primary" type="submit">
-                        CADASTRE-SE
-                    </Button>
-
-                    <div style={{height: '60px', width: '3%', marginTop: '10px'}}>
-                        <i style={{height: '100%'}} className='i-ou'>ou</i>
-                    </div>
-
-
-                    <Button className='button-back-login' variant="primary" onClick={() => navigate("../register-company", { replace: true })}>
-                        VOLTAR PARA O LOGIN
-                    </Button>
-
                 </div>
             </div>
         </>

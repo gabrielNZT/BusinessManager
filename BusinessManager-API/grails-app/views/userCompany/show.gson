@@ -1,0 +1,7 @@
+import security.UserCompany
+
+model {
+	UserCompany userCompany
+}
+
+json tmpl.userCompany(userCompany)

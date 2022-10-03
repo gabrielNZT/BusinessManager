@@ -1,1 +1,2 @@
 export const LOGIN = 'LOGIN'
+export const HAS_TEMPORARY_PASSWORD = 'HAS_TEMPORARY_PASSWORD'

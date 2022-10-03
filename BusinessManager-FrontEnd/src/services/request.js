@@ -15,3 +15,13 @@ export function RegisterCompany(company, user) {
     return api
         .post("/api/registerCompany", userCompany).then()
 }
+
+export function ChangePassword(name, newPassword){
+    const user = {
+        name: name,
+        password: newPassword
+    }
+    console.log(user)
+    return api
+    .post("/api/configPassword", user).then()
+}

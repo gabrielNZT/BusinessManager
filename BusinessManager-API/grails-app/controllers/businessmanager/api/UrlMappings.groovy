@@ -12,6 +12,7 @@ class UrlMappings {
 
         "/api/recoverPassword"(controller: 'user', action: 'recoverPassword')
         "/api/registerCompany"(controller: 'userCompany', action: 'registerCompany')
+        "/api/configPassword"(controller: 'user', action: 'configPassword')
 
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')

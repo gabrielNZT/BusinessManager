@@ -51,4 +51,9 @@ class UserService{
             text "Sua senha de acesso temporária é: $password"
         }
     }
+
+    User findUser(name) {
+        if(User.findByUsername(name) != null) return User.findByUsername(name)
+        else return User.findByEmail(name)
+    }
 }

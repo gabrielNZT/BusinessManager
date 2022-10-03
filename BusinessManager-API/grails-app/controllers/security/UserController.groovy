@@ -108,4 +108,20 @@ class UserController {
 
         render status: NO_CONTENT
     }
+
+    @Transactional
+    def configPassword(){
+        def request = request.getJSON()
+
+        if(request == null || request.name == null || request.password == null){
+            respond status: UNPROCESSABLE_ENTITY
+            return
+        }
+
+        User user = userService.findUser(request.name)
+        user.setPassword(request.password)
+        user.setVersion(user.version + 1)
+
+        respond user, [status: OK, view: "show"]
+    }
 }

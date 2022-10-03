@@ -40,7 +40,7 @@ function Register() {
         ToastNotify({type: 'REGISTER_PROMISE', payload: {company: dataCompany, user: dataUser}})
         .then(resp => {
             console.log(resp)
-            if(resp.data.status === 'CREATED'){
+            if(resp.status === 201){
                 setModalOpen(true)
                 clearAllFields()
             } 

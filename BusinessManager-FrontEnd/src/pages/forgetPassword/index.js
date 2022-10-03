@@ -6,19 +6,25 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import ModalNotification from "../../global/modal"
 import { ToastNotify } from "../../global/toast";
+import { useDispatch } from "react-redux";
+import { HasTemporaryPassword } from '../login/reducer/actions'
 
 
 export function ForgetPassword() {
     const [modalOpen, setModalOpen] = useState(false);
     const [email, setEmail] = useState('')
+
+    const dispatch = useDispatch()
     let navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        ToastNotify({ type: 'FORGET_PASSWORD_PROMISE', payload: { email } }).finally(() => {
-            setEmail('');
-            setModalOpen(true)
-        })
+        ToastNotify({ type: 'FORGET_PASSWORD_PROMISE', payload: { email } })
+            .then(() => dispatch(HasTemporaryPassword()))
+            .finally(() => {
+                setEmail('');
+                setModalOpen(true)
+            })
     }
 
     const handleNavigate = () => {

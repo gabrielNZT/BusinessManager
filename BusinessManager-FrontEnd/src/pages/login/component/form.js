@@ -3,12 +3,14 @@ import Form from 'react-bootstrap/Form';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useState } from 'react';
 import { LogIn } from '../reducer/actions.js'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ToastNotify } from '../../../global/toast/index.js';
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+
   const dispatch = useDispatch()
+  const hasTemporaryPassword = useSelector(state => state.hasTemporaryPassword)
   const [visibleIcon, setVisibleIcon] = useState('password')
   const [user, setUser] = useState({
     name: '',
@@ -16,8 +18,23 @@ function LoginForm() {
   })
   let navigate = useNavigate()
 
-  const handleNavigate = () => {
-    navigate('../forget-password', { replace: true })
+  const handleNavigate = (goTo) => {
+    switch (goTo) {
+      case 'FORGET_PASSWORD':
+        navigate('../forget-password', { replace: true })
+        return
+      case 'REGISTER':
+        navigate('../register-company', { replace: true })
+        return
+      case 'CONFIG_PASSWORD':
+        navigate('../config-password', {replace: true})
+        return
+      case 'HOME_PAGE':
+        return
+      default:
+        navigate('../', {replace: true})
+        return
+    }
   }
 
   function callBack() {
@@ -25,9 +42,10 @@ function LoginForm() {
     dispatch(LogIn({ ...user, access_token: access_token }))
   }
 
-  async function handleToast(){
+  async function handleToast() {
     await ToastNotify({ type: 'LOGIN_PROMISE', payload: { user: { name: user.name, password: user.password } } }, callBack)
-    .finally(() => setUser({ name: '', password: '' })) 
+      .then(() => handleNavigate( hasTemporaryPassword? 'CONFIG_PASSWORD':'HOME_PAGE' ))
+      .finally(() => setUser({ name: '', password: '' }))
   }
 
   const handleSubmit = (e) => {
@@ -66,8 +84,8 @@ function LoginForm() {
         </Form.Text>
       </Form.Group>
 
-      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginTop: '20px'}}>
-        <i className='i-loginform-forget-password' onClick={handleNavigate}>Esqueci a senha</i>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginTop: '20px' }}>
+        <i className='i-loginform-forget-password' onClick={() => handleNavigate('FORGET_PASSWORD')}>Esqueci a senha</i>
       </div>
 
       <div className='div-buttons'>
@@ -77,7 +95,7 @@ function LoginForm() {
 
         <i className='i-ou'>ou</i>
 
-        <Button className='button-register' variant="primary" onClick={() => navigate("../register-company", {replace: true})}>
+        <Button className='button-register' variant="primary" onClick={() => handleNavigate('REGISTER')}>
           CADASTRE SUA EMPRESA
         </Button>
 

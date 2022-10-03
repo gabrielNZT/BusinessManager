@@ -34,6 +34,13 @@ function ConfigPassword() {
             ChangePassword(name, fieldValues.password).then(() => dispatch(HasTemporaryPassword()))
         }
     }
+    
+    const validatePassword = () => {
+        console.log(fieldValues)
+        if(!validate) {
+            setValidate( fieldValues.password !== fieldValues.againPassword? false : true )
+        }
+    }
 
     return (
         <>
@@ -64,7 +71,10 @@ function ConfigPassword() {
                                 <Form.Control
                                     autoComplete="false"
                                     value={fieldValues.password}
-                                    onChange={(e) => setFieldValues({ ...fieldValues, password: e.target.value })}
+                                    onChange={(e) => {
+                                        setFieldValues({ ...fieldValues, password: e.target.value })
+                                        validatePassword()
+                                    }}
                                     required
                                     onBlur={() => setVisibleIcon({
                                         ...visibleIcon,
@@ -92,7 +102,10 @@ function ConfigPassword() {
                                     required
                                     autoComplete="false"
                                     value={fieldValues.againPassword}
-                                    onChange={(e) => setFieldValues({ ...fieldValues, againPassword: e.target.value })}
+                                    onChange={(e) => {
+                                        setFieldValues({ ...fieldValues, againPassword: e.target.value })
+                                        validatePassword()
+                                    }}
                                     onBlur={() => setVisibleIcon({
                                         ...visibleIcon,
                                         againPassword: 'password'

@@ -2,15 +2,16 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useState } from 'react';
-import { LogIn } from '../reducer/actions.js'
-import { useDispatch, useSelector } from 'react-redux';
+import { FetchUserData, LogIn } from '../reducer/actions.js'
+import { useDispatch } from 'react-redux';
 import { ToastNotify } from '../../../global/toast/index.js';
 import { useNavigate } from 'react-router-dom';
+import { GetUserProperties } from '../../../services/request.js';
 
 function LoginForm() {
 
   const dispatch = useDispatch()
-  const hasTemporaryPassword = useSelector(state => state.hasTemporaryPassword)
+
   const [visibleIcon, setVisibleIcon] = useState('password')
   const [user, setUser] = useState({
     name: '',
@@ -42,9 +43,15 @@ function LoginForm() {
     dispatch(LogIn({ ...user, access_token: access_token }))
   }
 
+  async function getHasTemporaryPassword(username){
+    const response = await GetUserProperties(username)
+    dispatch(FetchUserData(response.data))
+    handleNavigate( response.data?.hasTemporaryPassword ? 'CONFIG_PASSWORD' : 'HOME_PAGE' )
+  }
+
   async function handleToast() {
     await ToastNotify({ type: 'LOGIN_PROMISE', payload: { user: { name: user.name, password: user.password } } }, callBack)
-      .then(() => handleNavigate( hasTemporaryPassword? 'CONFIG_PASSWORD':'HOME_PAGE' ))
+      .then((response) => getHasTemporaryPassword(response.data.username))
       .finally(() => setUser({ name: '', password: '' }))
   }
 
@@ -73,6 +80,7 @@ function LoginForm() {
           {visibleIcon === 'password' ? <EyeInvisibleOutlined onClick={() => setVisibleIcon('text')} className='sufix-icon' />
             : <EyeTwoTone onClick={() => setVisibleIcon('password')} className='sufix-icon'></EyeTwoTone>}
           <Form.Control
+            autoComplete='false'
             required
             value={user.password}
             onChange={(event) => setUser({ ...user, password: event.target.value })}

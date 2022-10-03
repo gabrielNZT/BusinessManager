@@ -1,6 +1,5 @@
 import { toast } from "react-toastify"
-import { PasswordRecover, RegisterCompany } from "../../services/request"
-import { SignIn } from "../../services/security/auth"
+import { PasswordRecover, RegisterCompany, SignIn } from "../../services/request"
 
 export function ToastNotify(action, callBack) {
     const payload = action.payload
@@ -12,7 +11,6 @@ export function ToastNotify(action, callBack) {
                     SignIn(payload?.user).then(callBack()),
                     {
                         pending: '...loading',
-                        success: 'Usuário válido',
                         error: 'Campos inválidos'
                     }
                 )

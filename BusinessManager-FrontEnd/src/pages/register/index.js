@@ -1,5 +1,6 @@
 import { Background, Logo } from '../../assets/index.js'
 import { ArrowLeftOutlined } from '@ant-design/icons'
+import { IMaskInput } from 'react-imask';
 import { useNavigate } from 'react-router-dom'
 import './styleSheets.css'
 import ModalNotification from "../../global/modal"
@@ -39,7 +40,6 @@ function Register() {
         const dataCompany = {cnpj, name, fantasyName, corporateName}
         ToastNotify({type: 'REGISTER_PROMISE', payload: {company: dataCompany, user: dataUser}})
         .then(resp => {
-            console.log(resp)
             if(resp.status === 201){
                 setModalOpen(true)
                 clearAllFields()
@@ -77,15 +77,15 @@ function Register() {
     const formGroups = [
         {
             row: 1, elements: [{ key: 1, text: 'Nome', placeHolder: 'Digite o nome da empresa', className: 'div-form', tag: 'name'},
-            { key: 2, text: 'CNPJ', placeHolder: 'Digite o CNPJ da empresa', className: 'div-form', tag: 'cnpj' }]
+            { key: 2, text: 'CNPJ', placeHolder: 'Digite o CNPJ da empresa', className: 'div-form', tag: 'cnpj', mask: '00.000.000/0000-00' }]
         },
         {
             row: 2, elements: [{ key: 3, text: 'Email', placeHolder: 'Digite seu Email', className: 'div-form', tag: 'email' },
-            { key: 4, text: 'Telefone', placeHolder: 'Digite seu telefone', className: 'div-form', tag: 'phone' }]
+            { key: 4, text: 'Telefone', placeHolder: 'Digite seu telefone', className: 'div-form', tag: 'phone', mask: '(00) 0 0000-0000' }]
         },
         {
             row: 2, elements: [{ key: 5, text: 'Nome Fantasia', placeHolder: 'Digite o nome fantasia da empresa', className: 'div-form', tag: 'fantasyName' },
-            { key: 6, text: 'Razão Social', placeHolder: 'Digite a razão social da empresa', className: 'div-form', tag: 'corporateName' }]
+            { key: 6, text: 'Razão Social', placeHolder: 'Digite a razão social da empresa', className: 'div-form', tag: 'corporateName', mask: '' }]
         }
     ]
 
@@ -125,9 +125,11 @@ function Register() {
                         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
                             {formGroups.map(row => (
                                 <div>
-                                    <Form.Group key={row.elements[1].key} className={row.elements[1].className}>
-                                        <Form.Label key={row.elements[1].key}> {row.elements[1].text}
+                                    <Form.Group className={row.elements[1].className}>
+                                        <Form.Label > {row.elements[1].text}
                                             <Form.Control
+                                                as={row.elements[1].mask !== undefined? IMaskInput : 'a'}
+                                                mask={row.elements[1].mask !== undefined? row.elements[1].mask: null}
                                                 value={valueField(row.elements[1].key)}
                                                 onChange={(event) => setCompany(() => handleState(event, row.elements[1].tag))}
                                                 key={row.elements[1].key}
@@ -135,8 +137,8 @@ function Register() {
                                         </Form.Label>
                                     </Form.Group>
 
-                                    <Form.Group key={row.elements[0].key} className={row.elements[0].className}>
-                                        <Form.Label key={row.elements[0].key}> {row.elements[0].text}
+                                    <Form.Group className={row.elements[0].className}>
+                                        <Form.Label > {row.elements[0].text}
                                             <Form.Control
                                                 value={valueField(row.elements[0].key)}
                                                 onChange={(event) => setCompany(() => handleState(event, row.elements[0].tag))}

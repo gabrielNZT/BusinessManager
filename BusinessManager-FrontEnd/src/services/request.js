@@ -25,3 +25,18 @@ export function ChangePassword(name, newPassword){
     return api
     .post("/api/configPassword", user).then()
 }
+
+export const SignIn = (user) => {
+
+    return api
+    .post("/api/login", {
+        username: user.name,
+        password: user.password
+    })
+    .then()
+}
+
+export const GetUserProperties = (username) => {
+    return api
+    .get(`/api/userProperties?username=${username}`).then()
+}

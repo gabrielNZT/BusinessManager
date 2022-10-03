@@ -66,7 +66,7 @@ class UserCompanyController {
         }
         String password = userService.generatePassword()
         User user = new User(username: email, email: email, password: password, phone: phone, enabled: true,
-        accountExpired: false, accountLocked: false, passwordExpired: false).save(flush: true)
+        accountExpired: false, hasTemporaryPassword: true,accountLocked: false, passwordExpired: false).save(flush: true)
 
         UserCompany userCompany = new UserCompany(user: user, company: company).save(flush: true)
         userService.sendEmailPassword(email, password)

@@ -1,2 +1,3 @@
 export const LOGIN = 'LOGIN'
 export const HAS_TEMPORARY_PASSWORD = 'HAS_TEMPORARY_PASSWORD'
+export const FETCH_USER_DATA = 'FETCH_USER_DATA'

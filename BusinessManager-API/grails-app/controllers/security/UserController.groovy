@@ -39,6 +39,7 @@ class UserController {
         }
 
         String newPassword = userService.generatePassword()
+        user.setHasTemporaryPassword(true)
         user.setPassword(newPassword)
         user.setVersion((user.version + 1))
 
@@ -119,9 +120,20 @@ class UserController {
         }
 
         User user = userService.findUser(request.name)
+        user.setHasTemporaryPassword(false)
         user.setPassword(request.password)
         user.setVersion(user.version + 1)
 
         respond user, [status: OK, view: "show"]
+    }
+
+    @Transactional
+    def userProperties(String username){
+        if(User.findByUsername(username) == null){
+            respond NOT_FOUND
+            return
+        }
+
+        respond User.findByUsername(username), [status: OK, view: "show"]
     }
 }

@@ -5,13 +5,15 @@ import { useNavigate } from "react-router-dom"
 import { Button, Form } from "react-bootstrap"
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import './style.css'
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { ChangePassword } from "../../services/request"
+import { HasTemporaryPassword } from "../login/reducer/actions"
 
 function ConfigPassword() {
     let navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    const name = useSelector(state => state.username)
+    const name = useSelector(state => state.user.username)
     const [validate, setValidate] = useState(true);
     const handleNavigate = () => navigate("../", { replace: true })
     const [fieldValues, setFieldValues] = useState({
@@ -29,7 +31,7 @@ function ConfigPassword() {
             
         } else {
             setValidate(true)
-            ChangePassword(name, fieldValues.password).then(() => console.log("go To Home Page"))
+            ChangePassword(name, fieldValues.password).then(() => dispatch(HasTemporaryPassword()))
         }
     }
 

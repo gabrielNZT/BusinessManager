@@ -7,5 +7,6 @@ model {
 json {
 	id user.id
 	username user.username
+	hasTemporaryPassword user.hasTemporaryPassword
 	enabled user.enabled
 }

@@ -21,12 +21,14 @@ class BootStrap {
         Role.findByAuthority('ROLE_ADMIN')?: new Role(authority: 'ROLE_ADMIN').save(flush: true)
 
         if(User.findByUsername('gabrielAdmin') == null){
-            new User(username: 'gabrielAdmin', password: 'admin', phone: "892243", email: 'gabrielnunescesarino@gmail.com', enabled: true, passwordExpired: false,
+            new User(username: 'gabrielAdmin', password: 'admin', phone: "892243",
+                    email: 'gabrielnunescesarino@gmail.com', hasTemporaryPassword: false,enabled: true, passwordExpired: false,
             accountLocked: false, accountExpired: false).save(flush: true)
         }
 
         if(User.findByUsername('gabrielUser') == null){
-            new User(username: 'gabrielUser', phone: "892243", password: 'admin', email: 'user@gmail.com', enabled: true, passwordExpired: false,
+            new User(username: 'gabrielUser', phone: "892243", password: 'admin', email: 'user@gmail.com',
+                    enabled: true, passwordExpired: false, hasTemporaryPassword: false,
                     accountLocked: false, accountExpired: false).save(flush: true)
         }
 

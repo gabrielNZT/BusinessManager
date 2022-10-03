@@ -44,11 +44,11 @@ function Register() {
                 setModalOpen(true)
                 clearAllFields()
             } 
-            else if(resp.status === 417){
+            else if(resp.data.status === 'CONFLICT'){
                 ToastNotify({type: 'CNPJ_ERROR'})
                 setCompany({...company, cnpj: ''})
             }
-            else if(resp.status === 409){
+            else if(resp.data.status === 'EXPECTATION_FAILED'){
                 ToastNotify({type: 'EMAIL_ERROR'})
                 setCompany({...company, email: ''})
             } else {

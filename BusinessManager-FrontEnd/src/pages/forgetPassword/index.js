@@ -17,6 +17,11 @@ export function ForgetPassword() {
     const dispatch = useDispatch()
     let navigate = useNavigate();
 
+    const callBack = () => {
+        navigate("../", {replace: true})
+        setModalOpen(false)
+    }
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         ToastNotify({ type: 'FORGET_PASSWORD_PROMISE', payload: { email } })
@@ -36,6 +41,7 @@ export function ForgetPassword() {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                     <ModalNotification
+                        callBack={callBack}
                         title='Verifique seu email'
                         body='Caso o email informado esteja cadastrado no sistema, você
               receberá uma mensagem com a nova senha temporária.'

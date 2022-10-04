@@ -3,7 +3,8 @@ import Button from 'react-bootstrap/Button';
 import './styleSheets.css'
 
 function ModalNotification(props) {
-  const {setModalOpen, body, title} = props
+  const { body, title, callBack} = props
+
   return (
     <>
       <div className="modalBackground" />
@@ -16,7 +17,7 @@ function ModalNotification(props) {
             <p>{body}</p>
           </div>
           <div className="footer">
-            <Button className='button-submit-form' variant="primary" onClick={() => setModalOpen(false)} >Confirmar</Button>
+            <Button className='button-submit-form' variant="primary" onClick={() => callBack()} >Confirmar</Button>
           </div>
         </div>
       </div>

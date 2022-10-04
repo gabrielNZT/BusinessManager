@@ -7,6 +7,7 @@ import ModalNotification from "../../global/modal"
 import { Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { ToastNotify } from '../../global/toast/index.js'
+import { cnpjIsValid } from '../../utils/index.js';
 
 
 function Register() {
@@ -24,7 +25,7 @@ function Register() {
     const handleState = (event, tag) => {
         const value = event.target.value
         company[tag] = value;
-        return {...company}
+        return { ...company }
     }
 
     const clearAllFields = () => {
@@ -33,38 +34,50 @@ function Register() {
         }
     }
 
+    const callBack = () => {
+        setModalOpen(false) 
+        navigate("../", {replace: true})
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
-        const {cnpj, name, fantasyName, corporateName, email, phone} = company
+        const { cnpj, name, fantasyName, corporateName, email, phone } = company
         const dataUser = { email, phone }
-        const dataCompany = {cnpj, name, fantasyName, corporateName}
-        ToastNotify({type: 'REGISTER_PROMISE', payload: {company: dataCompany, user: dataUser}})
-        .then(resp => {
-            if(resp.status === 201){
-                setModalOpen(true)
-                clearAllFields()
-            } 
-            else if(resp.data.status === 'CONFLICT'){
-                ToastNotify({type: 'CNPJ_ERROR'})
-                setCompany({...company, cnpj: ''})
-            }
-            else if(resp.data.status === 'EXPECTATION_FAILED'){
-                ToastNotify({type: 'EMAIL_ERROR'})
-                setCompany({...company, email: ''})
-            } else {
-                clearAllFields()
-            }
-        })
+        const dataCompany = { cnpj, name, fantasyName, corporateName }
+        
+        if (cnpjIsValid(cnpj)) {
+            ToastNotify({ type: 'REGISTER_PROMISE', payload: { company: dataCompany, user: dataUser } })
+                .then(resp => {
+                    if (resp.status === 201) {
+                        setModalOpen(true)
+                        clearAllFields()
+                    }
+                    else if (resp.data.status === 'CONFLICT') {
+                        ToastNotify({ type: 'CNPJ_ERROR' })
+                        setCompany({ ...company, cnpj: '' })
+                    }
+                    else if (resp.data.status === 'EXPECTATION_FAILED') {
+                        ToastNotify({ type: 'EMAIL_ERROR' })
+                        setCompany({ ...company, email: '' })
+                    } else {
+                        clearAllFields()
+                    }
+                })
+        } else if (!cnpjIsValid(cnpj)) {
+            ToastNotify({ type: 'CNPJ_INVALID' })
+            setCompany({ ...company, cnpj: '' })
+        }
+
     }
     const valueField = (key) => {
-        switch(key){
+        switch (key) {
             case 1:
                 return company.name
             case 2:
                 return company.cnpj
             case 3:
                 return company.email
-            case 4: 
+            case 4:
                 return company.phone
             case 5:
                 return company.fantasyName
@@ -76,7 +89,7 @@ function Register() {
     }
     const formGroups = [
         {
-            row: 1, elements: [{ key: 1, text: 'Nome', placeHolder: 'Digite o nome da empresa', className: 'div-form', tag: 'name'},
+            row: 1, elements: [{ key: 1, text: 'Nome', placeHolder: 'Digite o nome da empresa', className: 'div-form', tag: 'name' },
             { key: 2, text: 'CNPJ', placeHolder: 'Digite o CNPJ da empresa', className: 'div-form', tag: 'cnpj', mask: '00.000.000/0000-00' }]
         },
         {
@@ -94,6 +107,7 @@ function Register() {
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                     <ModalNotification
+                        callBack={callBack}
                         title='Confirme seu cadastro'
                         body='enviaremos uma senha temporária para o email informado. Ao entrar no sistema pela primeira vez
                         será solicitado uma nova senha'
@@ -128,18 +142,21 @@ function Register() {
                                     <Form.Group className={row.elements[1].className}>
                                         <Form.Label > {row.elements[1].text}
                                             <Form.Control
-                                                as={row.elements[1].mask !== undefined? IMaskInput : 'a'}
-                                                mask={row.elements[1].mask !== undefined? row.elements[1].mask: null}
+                                                required
+                                                as={row.elements[1].mask !== undefined ? IMaskInput : 'a'}
+                                                mask={row.elements[1].mask !== undefined ? row.elements[1].mask : null}
                                                 value={valueField(row.elements[1].key)}
                                                 onChange={(event) => setCompany(() => handleState(event, row.elements[1].tag))}
                                                 key={row.elements[1].key}
                                                 placeholder={row.elements[1].placeHolder} />
                                         </Form.Label>
+
                                     </Form.Group>
 
                                     <Form.Group className={row.elements[0].className}>
                                         <Form.Label > {row.elements[0].text}
                                             <Form.Control
+                                                required
                                                 value={valueField(row.elements[0].key)}
                                                 onChange={(event) => setCompany(() => handleState(event, row.elements[0].tag))}
                                                 key={row.elements[0].key}

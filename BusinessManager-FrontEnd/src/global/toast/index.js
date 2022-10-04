@@ -24,9 +24,9 @@ export function ToastNotify(action, callBack) {
                     }
                 )
             )
-        
+
         case 'REGISTER_PROMISE':
-            return(
+            return (
                 toast.promise(
                     RegisterCompany(payload.company, payload.user),
                     {
@@ -36,11 +36,15 @@ export function ToastNotify(action, callBack) {
             )
         case 'CNPJ_ERROR':
             return (
-                toast.error ('Esse CNPJ já está em uso')
+                toast.error('Esse CNPJ já está em uso')
+            )
+        case 'CNPJ_INVALID':
+            return (
+                toast.error('Esse CNPJ é inválido')
             )
         case 'EMAIL_ERROR':
             return (
-                toast.error ('Esse email já está em uso')
+                toast.error('Esse email já está em uso')
             )
 
         default:

@@ -2,6 +2,7 @@ package security
 
 import businessmanager.api.Company
 import businessmanager.api.CompanyService
+import grails.plugins.mail.MailService
 import grails.validation.ValidationException
 
 import static org.springframework.http.HttpStatus.CONFLICT
@@ -21,6 +22,7 @@ class UserCompanyController {
     UserCompanyService userCompanyService
     UserService userService
     CompanyService companyService
+    MailService mailService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -48,16 +50,6 @@ class UserCompanyController {
         }
         else company = request.company
 
-        if(User.findByEmail(email) != null){
-            respond(status: EXPECTATION_FAILED)
-            return
-        }
-
-        if(Company.findByCnpj(company.cnpj) != null){
-            respond(status: CONFLICT)
-            return
-        }
-
         try{
             companyService.save(company)
         } catch (ValidationException e){
@@ -66,10 +58,32 @@ class UserCompanyController {
         }
         String password = userService.generatePassword()
         User user = new User(username: email, email: email, password: password, phone: phone, enabled: true,
-        accountExpired: false, hasTemporaryPassword: true,accountLocked: false, passwordExpired: false).save(flush: true)
+        accountExpired: false, hasTemporaryPassword: true,accountLocked: false, passwordExpired: false)
 
-        UserCompany userCompany = new UserCompany(user: user, company: company).save(flush: true)
-        userService.sendEmailPassword(email, password)
+        try {
+            userService.save(user)
+        } catch (ValidationException e){
+            respond user.errors.reject(
+                    'user.email.unique',
+                    ['email', 'class User'] as Object[],
+                    '[EMAIL_NOT_UNIQUE]')
+            return
+        }
+
+        mailService.sendMail {
+            to email
+            subject "NOVA SENHA"
+            text "Sua senha de acesso temporária é: $password"
+        }
+        UserCompany userCompany = new UserCompany(user: user, company: company)
+
+        try {
+            userCompanyService.save(userCompany)
+        } catch (ValidationException e){
+            respond userCompany.errors
+            return
+        }
+
         respond userCompany, [status: CREATED, view: "show"]
     }
 

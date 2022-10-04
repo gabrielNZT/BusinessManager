@@ -44,7 +44,6 @@ class UserService{
     }
 
     def sendEmailPassword(String email, String password){
-
         email?: mailService.sendMail {
             to email
             subject "NOVA SENHA"

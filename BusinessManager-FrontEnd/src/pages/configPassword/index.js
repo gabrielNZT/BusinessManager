@@ -1,6 +1,6 @@
 import { Background, Logo } from "../../assets"
 import { ArrowLeftOutlined } from '@ant-design/icons'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Button, Form } from "react-bootstrap"
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
@@ -35,12 +35,9 @@ function ConfigPassword() {
         }
     }
     
-    const validatePassword = () => {
-        console.log(fieldValues)
-        if(!validate) {
+    useEffect(() => {
             setValidate( fieldValues.password !== fieldValues.againPassword? false : true )
-        }
-    }
+    }, [fieldValues]);
 
     return (
         <>
@@ -73,7 +70,7 @@ function ConfigPassword() {
                                     value={fieldValues.password}
                                     onChange={(e) => {
                                         setFieldValues({ ...fieldValues, password: e.target.value })
-                                        validatePassword()
+                                        
                                     }}
                                     required
                                     onBlur={() => setVisibleIcon({
@@ -104,7 +101,7 @@ function ConfigPassword() {
                                     value={fieldValues.againPassword}
                                     onChange={(e) => {
                                         setFieldValues({ ...fieldValues, againPassword: e.target.value })
-                                        validatePassword()
+                                        
                                     }}
                                     onBlur={() => setVisibleIcon({
                                         ...visibleIcon,

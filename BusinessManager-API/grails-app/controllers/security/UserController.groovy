@@ -62,9 +62,10 @@ class UserController {
             render status: NOT_FOUND
             return
         }
+
         if (user.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond user.errors
+            respond(user.errors)
             return
         }
 

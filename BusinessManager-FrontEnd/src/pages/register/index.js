@@ -1,6 +1,6 @@
 import { Background, Logo } from '../../assets/index.js'
 import { ArrowLeftOutlined } from '@ant-design/icons'
-import { IMaskInput } from 'react-imask';
+import { IMaskInput } from 'react-imask'
 import { useNavigate } from 'react-router-dom'
 import './styleSheets.css'
 import ModalNotification from "../../global/modal"
@@ -20,6 +20,7 @@ function Register() {
         corporateName: '',
         fantasyName: '',
     })
+    console.log(company)
     let navigate = useNavigate();
     const handleNavigate = () => navigate("../", { replace: true });
     const handleState = (event, tag) => {
@@ -35,8 +36,8 @@ function Register() {
     }
 
     const callBack = () => {
-        setModalOpen(false) 
-        navigate("../", {replace: true})
+        setModalOpen(false)
+        navigate("../", { replace: true })
     }
 
     const handleSubmit = (e) => {
@@ -44,7 +45,17 @@ function Register() {
         const { cnpj, name, fantasyName, corporateName, email, phone } = company
         const dataUser = { email, phone }
         const dataCompany = { cnpj, name, fantasyName, corporateName }
-        
+
+        const cnpjError = () => {
+            ToastNotify({ type: 'CNPJ_ERROR' })
+            setCompany({ ...company, cnpj: '' })
+        }
+
+        const emailError = () => {
+            ToastNotify({ type: 'EMAIL_ERROR' })
+            setCompany({ ...company, email: '' })
+        }
+
         if (cnpjIsValid(cnpj)) {
             ToastNotify({ type: 'REGISTER_PROMISE', payload: { company: dataCompany, user: dataUser } })
                 .then(resp => {
@@ -52,21 +63,24 @@ function Register() {
                         setModalOpen(true)
                         clearAllFields()
                     }
-                    else if (resp.data.status === 'CONFLICT') {
-                        ToastNotify({ type: 'CNPJ_ERROR' })
-                        setCompany({ ...company, cnpj: '' })
+                })
+                .catch(request => {
+                    if (request.response.data.total > 1) {
+                        request.response.data._embedded.errors.forEach(
+                            error => {
+                                if (error.message === 'CNPJ_NOT_UNIQUE') cnpjError();
+                                else if (error.message === 'EMAIL_NOT_UNIQUE') emailError();
+                            }
+                        )
                     }
-                    else if (resp.data.status === 'EXPECTATION_FAILED') {
-                        ToastNotify({ type: 'EMAIL_ERROR' })
-                        setCompany({ ...company, email: '' })
-                    } else {
-                        clearAllFields()
-                    }
+                    else if (request.response.data.message === 'CNPJ_NOT_UNIQUE') cnpjError();
+                    else if (request.response.data.message === 'EMAIL_NOT_UNIQUE') emailError();
+                    else clearAllFields();
                 })
         } else if (!cnpjIsValid(cnpj)) {
             ToastNotify({ type: 'CNPJ_INVALID' })
             setCompany({ ...company, cnpj: '' })
-        }
+        };
 
     }
     const valueField = (key) => {
@@ -117,6 +131,13 @@ function Register() {
         )
     }
 
+    function formatarCNPJ(v){
+        v=v.replace(/\D/g,"")   
+        v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5")
+        v = v.substr(0,18)
+        return v
+      }
+
     return (
         <>
             <Background />
@@ -143,9 +164,10 @@ function Register() {
                                         <Form.Label > {row.elements[1].text}
                                             <Form.Control
                                                 required
-                                                as={row.elements[1].mask !== undefined ? IMaskInput : 'a'}
+                                                value={valueField(row.elements[1].key).replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")}
+                                                type='text'
+                                                as={row.elements[1].mask !== undefined ? IMaskInput : 'input'}
                                                 mask={row.elements[1].mask !== undefined ? row.elements[1].mask : null}
-                                                value={valueField(row.elements[1].key)}
                                                 onChange={(event) => setCompany(() => handleState(event, row.elements[1].tag))}
                                                 key={row.elements[1].key}
                                                 placeholder={row.elements[1].placeHolder} />

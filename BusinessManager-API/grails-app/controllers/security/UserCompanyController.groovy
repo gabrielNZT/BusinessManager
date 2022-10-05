@@ -63,18 +63,10 @@ class UserCompanyController {
         try {
             userService.save(user)
         } catch (ValidationException e){
-            respond user.errors.reject(
-                    'user.email.unique',
-                    ['email', 'class User'] as Object[],
-                    '[EMAIL_NOT_UNIQUE]')
+            respond user.errors
             return
         }
 
-        mailService.sendMail {
-            to email
-            subject "NOVA SENHA"
-            text "Sua senha de acesso temporária é: $password"
-        }
         UserCompany userCompany = new UserCompany(user: user, company: company)
 
         try {
@@ -83,7 +75,11 @@ class UserCompanyController {
             respond userCompany.errors
             return
         }
-
+        mailService.sendMail {
+            to email
+            subject "NOVA SENHA"
+            text "Sua senha de acesso temporária é: $password"
+        }
         respond userCompany, [status: CREATED, view: "show"]
     }
 

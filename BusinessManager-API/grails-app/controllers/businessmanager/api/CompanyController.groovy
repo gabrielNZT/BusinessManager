@@ -27,6 +27,10 @@ class CompanyController {
         respond companyService.get(id)
     }
 
+    def registerCompany() {
+        def request = request.getJSON()
+    }
+
     @Transactional
     def save(Company company) {
         if (company == null) {

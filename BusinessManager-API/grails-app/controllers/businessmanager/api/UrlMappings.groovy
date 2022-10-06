@@ -11,7 +11,7 @@ class UrlMappings {
         patch "/api/$controller/$id(.$format)?"(action:"patch")
 
         "/api/recoverPassword"(controller: 'user', action: 'recoverPassword')
-        "/api/registerCompany"(controller: 'userCompany', action: 'registerCompany')
+        "/api/registerCompany"(controller: 'user', action: 'registerCompany')
         "/api/configPassword"(controller: 'user', action: 'configPassword')
         "/api/userProperties"(controller: 'user', action: 'userProperties')
 

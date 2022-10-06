@@ -1,6 +1,6 @@
 package businessmanager.api
 
-import security.UserCompany
+import security.User
 
 class Company {
 
@@ -9,7 +9,7 @@ class Company {
     String fantasyName
     String corporateName
 
-    static hasMany = [userCompany: UserCompany]
+    static hasMany = [users: User]
 
     static constraints = {
         cnpj unique: true, blank: false, nullable: false

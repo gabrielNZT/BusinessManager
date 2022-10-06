@@ -1,7 +1,0 @@
-import security.UserCompany
-
-model {
-	UserCompany userCompany
-}
-
-json g.render(userCompany, [resolveTemplate: false])

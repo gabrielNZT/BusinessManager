@@ -1,5 +1,6 @@
 package security
 
+import businessmanager.api.Company
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import grails.compiler.GrailsCompileStatic
@@ -22,6 +23,8 @@ class User implements Serializable {
     boolean accountExpired
     boolean accountLocked
     boolean passwordExpired
+
+    static belongsTo = [company: Company]
 
     static transients = ['springSecurityService']
 

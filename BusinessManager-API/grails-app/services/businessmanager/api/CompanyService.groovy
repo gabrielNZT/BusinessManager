@@ -1,18 +1,48 @@
 package businessmanager.api
 
-import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
+import grails.views.api.http.Request
+import security.User
+import security.UserService
 
-@Service(Company)
-interface CompanyService {
+import javax.validation.ValidationException
 
-    Company get(Serializable id)
+@Transactional
+class CompanyService{
+    UserService userService
 
-    List<Company> list(Map args)
+    Long count(){
+        return Company.count
+    }
 
-    Long count()
+    Company get(Long id){
+        return Company.get(id)
+    }
 
-    Company delete(Serializable id)
+    def delete(Long id){
+        Company.findById(id).delete()
+    }
 
-    Company save(Company company)
+    List<Company> list(){
+        return Company.list()
+    }
 
+    def save(Company user){
+        user.save()
+    }
+
+    Company registerCompany(Request request){
+        def user = request.user
+        def company = request.company
+
+        Company companyToSave
+
+        if(User.findByEmail(user.email) != null) return null
+        else {
+            companyToSave = new Company(cnpj: company.cnpj, corporateName: company.corporateName,
+                    fantasyName: company.fantasyName, users: )
+        }
+
+        return companyToSave
+    }
 }

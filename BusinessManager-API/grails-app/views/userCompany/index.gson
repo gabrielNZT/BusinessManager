@@ -1,8 +1,0 @@
-import security.UserCompany
-
-model {
-	Iterable<UserCompany> userCompanyList
-}
-
-json tmpl.userCompany(userCompanyList ?: [])
-

@@ -20,6 +20,7 @@ function Register() {
         corporateName: '',
         fantasyName: '',
     })
+    
     let navigate = useNavigate();
     const handleNavigate = () => navigate("../", { replace: true });
     const handleState = (event, tag) => {

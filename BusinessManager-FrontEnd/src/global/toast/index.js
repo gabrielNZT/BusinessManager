@@ -34,19 +34,10 @@ export function ToastNotify(action, callBack) {
                     }
                 )
             )
-        case 'CNPJ_ERROR':
-            return (
-                toast.error('Esse CNPJ já está em uso')
-            )
         case 'CNPJ_INVALID':
             return (
                 toast.error('Esse CNPJ é inválido')
             )
-        case 'EMAIL_ERROR':
-            return (
-                toast.error('Esse email já está em uso')
-            )
-
         default:
             return
     }

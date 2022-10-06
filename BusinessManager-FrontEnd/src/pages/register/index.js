@@ -1,6 +1,5 @@
 import { Background, Logo } from '../../assets/index.js'
 import { ArrowLeftOutlined } from '@ant-design/icons'
-import { IMaskInput } from 'react-imask'
 import { useNavigate } from 'react-router-dom'
 import './styleSheets.css'
 import ModalNotification from "../../global/modal"
@@ -8,6 +7,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { ToastNotify } from '../../global/toast/index.js'
 import { cnpjIsValid } from '../../utils/index.js';
+import { toast } from 'react-toastify'
 
 
 function Register() {
@@ -20,7 +20,6 @@ function Register() {
         corporateName: '',
         fantasyName: '',
     })
-    console.log(company)
     let navigate = useNavigate();
     const handleNavigate = () => navigate("../", { replace: true });
     const handleState = (event, tag) => {
@@ -46,16 +45,6 @@ function Register() {
         const dataUser = { email, phone }
         const dataCompany = { cnpj, name, fantasyName, corporateName }
 
-        const cnpjError = () => {
-            ToastNotify({ type: 'CNPJ_ERROR' })
-            setCompany({ ...company, cnpj: '' })
-        }
-
-        const emailError = () => {
-            ToastNotify({ type: 'EMAIL_ERROR' })
-            setCompany({ ...company, email: '' })
-        }
-
         if (cnpjIsValid(cnpj)) {
             ToastNotify({ type: 'REGISTER_PROMISE', payload: { company: dataCompany, user: dataUser } })
                 .then(resp => {
@@ -65,17 +54,9 @@ function Register() {
                     }
                 })
                 .catch(request => {
-                    if (request.response.data.total > 1) {
-                        request.response.data._embedded.errors.forEach(
-                            error => {
-                                if (error.message === 'CNPJ_NOT_UNIQUE') cnpjError();
-                                else if (error.message === 'EMAIL_NOT_UNIQUE') emailError();
-                            }
-                        )
-                    }
-                    else if (request.response.data.message === 'CNPJ_NOT_UNIQUE') cnpjError();
-                    else if (request.response.data.message === 'EMAIL_NOT_UNIQUE') emailError();
-                    else clearAllFields();
+                    toast.error(request.response.data.message)
+                    if((request.response.data.message).indexOf("cnpj") > 0) setCompany({...company, cnpj: ''});
+                    else if((request.response.data.message).indexOf("email") > 0) setCompany({...company, email: ''});
                 })
         } else if (!cnpjIsValid(cnpj)) {
             ToastNotify({ type: 'CNPJ_INVALID' })
@@ -88,11 +69,11 @@ function Register() {
             case 1:
                 return company.name
             case 2:
-                return company.cnpj
+                return cnpjMask(company.cnpj)
             case 3:
                 return company.email
             case 4:
-                return company.phone
+                return phoneMask(company.phone)
             case 5:
                 return company.fantasyName
             case 6:
@@ -131,11 +112,22 @@ function Register() {
         )
     }
 
-    function formatarCNPJ(v){
-        v=v.replace(/\D/g,"")   
-        v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5")
-        v = v.substr(0,18)
-        return v
+    const cnpjMask = (value) => {
+        return value
+          .replace(/\D+/g, '') 
+          .replace(/(\d{2})(\d)/, '$1.$2') 
+          .replace(/(\d{3})(\d)/, '$1.$2')
+          .replace(/(\d{3})(\d)/, '$1/$2') 
+          .replace(/(\d{4})(\d)/, '$1-$2')
+          .replace(/(-\d{2})\d+?$/, '$1') 
+      } 
+
+      const phoneMask = (value) => {
+        return value
+        .replace(/\D/g,"")
+        .substr(0,11)
+        .replace(/^(\d{2})(\d)/g,"($1) $2")
+        .replace(/(\d)(\d{4})$/,"$1-$2")
       }
 
     return (
@@ -164,10 +156,8 @@ function Register() {
                                         <Form.Label > {row.elements[1].text}
                                             <Form.Control
                                                 required
-                                                value={valueField(row.elements[1].key).replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3")}
+                                                value={valueField(row.elements[1].key)}
                                                 type='text'
-                                                as={row.elements[1].mask !== undefined ? IMaskInput : 'input'}
-                                                mask={row.elements[1].mask !== undefined ? row.elements[1].mask : null}
                                                 onChange={(event) => setCompany(() => handleState(event, row.elements[1].tag))}
                                                 key={row.elements[1].key}
                                                 placeholder={row.elements[1].placeHolder} />

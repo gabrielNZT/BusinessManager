@@ -1,6 +1,5 @@
-import { Button, Form } from "react-bootstrap"
+import { Form } from "react-bootstrap"
 import { Background, Logo } from "../../assets"
-import { ArrowLeftOutlined } from '@ant-design/icons'
 import './stylesheets.css'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
@@ -8,6 +7,8 @@ import ModalNotification from "../../global/modal"
 import { ToastNotify } from "../../global/toast";
 import { useDispatch } from "react-redux";
 import { HasTemporaryPassword } from '../login/reducer/actions'
+import HeaderArrow from "../../global/components/headerBackToLogin";
+import ButtonsVertical from "../../global/components/buttonsVertical";
 
 
 export function ForgetPassword() {
@@ -32,10 +33,6 @@ export function ForgetPassword() {
             })
     }
 
-    const handleNavigate = () => {
-        navigate('../', { replace: true })
-    }
-
     function ModalNotify() {
         return (
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
@@ -57,12 +54,7 @@ export function ForgetPassword() {
             <Logo />
             {modalOpen && ModalNotify()}
             <div className="div-login-form">
-                <div className="div-login-form-header">
-                    <div className="prefix-icon">
-                        <ArrowLeftOutlined onClick={handleNavigate} />
-                    </div>
-                    <h1 style={{ marginLeft: '3%' }}> Esqueci a senha</h1>
-                </div>
+                <HeaderArrow title='Esqueci a senha'/>
                 <div className='form-loginform'>
                     <p>Para recuperar sua senha, informe seu email. Enviaremos
                         uma nova senha temporária, lembre-se de alterá-la na
@@ -76,11 +68,7 @@ export function ForgetPassword() {
                                 type="email"
                                 placeholder="Digite seu email" />
                         </Form.Group>
-                        <div className='div-buttons' style={{ marginTop: '10%' }}>
-                            <Button className='button-submit-form' variant="primary" type="submit">RECUPERAR A SENHA</Button>
-                            <i>ou</i>
-                            <Button onClick={handleNavigate} className='button-register' variant="primary" type="submit">VOLTAR PARA O LOGIN</Button>
-                        </div>
+                        <ButtonsVertical primaryButton='RECUPERAR A SENHA' style={{marginTop: '12%'}}/>
                     </Form>
                 </div>
             </div>

@@ -31,18 +31,10 @@ class CompanyService{
         user.save()
     }
 
-    Company registerCompany(Request request){
-        def user = request.user
-        def company = request.company
-
-        Company companyToSave
-
-        if(User.findByEmail(user.email) != null) return null
-        else {
-            companyToSave = new Company(cnpj: company.cnpj, corporateName: company.corporateName,
-                    fantasyName: company.fantasyName, users: )
-        }
-
-        return companyToSave
+    Company handleRequestCompanyRegister (Object request){
+        def requestCompany = request.company
+        return new Company(name: requestCompany.name, cnpj: requestCompany.cnpj,
+                corporateName: requestCompany.corporateName, fantasyName: requestCompany.fantasyName)
     }
+
 }

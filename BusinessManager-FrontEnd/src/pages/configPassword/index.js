@@ -1,21 +1,20 @@
 import { Background, Logo } from "../../assets"
-import { ArrowLeftOutlined } from '@ant-design/icons'
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { Button, Form } from "react-bootstrap"
+import { Form } from "react-bootstrap"
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import './style.css'
 import { useDispatch, useSelector } from "react-redux"
 import { ChangePassword } from "../../services/request"
 import { HasTemporaryPassword } from "../login/reducer/actions"
+import HeaderArrow from "../../global/components/headerBackToLogin"
+import ButtonsVertical from "../../global/components/buttonsVertical";
 
 function ConfigPassword() {
-    let navigate = useNavigate()
     const dispatch = useDispatch()
 
     const name = useSelector(state => state.user.username)
     const [validate, setValidate] = useState(true);
-    const handleNavigate = () => navigate("../", { replace: true })
+
     const [fieldValues, setFieldValues] = useState({
         password: '',
         againPassword: ''
@@ -44,12 +43,7 @@ function ConfigPassword() {
             <Background />
             <Logo />
             <div className="div-login-form">
-                <div className="div-login-form-header">
-                    <div className="prefix-icon">
-                        <ArrowLeftOutlined onClick={handleNavigate} />
-                    </div>
-                    <h1 style={{ marginLeft: '3%' }}> Configurar nova senha</h1>
-                </div>
+                <HeaderArrow title='Configurar nova senha' />
                 <div className='form-loginform'>
                     <p>Para sua segurança, informe uma nova senha para acessar o sistema. </p>
                     <Form onSubmit={handleSubmit} style={{ marginTop: '5%' }}>
@@ -113,11 +107,7 @@ function ConfigPassword() {
                             {!validate && <Form.Text className="text-muted"> As senhas devem ser iguais
                             </Form.Text>}
                         </Form.Group>
-                        <div className='div-buttons'>
-                            <Button className='button-submit-form' variant="primary" type="submit">SALVAR NOVA SENHA</Button>
-                            <i>ou</i>
-                            <Button onClick={handleNavigate} className='button-register' variant="primary" type="submit">VOLTAR PARA O LOGIN</Button>
-                        </div>
+                        <ButtonsVertical primaryButton='SALVAR NOVA SENHA' />
                     </Form>
                 </div>
             </div>

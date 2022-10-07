@@ -1,5 +1,4 @@
 import { Background, Logo } from '../../assets/index.js'
-import { ArrowLeftOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import './styleSheets.css'
 import ModalNotification from "../../global/modal"
@@ -8,6 +7,7 @@ import { useState } from 'react';
 import { ToastNotify } from '../../global/toast/index.js'
 import { cnpjIsValid } from '../../utils/index.js';
 import { toast } from 'react-toastify'
+import HeaderArrow from '../../global/components/headerBackToLogin/index.js'
 
 
 function Register() {
@@ -25,7 +25,9 @@ function Register() {
     const handleNavigate = () => navigate("../", { replace: true });
     const handleState = (event, tag) => {
         const value = event.target.value
-        company[tag] = value;
+        if(tag === 'cnpj') company[tag] = cnpjMask(value);
+        else if (tag === 'phone') company[tag] = phoneMask(value);
+        else company[tag] = value;
         return { ...company }
     }
 
@@ -138,12 +140,7 @@ function Register() {
             {modalOpen && ModalNotify()}
             <div className="div-register-form">
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <div className="div-login-form-header">
-                        <div className="prefix-icon">
-                            <ArrowLeftOutlined onClick={handleNavigate} />
-                        </div>
-                        <h1 style={{ marginLeft: '3%' }}>CADASTRE SUA EMPRESA</h1>
-                    </div>
+                    <HeaderArrow title='CADASTRE SUA EMPRESA'/>
                     <div style={{ marginLeft: '40px', marginTop: '30px', fontWeight: '700' }}>
                         <h5 className=''>Para criar um conta na <span className='span-company-name'>BM</span>, entre com os dados da sua empresa</h5>
                     </div>

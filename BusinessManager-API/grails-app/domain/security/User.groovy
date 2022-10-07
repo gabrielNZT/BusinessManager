@@ -20,9 +20,9 @@ class User implements Serializable {
     String phone
     boolean hasTemporaryPassword = false
     boolean enabled = true
-    boolean accountExpired
-    boolean accountLocked
-    boolean passwordExpired
+    boolean accountExpired = false
+    boolean accountLocked = false
+    boolean passwordExpired = false
 
     static belongsTo = [company: Company]
 

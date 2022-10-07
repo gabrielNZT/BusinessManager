@@ -28,6 +28,12 @@ class UserService{
         user.save()
     }
 
+    User handleRequestUserRegister (Object request){
+        def requestUser = request.user
+        return new User(email: requestUser.email, username: requestUser.email, phone: requestUser.phone,
+        password: generatePassword())
+    }
+
     String generatePassword(){
         ArrayList<String> validCharacters = new ArrayList<>(Arrays.asList("A", "a", "B", "b", "1", "3", "V", "#",
         "v", "G", "g", "&", "@", "T", "h", "H", "J", "j", "L", "l", "x", "X"))
@@ -54,6 +60,32 @@ class UserService{
                 text "Sua senha de acesso temporária é: $passwordToSend"
             }
         }
+    }
+
+    User recoverUserPassword (Object request) {
+        User user = User.findByEmail(request.email)
+        if(user == null) return null
+
+        String newPassowrd = generatePassword()
+        user.setPassword(newPassowrd)
+        user.setHasTemporaryPassword(true)
+        user.setVersion(user.version + 1)
+
+        sendEmailPassword(user.email, newPassowrd)
+
+        return user
+    }
+
+    User configPassword (Object request) {
+        User user = findUser(request.name)
+        if(user == null) return null
+
+        String newPassword = generatePassword()
+        user.setHasTemporaryPassword(false)
+        user.setPassword(newPassword)
+        user.setVersion(user.version + 1)
+
+        return user
     }
 
     User findUser(name) {

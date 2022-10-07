@@ -2,6 +2,8 @@ package security
 
 import grails.plugins.mail.MailService
 import grails.validation.ValidationException
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
@@ -28,25 +30,13 @@ class UserController {
     @Transactional
     def recoverPassword(){
         def request = request.getJSON()
-        User user = new User()
-        if( request != null ){
-            user = User.findByEmail(request.email)
-            if(user == null){
-                respond NOT_FOUND
-            }
-        } else {
-            respond UNPROCESSABLE_ENTITY
-        }
+        User user = userService.recoverUserPassword(request)
 
-        String newPassword = userService.generatePassword()
-        user.setHasTemporaryPassword(true)
-        user.setPassword(newPassword)
-        user.setVersion((user.version + 1))
-
-        mailService.sendMail {
-            to user.email
-            subject "NOVA SENHA"
-            text "Sua senha de acesso temporária é: $newPassword"
+        try {
+            userService.save(user)
+        } catch (ValidationException e) {
+            respond user.errors
+            return
         }
 
         respond user, [status: OK, view: "show"]
@@ -114,17 +104,19 @@ class UserController {
     @Transactional
     def configPassword(){
         def request = request.getJSON()
+        User user = userService.configPassword(request)
 
-        if(request == null || request.name == null || request.password == null){
-            respond status: UNPROCESSABLE_ENTITY
+        if(user == null){
+            respond BAD_REQUEST
             return
         }
 
-        User user = userService.findUser(request.name)
-        user.setHasTemporaryPassword(false)
-        user.setPassword(request.password)
-        user.setVersion(user.version + 1)
-
+        try {
+            userService.save(user)
+        } catch (ValidationException e){
+            user.errors
+            return
+        }
         respond user, [status: OK, view: "show"]
     }
 

@@ -1,6 +1,10 @@
 package businessmanager.api
 
+import exceptions.RegisterCompanyException
 import grails.validation.ValidationException
+import security.User
+import security.UserService
+
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
@@ -14,6 +18,7 @@ import grails.gorm.transactions.Transactional
 class CompanyController {
 
     CompanyService companyService
+    UserService userService
 
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -27,8 +32,28 @@ class CompanyController {
         respond companyService.get(id)
     }
 
+    @Transactional
     def registerCompany() {
         def request = request.getJSON()
+        User user = userService.handleRequestUserRegister(request)
+        Company company = companyService.handleRequestCompanyRegister(request)
+
+        try {
+            companyService.save(company)
+        } catch (ValidationException e){
+            respond company.errors
+            return
+        }
+
+        try {
+            userService.save(user)
+        } catch (RegisterCompanyException e) {
+            respond e.errors
+            return
+        }
+        company.addToUsers(user)
+        userService.sendEmailPassword(user.email, user.password)
+        respond company, [status: CREATED, view: "show"]
     }
 
     @Transactional

@@ -19,10 +19,10 @@ export function ForgetPassword() {
     let navigate = useNavigate();
 
     const callBack = () => {
-        navigate("../", {replace: true})
+        navigate("../", { replace: true })
         setModalOpen(false)
     }
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         ToastNotify({ type: 'FORGET_PASSWORD_PROMISE', payload: { email } })
@@ -33,28 +33,17 @@ export function ForgetPassword() {
             })
     }
 
-    function ModalNotify() {
-        return (
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                    <ModalNotification
-                        callBack={callBack}
-                        title='Verifique seu email'
-                        body='Caso o email informado esteja cadastrado no sistema, você
-              receberá uma mensagem com a nova senha temporária.'
-                        setModalOpen={setModalOpen} />
-                </div>
-            </div>
-        )
-    }
-
     return (
         <>
             <Background />
             <Logo />
-            {modalOpen && ModalNotify()}
+            {modalOpen && (<ModalNotification callBack={callBack}
+                title='Verifique seu email'
+                body='Caso o email informado esteja cadastrado no sistema, você
+              receberá uma mensagem com a nova senha temporária.'
+                setModalOpen={setModalOpen} />)}
             <div className="div-login-form">
-                <HeaderArrow title='Esqueci a senha'/>
+                <HeaderArrow title='Esqueci a senha' />
                 <div className='form-loginform'>
                     <p>Para recuperar sua senha, informe seu email. Enviaremos
                         uma nova senha temporária, lembre-se de alterá-la na
@@ -68,7 +57,7 @@ export function ForgetPassword() {
                                 type="email"
                                 placeholder="Digite seu email" />
                         </Form.Group>
-                        <ButtonsVertical primaryButton='RECUPERAR A SENHA' style={{marginTop: '12%'}}/>
+                        <ButtonsVertical primaryButton='RECUPERAR A SENHA' style={{ marginTop: '12%' }} />
                     </Form>
                 </div>
             </div>

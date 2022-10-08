@@ -20,12 +20,12 @@ function Register() {
         corporateName: '',
         fantasyName: '',
     })
-    
+
     let navigate = useNavigate();
     const handleNavigate = () => navigate("../", { replace: true });
     const handleState = (event, tag) => {
         const value = event.target.value
-        if(tag === 'cnpj') company[tag] = cnpjMask(value);
+        if (tag === 'cnpj') company[tag] = cnpjMask(value);
         else if (tag === 'phone') company[tag] = phoneMask(value);
         else company[tag] = value;
         return { ...company }
@@ -58,8 +58,8 @@ function Register() {
                 })
                 .catch(request => {
                     toast.error(request.response.data.message)
-                    if((request.response.data.message).indexOf("cnpj") > 0) setCompany({...company, cnpj: ''});
-                    else if((request.response.data.message).indexOf("email") > 0) setCompany({...company, email: ''});
+                    if ((request.response.data.message).indexOf("cnpj") > 0) setCompany({ ...company, cnpj: '' });
+                    else if ((request.response.data.message).indexOf("email") > 0) setCompany({ ...company, email: '' });
                 })
         } else if (!cnpjIsValid(cnpj)) {
             ToastNotify({ type: 'CNPJ_INVALID' })
@@ -100,47 +100,36 @@ function Register() {
         }
     ]
 
-    function ModalNotify() {
-        return (
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', }}>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                    <ModalNotification
-                        callBack={callBack}
-                        title='Confirme seu cadastro'
-                        body='enviaremos uma senha temporária para o email informado. Ao entrar no sistema pela primeira vez
-                        será solicitado uma nova senha'
-                        setModalOpen={setModalOpen} />
-                </div>
-            </div>
-        )
-    }
-
     const cnpjMask = (value) => {
         return value
-          .replace(/\D+/g, '') 
-          .replace(/(\d{2})(\d)/, '$1.$2') 
-          .replace(/(\d{3})(\d)/, '$1.$2')
-          .replace(/(\d{3})(\d)/, '$1/$2') 
-          .replace(/(\d{4})(\d)/, '$1-$2')
-          .replace(/(-\d{2})\d+?$/, '$1') 
-      } 
+            .replace(/\D+/g, '')
+            .replace(/(\d{2})(\d)/, '$1.$2')
+            .replace(/(\d{3})(\d)/, '$1.$2')
+            .replace(/(\d{3})(\d)/, '$1/$2')
+            .replace(/(\d{4})(\d)/, '$1-$2')
+            .replace(/(-\d{2})\d+?$/, '$1')
+    }
 
-      const phoneMask = (value) => {
+    const phoneMask = (value) => {
         return value
-        .replace(/\D/g,"")
-        .substr(0,11)
-        .replace(/^(\d{2})(\d)/g,"($1) $2")
-        .replace(/(\d)(\d{4})$/,"$1-$2")
-      }
+            .replace(/\D/g, "")
+            .substr(0, 11)
+            .replace(/^(\d{2})(\d)/g, "($1) $2")
+            .replace(/(\d)(\d{4})$/, "$1-$2")
+    }
 
     return (
         <>
             <Background />
             <Logo />
-            {modalOpen && ModalNotify()}
+            {modalOpen && (<ModalNotification callBack={callBack}
+                title='Confirme seu cadastro'
+                body='enviaremos uma senha temporária para o email informado. Ao entrar no sistema pela primeira vez
+                        será solicitado uma nova senha'
+                setModalOpen={setModalOpen} />)}
             <div className="div-register-form">
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <HeaderArrow title='CADASTRE SUA EMPRESA'/>
+                    <HeaderArrow title='CADASTRE SUA EMPRESA' />
                     <div style={{ marginLeft: '40px', marginTop: '30px', fontWeight: '700' }}>
                         <h5 className=''>Para criar um conta na <span className='span-company-name'>BM</span>, entre com os dados da sua empresa</h5>
                     </div>

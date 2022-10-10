@@ -1,6 +1,5 @@
-import { Form } from "react-bootstrap"
 import { Background, Logo } from "../../assets"
-import './stylesheets.css'
+import './style/stylesheets.css'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import ModalNotification from "../../global/modal"
@@ -8,7 +7,7 @@ import { ToastNotify } from "../../global/toast";
 import { useDispatch } from "react-redux";
 import { HasTemporaryPassword } from '../login/reducer/actions'
 import HeaderArrow from "../../global/components/headerBackToLogin";
-import ButtonsVertical from "../../global/components/buttonsVertical";
+import ForgetPasswordForm from "./components/form";
 
 
 export function ForgetPassword() {
@@ -48,17 +47,7 @@ export function ForgetPassword() {
                     <p>Para recuperar sua senha, informe seu email. Enviaremos
                         uma nova senha temporária, lembre-se de alterá-la na
                         próxima vez que acessar o sistema. </p>
-                    <Form onSubmit={handleSubmit} style={{ marginTop: '10%' }}>
-                        <Form.Group>
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control
-                                onChange={(event) => setEmail(event.target.value)}
-                                value={email}
-                                type="email"
-                                placeholder="Digite seu email" />
-                        </Form.Group>
-                        <ButtonsVertical primaryButton='RECUPERAR A SENHA' style={{ marginTop: '12%' }} />
-                    </Form>
+                    <ForgetPasswordForm handleSubmit={handleSubmit} setEmail={setEmail} email={email}/>
                 </div>
             </div>
         </>

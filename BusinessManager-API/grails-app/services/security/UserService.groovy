@@ -1,5 +1,6 @@
 package security
 
+import exceptions.RegisterCompanyException
 import grails.gorm.transactions.Transactional
 import grails.plugins.mail.MailService
 
@@ -24,8 +25,12 @@ class UserService{
         return User.list()
     }
 
-    def save(User user){
+    def save(User user) throws RegisterCompanyException{
         user.save()
+        if(user.hasErrors()){
+            transactionStatus.setRollbackOnly()
+            throw new RegisterCompanyException(user.errors)
+        }
     }
 
     User handleRequestUserRegister (Object request){

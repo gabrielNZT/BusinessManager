@@ -1,6 +1,6 @@
 import {Background} from "../../assets";
 import { Logo } from "../../assets";
-import LoginForm from "./component/form";
+import LoginForm from "./components/form";
 import './style/style.css'
 
 function Login() {

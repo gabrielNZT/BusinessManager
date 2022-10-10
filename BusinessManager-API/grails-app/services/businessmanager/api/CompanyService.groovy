@@ -1,5 +1,6 @@
 package businessmanager.api
 
+import exceptions.RegisterCompanyException
 import grails.gorm.transactions.Transactional
 import grails.views.api.http.Request
 import security.User
@@ -27,8 +28,13 @@ class CompanyService{
         return Company.list()
     }
 
-    def save(Company user){
-        user.save()
+    Company save(Company company){
+        Company companyToSave = company.save()
+        if(company.hasErrors()){
+            transactionStatus.setRollbackOnly()
+            throw new RegisterCompanyException(company.errors)
+        }
+        return companyToSave
     }
 
     Company handleRequestCompanyRegister (Object request){
@@ -37,4 +43,19 @@ class CompanyService{
                 corporateName: requestCompany.corporateName, fantasyName: requestCompany.fantasyName)
     }
 
+    def registerCompany(Company company, User user){
+        company.save()
+        if(company.hasErrors()){
+            transactionStatus.setRollbackOnly()
+            throw new RegisterCompanyException(company.errors)
+        }
+        user.setCompany(company)
+        user.save()
+        if(user.hasErrors()){
+            transactionStatus.setRollbackOnly()
+            throw new RegisterCompanyException(user.errors)
+        }
+        company.addToUsers(user)
+        userService.sendEmailPassword(user.email, user.password)
+    }
 }

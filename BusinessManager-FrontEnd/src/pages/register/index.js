@@ -1,13 +1,13 @@
 import { Background, Logo } from '../../assets/index.js'
 import { useNavigate } from 'react-router-dom'
-import './styleSheets.css'
+import './style/styleSheets.css'
 import ModalNotification from "../../global/modal"
-import { Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { ToastNotify } from '../../global/toast/index.js'
 import { cnpjIsValid } from '../../utils/index.js';
 import { toast } from 'react-toastify'
 import HeaderArrow from '../../global/components/headerBackToLogin/index.js'
+import RegisterForm from './components/form.js';
 
 
 function Register() {
@@ -57,9 +57,24 @@ function Register() {
                     }
                 })
                 .catch(request => {
-                    toast.error(request.response.data.message)
-                    if ((request.response.data.message).indexOf("cnpj") > 0) setCompany({ ...company, cnpj: '' });
-                    else if ((request.response.data.message).indexOf("email") > 0) setCompany({ ...company, email: '' });
+                    console.log(request.response.data)
+                    if ((request.response.data.total > 1)) {
+                        request.response.data._embedded.errors.forEach(element => {
+                            if ((element.message).indexOf("email") > 0) {
+                                toast.error(element.message);
+                                setCompany({ ...company, email: '' });
+                                return
+                            }
+                            else if ((element.message).indexOf("cnpj") > 0) {
+                                toast.error(element.message)
+                                setCompany({ ...company, cnpj: '' })
+                            }   
+                        })
+                    } else {
+                        if ((request.response.data.message).indexOf("cnpj") > 0) setCompany({ ...company, cnpj: '' });
+                        else if ((request.response.data.message).indexOf("email") > 0) setCompany({ ...company, email: '' });
+                        toast.error(request.response.data.message);
+                    }
                 })
         } else if (!cnpjIsValid(cnpj)) {
             ToastNotify({ type: 'CNPJ_INVALID' })
@@ -72,11 +87,11 @@ function Register() {
             case 1:
                 return company.name
             case 2:
-                return cnpjMask(company.cnpj)
+                return company.cnpj
             case 3:
                 return company.email
             case 4:
-                return phoneMask(company.phone)
+                return company.phone
             case 5:
                 return company.fantasyName
             case 6:
@@ -85,20 +100,6 @@ function Register() {
                 return
         }
     }
-    const formGroups = [
-        {
-            row: 1, elements: [{ key: 1, text: 'Nome', placeHolder: 'Digite o nome da empresa', className: 'div-form', tag: 'name' },
-            { key: 2, text: 'CNPJ', placeHolder: 'Digite o CNPJ da empresa', className: 'div-form', tag: 'cnpj', mask: '00.000.000/0000-00' }]
-        },
-        {
-            row: 2, elements: [{ key: 3, text: 'Email', placeHolder: 'Digite seu Email', className: 'div-form', tag: 'email' },
-            { key: 4, text: 'Telefone', placeHolder: 'Digite seu telefone', className: 'div-form', tag: 'phone', mask: '(00) 0 0000-0000' }]
-        },
-        {
-            row: 2, elements: [{ key: 5, text: 'Nome Fantasia', placeHolder: 'Digite o nome fantasia da empresa', className: 'div-form', tag: 'fantasyName' },
-            { key: 6, text: 'Razão Social', placeHolder: 'Digite a razão social da empresa', className: 'div-form', tag: 'corporateName', mask: '' }]
-        }
-    ]
 
     const cnpjMask = (value) => {
         return value
@@ -135,55 +136,16 @@ function Register() {
                     </div>
                 </div>
                 <div >
-                    <Form onSubmit={handleSubmit}>
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'center' }}>
-                            {formGroups.map(row => (
-                                <div>
-                                    <Form.Group className={row.elements[1].className}>
-                                        <Form.Label > {row.elements[1].text}
-                                            <Form.Control
-                                                required
-                                                value={valueField(row.elements[1].key)}
-                                                type='text'
-                                                onChange={(event) => setCompany(() => handleState(event, row.elements[1].tag))}
-                                                key={row.elements[1].key}
-                                                placeholder={row.elements[1].placeHolder} />
-                                        </Form.Label>
-
-                                    </Form.Group>
-
-                                    <Form.Group className={row.elements[0].className}>
-                                        <Form.Label > {row.elements[0].text}
-                                            <Form.Control
-                                                required
-                                                value={valueField(row.elements[0].key)}
-                                                onChange={(event) => setCompany(() => handleState(event, row.elements[0].tag))}
-                                                key={row.elements[0].key}
-                                                placeholder={row.elements[0].placeHolder} />
-                                        </Form.Label>
-                                    </Form.Group>
-                                </div>
-                            ))}
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', marginTop: '25px' }}>
-                            <Button className='button-register-company' variant="primary" type="submit">
-                                CADASTRE-SE
-                            </Button>
-
-                            <div style={{ height: '60px', width: '3%', marginTop: '10px' }}>
-                                <i style={{ height: '100%' }} className='i-ou'>ou</i>
-                            </div>
-
-                            <Button className='button-back-login' variant="primary" onClick={handleNavigate}>
-                                VOLTAR PARA O LOGIN
-                            </Button>
-
-                        </div>
-                    </Form>
+                    <RegisterForm
+                        handleSubmit={handleSubmit}
+                        valueField={valueField}
+                        setCompany={setCompany}
+                        handleState={handleState}
+                        handleNavigate={handleNavigate}
+                    />
                 </div>
             </div>
         </>
-
     )
 }
 export default Register

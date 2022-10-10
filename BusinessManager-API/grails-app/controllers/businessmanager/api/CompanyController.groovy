@@ -5,6 +5,8 @@ import grails.validation.ValidationException
 import security.User
 import security.UserService
 
+import java.sql.SQLIntegrityConstraintViolationException
+
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
@@ -38,21 +40,13 @@ class CompanyController {
         User user = userService.handleRequestUserRegister(request)
         Company company = companyService.handleRequestCompanyRegister(request)
 
-        try {
-            companyService.save(company)
-        } catch (ValidationException e){
-            respond company.errors
+        try{
+            companyService.registerCompany(company, user)
+        } catch (RegisterCompanyException ex) {
+            respond (ex.errors)
             return
         }
 
-        try {
-            userService.save(user)
-        } catch (RegisterCompanyException e) {
-            respond e.errors
-            return
-        }
-        company.addToUsers(user)
-        userService.sendEmailPassword(user.email, user.password)
         respond company, [status: CREATED, view: "show"]
     }
 

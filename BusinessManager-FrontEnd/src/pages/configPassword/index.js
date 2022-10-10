@@ -1,13 +1,11 @@
 import { Background, Logo } from "../../assets"
 import { useEffect, useState } from "react"
-import { Form } from "react-bootstrap"
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import './style.css'
+import './style/style.css'
 import { useDispatch, useSelector } from "react-redux"
 import { ChangePassword } from "../../services/request"
 import { HasTemporaryPassword } from "../login/reducer/actions"
 import HeaderArrow from "../../global/components/headerBackToLogin"
-import ButtonsVertical from "../../global/components/buttonsVertical";
+import ConfigPasswordForm from "./components/form";
 
 function ConfigPassword() {
     const dispatch = useDispatch()
@@ -25,17 +23,17 @@ function ConfigPassword() {
     })
     const handleSubmit = (e) => {
         e.preventDefault()
-        if(fieldValues.password !== fieldValues.againPassword){
+        if (fieldValues.password !== fieldValues.againPassword) {
             setValidate(false)
-            
+
         } else {
             setValidate(true)
             ChangePassword(name, fieldValues.password).then(() => dispatch(HasTemporaryPassword()))
         }
     }
-    
+
     useEffect(() => {
-            setValidate( fieldValues.password !== fieldValues.againPassword? false : true )
+        setValidate(fieldValues.password !== fieldValues.againPassword ? false : true)
     }, [fieldValues]);
 
     return (
@@ -46,69 +44,14 @@ function ConfigPassword() {
                 <HeaderArrow title='Configurar nova senha' />
                 <div className='form-loginform'>
                     <p>Para sua segurança, informe uma nova senha para acessar o sistema. </p>
-                    <Form onSubmit={handleSubmit} style={{ marginTop: '5%' }}>
-
-                        <Form.Group className="group-password" controlId="formBasicPassword">
-                            <Form.Label>Senha</Form.Label>
-                            <div className='div-input-password'>
-                                {visibleIcon.password === 'password' ? <EyeInvisibleOutlined onClick={() => setVisibleIcon({
-                                    ...visibleIcon,
-                                    password: 'text'
-                                })} className='sufix-icon' />
-                                    : <EyeTwoTone onClick={() => setVisibleIcon({
-                                        ...visibleIcon,
-                                        password: 'password'
-                                    })} className='sufix-icon'></EyeTwoTone>}
-                                <Form.Control
-                                    autoComplete="false"
-                                    value={fieldValues.password}
-                                    onChange={(e) => {
-                                        setFieldValues({ ...fieldValues, password: e.target.value })
-                                        
-                                    }}
-                                    required
-                                    onBlur={() => setVisibleIcon({
-                                        ...visibleIcon,
-                                        password: 'password'
-                                    })}
-                                    type={visibleIcon.password}
-                                    placeholder="Digite sua senha"></Form.Control>
-                            </div>
-                            <Form.Text className="text-muted">
-                            </Form.Text>
-                        </Form.Group>
-
-                        <Form.Group className="group-password" controlId="formBasicPassword1">
-                            <Form.Label>Confirmar senha</Form.Label>
-                            <div className='div-input-password'>
-                                {visibleIcon.againPassword === 'password' ? <EyeInvisibleOutlined onClick={() => setVisibleIcon({
-                                    ...visibleIcon,
-                                    againPassword: 'text'
-                                })} className='sufix-icon' />
-                                    : <EyeTwoTone onClick={() => setVisibleIcon({
-                                        ...visibleIcon,
-                                        againPassword: 'password'
-                                    })} className='sufix-icon'></EyeTwoTone>}
-                                <Form.Control
-                                    required
-                                    autoComplete="false"
-                                    value={fieldValues.againPassword}
-                                    onChange={(e) => {
-                                        setFieldValues({ ...fieldValues, againPassword: e.target.value })
-                                        
-                                    }}
-                                    onBlur={() => setVisibleIcon({
-                                        ...visibleIcon,
-                                        againPassword: 'password'
-                                    })}
-                                    type={visibleIcon.againPassword}
-                                    placeholder="Confirme a nova senha"></Form.Control>
-                            </div>
-                            {!validate && <Form.Text className="text-muted"> As senhas devem ser iguais
-                            </Form.Text>}
-                        </Form.Group>
-                        <ButtonsVertical primaryButton='SALVAR NOVA SENHA' />
-                    </Form>
+                    <ConfigPasswordForm
+                        handleSubmit={handleSubmit}
+                        setFieldValues={setFieldValues}
+                        setVisibleIcon={setVisibleIcon}
+                        fieldValues={fieldValues}
+                        validate={validate}
+                        visibleIcon={visibleIcon}
+                    />
                 </div>
             </div>
         </>

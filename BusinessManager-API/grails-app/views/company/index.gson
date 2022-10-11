@@ -1,0 +1,8 @@
+import businessmanager.api.Company
+
+model {
+	Iterable<Company> companyList
+}
+
+json tmpl.company(companyList ?: [])
+

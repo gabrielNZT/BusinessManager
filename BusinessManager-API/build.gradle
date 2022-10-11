@@ -33,6 +33,9 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     compileOnly "io.micronaut:micronaut-inject-groovy"
     console "org.grails:grails-console"
+    implementation 'org.grails.plugins:mail:3.0.0'
+    implementation "org.grails.plugins:spring-security-core:4.0.3"
+    implementation "org.grails.plugins:spring-security-rest:3.0.1"
     implementation "org.springframework.boot:spring-boot-starter-logging"
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springframework.boot:spring-boot-autoconfigure"
@@ -58,6 +61,7 @@ dependencies {
     profile "org.grails.profiles:rest-api"
     runtimeOnly "org.glassfish.web:el-impl:2.2.1-b05"
     runtimeOnly "com.h2database:h2"
+    runtimeOnly "mysql:mysql-connector-java:8.0.28"
     runtimeOnly "org.apache.tomcat:tomcat-jdbc"
     runtimeOnly "javax.xml.bind:jaxb-api:2.3.1"
     testImplementation "io.micronaut:micronaut-inject-groovy"

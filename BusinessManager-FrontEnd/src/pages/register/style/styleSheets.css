@@ -1,0 +1,72 @@
+@media only screen and (max-height: 700px) {
+    .div-register-form {
+        height: 750px !important;
+        width: 900px !important;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .div-form {
+        float: none !important;
+        width: 100% !important;
+    }
+
+    .div-register-form {
+        height: 80% !important;
+        width: 80% !important;
+        overflow: scroll;
+    }
+
+    .form-label {
+        width: 50% !important;
+    }
+
+    .button-back-login {
+        margin-right: 5% !important;
+    }
+}
+
+.div-register-form {
+    position: fixed;
+    top: 8%;
+    right: 12%;
+
+    background: white;
+    opacity: 80%;
+
+    height: 640px;
+    width: 850px;
+    border-radius: 5%;
+    box-shadow: 5px 2px 30px 10px rgba(0, 0, 0, 0.2);   
+}
+
+.div-form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 400px;
+    float: right;
+}
+
+.form-label {
+    width: 300px !important;
+}
+
+
+.button-register-company {
+    margin-top: 0px;
+    height: 50px;
+    background: #9f309d;
+    width: 37%;
+    margin-left: 20px;
+    color: aliceblue;
+    font-weight: 600;
+}
+
+.button-back-login {
+    background: #b3b3b3;
+    font-weight: 600;
+    width: 37%;
+    height: 50px;
+    margin-right: 60px;
+}

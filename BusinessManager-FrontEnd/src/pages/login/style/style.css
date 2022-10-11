@@ -1,0 +1,153 @@
+@media only screen and (max-height: 800px) {
+    .div-login-form{
+        height: 640px !important;
+        width: 570px !important;   
+    }
+
+    .p-login-header{
+        margin-left: 37% !important;
+    }
+  }
+
+.div-login-form{
+    position: fixed;
+    top: 10%;
+    right: 10%;
+
+    background: white;
+    opacity: 80%;
+
+    height: 670px;
+    width: 600px;
+    border-radius: 5%;
+    box-shadow: 5px 2px 30px 10px rgba(0, 0, 0, 0.2);
+    
+}
+
+.group-password{
+    margin-top: 40px;
+}
+
+.span-company-name{
+    color: #852383;
+}
+
+.div-login-form-header{
+    margin-top: 40px;
+    margin-left: 40px;
+    display: flex;  
+}
+
+.p-login-header{
+    font-weight: 600;
+    margin-left: 40%;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.h1-login-header{
+    font-size: 50px;
+}
+
+.form-loginform{
+    padding: 40px;
+    height: 600px;
+}
+
+label{
+    font-size: 13px;
+}
+
+
+
+.button-submit-form:hover{
+    background-color: gray;
+}
+
+.form-control{
+    border: 0px;
+    border-bottom: 2px solid;
+    border-radius: 0%;
+    transition: border;
+}
+
+.form-control:focus{
+    border-bottom: 3px solid #9f309d;
+    box-shadow: none;
+}
+
+.btn-primary {
+    --bs-btn-color: none;
+    --bs-btn-bg: none;
+    --bs-btn-border-color: none;
+    --bs-btn-hover-color: none;
+    --bs-btn-hover-bg: #aee5e9;
+    --bs-btn-hover-border-color: none;
+    --bs-btn-focus-shadow-rgb: none;
+    --bs-btn-active-color: none;
+    --bs-btn-active-bg: #aee5e9;
+    --bs-btn-active-border-color: none;
+    --bs-btn-active-shadow: none;
+    --bs-btn-disabled-color: none;
+    --bs-btn-disabled-bg: none;
+    --bs-btn-disabled-border-color: none;
+}
+
+.button-submit-form{
+    color: aliceblue;
+    font-weight: 600;
+    margin-top: 35px;
+    margin-bottom: 5px;
+    height: 50px;
+    width: 100%;
+    background: #9f309d;
+    border: 0px solid #9f309d;
+}
+
+.div-input-password{
+    display: flex;
+    align-items: flex-end;
+}
+
+.sufix-icon{
+    margin-bottom: 10px;
+    position: absolute;
+    height: min-content;
+    width: min-content;
+    color: gray;
+    font-size: 20px;
+    cursor: pointer;
+    right: 10%;
+}
+
+.i-loginform-forget-password{   
+    cursor: pointer;
+    color: #0a53be;
+}
+
+.div-buttons{
+    margin-top: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.i-ou{
+    font-size: 15px;
+    color: gray;
+}
+
+.button-register{
+    background: #b3b3b3;
+    margin-top: 5px;
+    width: 100%;
+    height: 50px;
+    color: black;
+    font-weight: 600;
+}
+
+.form-label{
+    font-weight: bold;
+}

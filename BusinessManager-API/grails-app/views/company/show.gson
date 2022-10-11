@@ -1,0 +1,7 @@
+import businessmanager.api.Company
+
+model {
+	Company company
+}
+
+json tmpl.company(company)

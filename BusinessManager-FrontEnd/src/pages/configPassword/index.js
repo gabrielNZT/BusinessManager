@@ -3,11 +3,13 @@ import { useEffect, useState } from "react"
 import './style/style.css'
 import { useDispatch, useSelector } from "react-redux"
 import { ChangePassword } from "../../services/request"
-import { HasTemporaryPassword } from "../login/reducer/actions"
+import { FetchCompanyNameConfigPage } from "../login/reducer/actions"
 import HeaderArrow from "../../global/components/headerBackToLogin"
 import ConfigPasswordForm from "./components/form";
+import { useNavigate } from "react-router-dom"
 
 function ConfigPassword() {
+    let navigate = useNavigate()
     const dispatch = useDispatch()
 
     const name = useSelector(state => state.user.username)
@@ -28,8 +30,14 @@ function ConfigPassword() {
 
         } else {
             setValidate(true)
-            ChangePassword(name, fieldValues.password).then(() => dispatch(HasTemporaryPassword()))
+            handleDispatch()
         }
+    }
+
+    async function handleDispatch() {
+        await ChangePassword(name, fieldValues.password).then((response) => {
+            dispatch(FetchCompanyNameConfigPage(response.data.company))
+        }).then(() => navigate("../home", { replace: true }))
     }
 
     useEffect(() => {

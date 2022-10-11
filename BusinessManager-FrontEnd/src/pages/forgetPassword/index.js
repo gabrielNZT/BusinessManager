@@ -22,6 +22,7 @@ export function ForgetPassword() {
         setModalOpen(false)
     }
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         ToastNotify({ type: 'FORGET_PASSWORD_PROMISE', payload: { email } })

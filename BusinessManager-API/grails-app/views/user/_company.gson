@@ -1,0 +1,10 @@
+import businessmanager.api.Company
+
+model {
+    Company company
+}
+
+json {
+    id company.id
+    name company.name
+}

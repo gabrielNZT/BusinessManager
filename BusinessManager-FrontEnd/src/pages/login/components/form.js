@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useState } from 'react';
-import { FetchUserData, LogIn } from '../reducer/actions.js'
+import { FetchCompanyName, FetchUserData, LogIn } from '../reducer/actions.js'
 import { useDispatch } from 'react-redux';
 import { ToastNotify } from '../../../global/toast/index.js';
 import { useNavigate } from 'react-router-dom';
@@ -31,6 +31,7 @@ function LoginForm() {
         navigate('../config-password', {replace: true})
         return
       case 'HOME_PAGE':
+        navigate('../home', {replace: true})
         return
       default:
         navigate('../', {replace: true})
@@ -51,7 +52,10 @@ function LoginForm() {
 
   async function handleToast() {
     await ToastNotify({ type: 'LOGIN_PROMISE', payload: { user: { name: user.name, password: user.password } } }, callBack)
-      .then((response) => getHasTemporaryPassword(response.data.username))
+      .then((response) => {
+        getHasTemporaryPassword(response.data.username)
+        dispatch(FetchCompanyName(response.data.company))
+      })
       .finally(() => setUser({ name: '', password: '' }))
   }
 

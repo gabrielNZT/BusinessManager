@@ -13,16 +13,20 @@ import MenuHeader from './components/menuHeader';
 import BreadcrumbNavigation from '../../global/components/breadcrumb';
 import DivInProgress from './components/divInProgress';
 import DefaultAvatar from '../../global/components/defaultAvatar';
+import { useNavigate } from 'react-router-dom';
+import { handleNavigate } from './utils';
 const { Header, Sider, Content } = Layout;
 
 const HomePage = () => {
     const [collapsed, setCollapsed] = useState(false);
+    let navigate = useNavigate()
 
     return (
         <Layout className='layout-home'>
             <Sider className={collapsed? 'collapsed' : 'not-collapsed'} trigger={null} collapsible collapsed={collapsed}>
                 { !collapsed && <MenuHeader/>}
-                <Menu 
+                <Menu
+                   onClick={(e) => navigate(handleNavigate(e.key), {replace: true})} 
                     mode="inline"
                     defaultSelectedKeys={['1']}
                     items={[

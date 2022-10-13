@@ -1,0 +1,6 @@
+export {default as UserPage} from './users'
+export {default as Register} from './register'
+export {default as Login} from './login'
+export {default as HomePage} from './home'
+export {default as ForgetPassword} from './forgetPassword'
+export {default as ConfigPassword} from './configPassword'

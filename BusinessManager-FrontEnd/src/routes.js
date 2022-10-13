@@ -1,10 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import ForgetPassword from './pages/forgetPassword'
-import ConfigPassword from './pages/configPassword'
-import Login from './pages/login'
-import Register from './pages/register'
-import HomePage from './pages/home'
+import {Login, Register, ForgetPassword, ConfigPassword, HomePage, UserPage} from './pages'
 
 export default function PagesRoutes(){
     return(
@@ -15,6 +11,7 @@ export default function PagesRoutes(){
                 <Route element={(<Register/>)} path={"/register-company"} />
                 <Route element={(<ConfigPassword/>)} path={'/config-password'}  />
                 <Route element={(<HomePage/>)} path={'/home'} />
+                <Route element={(<UserPage/>)} path={'/user'} />
             </Routes>
         </Router>
     )

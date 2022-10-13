@@ -28,13 +28,13 @@ function LoginForm() {
         navigate('../register-company', { replace: true })
         return
       case 'CONFIG_PASSWORD':
-        navigate('../config-password', {replace: true})
+        navigate('../config-password', { replace: true })
         return
       case 'HOME_PAGE':
-        navigate('../home', {replace: true})
+        navigate('../home', { replace: true })
         return
       default:
-        navigate('../', {replace: true})
+        navigate('../', { replace: true })
         return
     }
   }
@@ -44,17 +44,19 @@ function LoginForm() {
     dispatch(LogIn({ ...user, access_token: access_token }))
   }
 
-  async function getHasTemporaryPassword(username){
+  async function getHasTemporaryPassword(username) {
     const response = await GetUserProperties(username)
+    dispatch(FetchCompanyName(response.data.company))
     dispatch(FetchUserData(response.data))
-    handleNavigate( response.data?.hasTemporaryPassword ? 'CONFIG_PASSWORD' : 'HOME_PAGE' )
+    localStorage.setItem('company', JSON.stringify({name: response.data.company.name}));
+    handleNavigate(response.data?.hasTemporaryPassword ? 'CONFIG_PASSWORD' : 'HOME_PAGE')
   }
 
   async function handleToast() {
     await ToastNotify({ type: 'LOGIN_PROMISE', payload: { user: { name: user.name, password: user.password } } }, callBack)
       .then((response) => {
+        localStorage.setItem('auth', JSON.stringify({ access_token: response.data.access_token }))
         getHasTemporaryPassword(response.data.username)
-        dispatch(FetchCompanyName(response.data.company))
       })
       .finally(() => setUser({ name: '', password: '' }))
   }

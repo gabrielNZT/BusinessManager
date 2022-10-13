@@ -10,6 +10,9 @@ import React, { useState } from 'react';
 import { FaUsers, FaBoxes } from 'react-icons/fa'
 import LogoutFooter from './components/menuFooter/index.js';
 import MenuHeader from './components/menuHeader';
+import BreadcrumbNavigation from '../../global/components/breadcrumb';
+import DivInProgress from './components/divInProgress';
+import DefaultAvatar from '../../global/components/defaultAvatar';
 const { Header, Sider, Content } = Layout;
 
 const HomePage = () => {
@@ -60,6 +63,7 @@ const HomePage = () => {
                         className: 'trigger',
                         onClick: () => setCollapsed(!collapsed),
                     })}
+                    <DefaultAvatar />
                 </Header>
                 <Content
                     className="site-layout-background"
@@ -69,7 +73,8 @@ const HomePage = () => {
                         minHeight: 280,
                     }}
                 >
-
+                    <BreadcrumbNavigation />
+                    <DivInProgress/>
                 </Content>
             </Layout>
         </Layout>

@@ -40,3 +40,8 @@ export const GetUserProperties = (username) => {
     return api
     .get(`/api/userProperties?username=${username}`).then()
 }
+
+export const GetCurrentUser = () => {
+    return api
+    .get('/api/currentUser').then()
+}

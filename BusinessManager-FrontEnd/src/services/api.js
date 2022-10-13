@@ -8,8 +8,8 @@ const api = axios.create({
     }
 });
 
-// const auth = localStorage.getItem('auth')
-// const token = auth ? JSON.parse(auth)?.access_token : null
-// api.defaults.headers.common.authorization = `Bearer ${token}`
+ const auth = localStorage.getItem('auth')
+ const token = auth ? JSON.parse(auth)?.access_token : ''
+ api.defaults.headers.common.authorization = `Bearer ${token}`
 
 export default api;

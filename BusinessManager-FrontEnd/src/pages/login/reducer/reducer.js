@@ -50,6 +50,8 @@ function auth(state = INITIAL_STATE, action) {
           name: action.company.name
         }
       }
+    case 'LOGOUT':
+      return { INITIAL_STATE }
     default:
       return state;
   }

@@ -106,3 +106,7 @@
 .div-logout:hover {
   color: red;
 }
+
+.site-layout-background {
+  margin-top: 0px !important;
+}

@@ -130,7 +130,7 @@ function Register() {
                 setModalOpen={setModalOpen} />)}
             <div className="div-register-form">
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <HeaderArrow title='CADASTRE SUA EMPRESA' />
+                    <HeaderArrow margin='3%' title='CADASTRE SUA EMPRESA' />
                     <div style={{ marginLeft: '40px', marginTop: '30px', fontWeight: '700' }}>
                         <h5 className=''>Para criar um conta na <span className='span-company-name'>BM</span>, entre com os dados da sua empresa</h5>
                     </div>

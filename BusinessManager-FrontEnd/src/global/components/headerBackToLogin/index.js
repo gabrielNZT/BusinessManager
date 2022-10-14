@@ -10,7 +10,7 @@ function HeaderArrow(props) {
             <div className="prefix-icon">
                 <ArrowLeftOutlined onClick={handleNavigate} />
             </div>
-            <h1 style={{ marginLeft: '3%' }}> {props.title}</h1>
+            <h1 style={{ marginLeft: props.margin, fontSize: props.size, fontWeight: props.bold}}> {props.title}</h1>
         </div>
     )
 }

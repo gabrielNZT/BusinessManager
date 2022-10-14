@@ -49,7 +49,7 @@ function ConfigPassword() {
             <Background />
             <Logo />
             <div className="div-login-form">
-                <HeaderArrow title='Configurar nova senha' />
+                <HeaderArrow margin='3%' title='Configurar nova senha' />
                 <div className='form-loginform'>
                     <p>Para sua segurança, informe uma nova senha para acessar o sistema. </p>
                     <ConfigPasswordForm

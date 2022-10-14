@@ -33,8 +33,8 @@
 }
 
 .div-login-form-header{
-    margin-top: 40px;
     margin-left: 40px;
+    margin-top: 40px;
     display: flex;  
 }
 
@@ -150,4 +150,5 @@ label{
 
 .form-label{
     font-weight: bold;
+    width: 320px;
 }

@@ -1,18 +1,89 @@
 .form-register-user {
-    margin-top: 3%;
+    margin-top: 1%;
     display: flex;
     justify-content: flex-start;
-    gap: 30px;
+    gap: 20px;
     flex-wrap: wrap;
     max-width: max-content;
     
 }
 
+.div-upload {
+    height: 150px !important;
+}
+
 .div-register-user {
+    height: 70px;
     width: 31.6%;
 }
 
 .label-register-user {
     width: 100% !important;
     height: 100px;
+}
+
+.div-custom-label {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 31.6% !important;
+}
+
+.ant-switch {
+    width: 17%;
+}
+
+.ant-picker {
+    width: 100% !important;
+    border: none !important;
+    border-bottom: 2px solid black !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.ant-picker ant-picker-focused {
+    border-color: 2px solid #831e81 !important;
+}
+
+.ant-select-selector{
+    border: none !important;
+    height: 38px !important;
+    box-shadow: none !important;
+}
+
+.ant-select {
+    border-bottom: 2px solid black !important;
+}
+
+/* .ant-select-selector:hover {
+    border-bottom: 3px solid #831e81 !important;
+} */
+
+.div-custom-upload {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 31.6% !important;
+    height: 150px !important;
+}
+
+.div-user-form-header{
+    margin-top: 40px !important;
+    display: flex !important;  
+}
+
+.ant-select-open {
+    border-bottom: 3px solid #831e81 !important;
+}
+
+.ant-select-selection-placeholder {
+    color: #8e8e8e;
+}
+
+.ant-picker-input input::placeholder {
+    color: #8e8e8e !important;
+  }
+
+.ant-picker-focused {
+    border-bottom: 3px solid #831e81 !important;
 }

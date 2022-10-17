@@ -25,9 +25,9 @@ function LayoutHome (props) {
             <Sider className={collapsed? 'collapsed' : 'not-collapsed'} trigger={null} collapsible collapsed={collapsed}>
                 { !collapsed && <MenuHeader/>}
                 <Menu
-                   onClick={(e) => navigate(handleNavigate(e.key), {replace: true})} 
+                    onSelect={(item) => navigate(handleNavigate(item.key))}
                     mode="inline"
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={props.currentPage? props.currentPage : ['1']}
                     items={[
                         {
                             key: '1',

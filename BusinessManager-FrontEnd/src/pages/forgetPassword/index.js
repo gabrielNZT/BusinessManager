@@ -43,7 +43,7 @@ export function ForgetPassword() {
               receberá uma mensagem com a nova senha temporária.'
                 setModalOpen={setModalOpen} />)}
             <div className="div-login-form">
-                <HeaderArrow margin='3%' title='Esqueci a senha' />
+                <HeaderArrow customStyle={'div-login-form-header'} margin='3%' title='Esqueci a senha' />
                 <div className='form-loginform'>
                     <p>Para recuperar sua senha, informe seu email. Enviaremos
                         uma nova senha temporária, lembre-se de alterá-la na

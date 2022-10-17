@@ -24,15 +24,17 @@ const props = {
     },
 };
 
-const UploadUserPhoto = () => (
-    <div style={{ height: 'fit-content', width: '200px' }}>
-        <p style={{ color: 'gray' }}>Imagem do usuário</p>
-        <Dragger {...props}>
-            <p className="ant-upload-drag-icon">
-                <InboxOutlined style={{ color: 'black' }} />
-            </p>
-            <p className="ant-upload-text">Clique ou arraste a imagem para esta áerea para fazer upload</p>
-        </Dragger>
+const UploadUserPhoto = (prop) => (
+    <div className='div-custom-label'>
+        <p>{prop.label}</p>
+        <div style={{width: '60%', height: '160px'}}>
+            <Dragger {...props}>
+                <p className="ant-upload-drag-icon">
+                    <InboxOutlined style={{ color: 'black' }} />
+                </p>
+                <p className="ant-upload-text"> {prop.body} </p>
+            </Dragger>
+        </div>
     </div>
 );
 export default UploadUserPhoto;

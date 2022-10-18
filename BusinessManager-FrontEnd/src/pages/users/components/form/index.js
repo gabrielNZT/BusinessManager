@@ -1,22 +1,13 @@
 import { useState } from "react"
 import { Form } from "react-bootstrap"
-import DateEntry from "../datePicker"
-import InputLabel from "../input"
-import SelectPermission from "../selectPermission"
-import SwitchEnableUser from "../switch"
-import UploadUserPhoto from "../upload"
+import { DateEntry, InputLabel, SelectPermission, UploadUserPhoto, SwitchEnableUser } from '..'
 
 function FormRegisterUser(props) {
     const [formData, setFormData] = useState({});
-    const [test, setTest] = useState(false)
 
-    const handleSetData = (data) => {
-        //setTest(!test)
-        console.log(data)
-        setFormData(data);
-    }
+    const handleSetData = (data) => setFormData(data);
 
-    console.log("Fora" +formData)
+    console.log(formData)
     return (
         <Form className="form-register-user">
             {props.items.map((item, index) => {
@@ -50,8 +41,8 @@ function FormRegisterUser(props) {
                         return (<DateEntry
                             name={item.tag}
                             handleSetData={handleSetData}
-                            formData={formData} 
-                            label={item.label} 
+                            formData={formData}
+                            label={item.label}
                             key={index} />)
                     default:
                         return null

@@ -1,7 +1,5 @@
-import HeaderArrow from "../../global/components/headerBackToLogin"
 import LayoutHome from "../../global/components/layout"
-import ButtonSubmit from "./components/buttonSubmit"
-import FormRegisterUser from "./components/form"
+import { FormRegisterUser, HeaderRegisterForm } from "./components"
 import "./style/style.css"
 
 const items = [
@@ -22,17 +20,7 @@ const items = [
 function UserPage() {
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>
-            <div style={{ display: 'flex', width: '100%' }}>
-                <div style={{ width: '80%' }}>
-                    <HeaderArrow
-                        path={"../home"}
-                        customStyle={'div-user-form-header'}
-                        margin={'1%'} size={'24px'}
-                        bold={'bold'}
-                        title='Novo Usuário' />
-                </div>
-                <ButtonSubmit />
-            </div>
+            <HeaderRegisterForm/>
             <FormRegisterUser items={items} />
         </LayoutHome>
     )

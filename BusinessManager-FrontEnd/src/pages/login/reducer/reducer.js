@@ -6,7 +6,12 @@ const INITIAL_STATE = {
   },
   company: {
     name: ''
-  }
+  },
+  allPermission: [
+    {role: 'Administrador'},
+    {role: 'Gerente'},
+    {role: 'Operador'}
+  ]
 };
 
 function auth(state = INITIAL_STATE, action) {

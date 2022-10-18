@@ -2,7 +2,7 @@ import api from "./api";
 
 export function PasswordRecover(email) {
     return api
-        .post("/api/recoverPassword", {
+        .post("/recoverPassword", {
             email: email
         }).then();
 }
@@ -13,7 +13,7 @@ export function RegisterCompany(company, user) {
         user: user
     }
     return api
-        .post("/api/registerCompany", userCompany).then()
+        .post("/registerCompany", userCompany).then()
 }
 
 export function ChangePassword(name, newPassword){
@@ -23,7 +23,7 @@ export function ChangePassword(name, newPassword){
     }
     console.log(user)
     return api
-    .post("/api/configPassword", user).then()
+    .post("/configPassword", user).then()
 }
 
 export const SignIn = (user) => {
@@ -38,10 +38,16 @@ export const SignIn = (user) => {
 
 export const GetUserProperties = (username) => {
     return api
-    .get(`/api/userProperties?username=${username}`).then()
+    .get(`/userProperties?username=${username}`).then()
 }
 
 export const GetCurrentUser = () => {
     return api
-    .get('/api/currentUser').then()
+    .get('/currentUser').then()
+}
+
+export const RegisterUser = (user) => {
+    return api
+    .post('/RegisterUser', user)
+    .then()
 }

@@ -7,10 +7,8 @@ function SwitchEnableUser(props) {
 
     const handleChange = (value) => {
         setColor(value ? { background: 'green' } : { background: 'red' })
-        formData[props.name] = value
-        props.handleSetData(formData)
+        props.handleSetData({...formData, [props.name]: value})
     }
-
 
     return (
         <div className='div-custom-label'>

@@ -1,33 +1,33 @@
+import { useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { cpfMask, phoneMask } from '../../../../global/utils'
 
 function InputLabel(props) {
-    const { formData, setFormData, tag } = props
+    const [value, setValue] = useState()
+    const { formData, name } = props
 
     const handleState = (event) => {
-        const value = event.target.value
-        switch (tag) {
-            case 'cpf':
-                formData[tag] = cpfMask(value)
-                return formData
-            case 'phone':
-                formData[tag] = phoneMask(value)
-                return formData
-            default:
-                formData[tag] = value
-                return formData
-        }
-    }
+        const {name: tag, value} = event.target
 
+        if(tag === 'cpf') formData[tag] = cpfMask(value)
+        else if (tag === 'phone') formData[tag] = phoneMask(value)
+        else formData[tag] = value   
+
+        props.handleSetData(formData)
+        //setValue(formData[name])
+    }
 
     return (
         <Form.Group className="div-register-user">
             <Form.Label bsPrefix="label-register-user">
                 {props.label}
                 <Form.Control
-                    value = {formData[tag]}
+                    name={name}
+                    value = {formData[name]}
                     type={props.type? props.type: 'text'}
-                    onChange={(e) =>  setFormData(handleState(e))}
+                    onChange={(e) => {
+                        handleState(e)
+                    }}
                     placeholder={props.placeholder}
                 />
             </Form.Label>

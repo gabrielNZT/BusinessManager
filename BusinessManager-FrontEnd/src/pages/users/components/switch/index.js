@@ -2,12 +2,14 @@ import { Switch } from 'antd';
 import React, { useState } from 'react';
 
 function SwitchEnableUser(props) {
+    const {formData} = props
     const [color, setColor] = useState({ background: 'green' })
 
-    const handleChange = (e) => {
-        setColor(e ? { background: 'green' } : { background: 'red' })
+    const handleChange = (value) => {
+        setColor(value ? { background: 'green' } : { background: 'red' })
+        formData[props.name] = value
+        props.handleSetData(formData)
     }
-
 
 
     return (

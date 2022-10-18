@@ -6,12 +6,20 @@ import locale from 'antd/es/locale/pt_BR';
 const dateFormat = 'DD/MM/YYYY';
 
 function DateEntry(props) {
+    const {formData} = props;
+
+    const handleChange = (value) => {
+        formData[props.name] = value.toJSON()
+        props.handleSetData(formData)
+    }
+
     return (
         <div className='div-custom-label'>
             <label>{props.label}</label>
             <Space direction="vertical" size={12}>
                 <ConfigProvider locale={locale}>
                     <DatePicker
+                    onChange={(value) => handleChange(value)}
                     size='large'
                     format={dateFormat}
                         dateRender={(current) => {

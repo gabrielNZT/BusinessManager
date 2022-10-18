@@ -1,11 +1,16 @@
 import { Select } from 'antd';
 import React from 'react';
 const { Option } = Select;
-const handleChange = (value) => {
-    console.log(`selected ${value}`);
-};
+
 
 function SelectPermission(props) {
+    const {formData} = props;
+    
+    const handleChange = (value) => {
+        formData[props.name] = value
+        props.handleSetData(formData)
+    };
+
     return (
         <div style={{display: 'flex', flexDirection: 'column', width: '31.6%'}}>
             <label> {props.label} </label>

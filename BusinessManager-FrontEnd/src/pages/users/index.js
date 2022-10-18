@@ -20,7 +20,7 @@ const items = [
 function UserPage() {
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>
-            <HeaderRegisterForm/>
+            <HeaderRegisterForm title='Novo Usuário' path={"../home"}/>
             <FormRegisterUser items={items} />
         </LayoutHome>
     )

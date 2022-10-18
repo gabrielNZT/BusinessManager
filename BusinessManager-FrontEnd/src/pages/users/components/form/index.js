@@ -4,22 +4,17 @@ import { DateEntry, InputLabel, SelectPermission, UploadUserPhoto, SwitchEnableU
 
 function FormRegisterUser(props) {
     const [formData, setFormData] = useState({});
-
     const handleSetData = (data) => setFormData(data);
 
-    console.log(formData)
     return (
         <Form className="form-register-user">
             {props.items.map((item, index) => {
                 switch (item.type) {
                     case 'input':
                         return (<InputLabel
-                            name={item.tag}
-                            type={item.mask}
+                            item={item}
                             formData={formData}
                             handleSetData={handleSetData}
-                            placeholder={item.placeholder}
-                            label={item.label}
                             key={index} />)
                     case 'select':
                         return (<SelectPermission

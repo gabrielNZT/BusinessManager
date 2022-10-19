@@ -14,10 +14,14 @@ class User implements Serializable {
 
     private static final long serialVersionUID = 1
 
+    String name
+    Date birthDate
+    Date contractDate
     String username
     String password
     String email
     String phone
+    String cpf
     boolean hasTemporaryPassword = false
     boolean enabled = true
     boolean accountExpired = false

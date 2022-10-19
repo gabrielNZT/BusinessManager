@@ -8,6 +8,7 @@ import { cnpjIsValid } from '../../utils/index.js';
 import { toast } from 'react-toastify'
 import HeaderArrow from '../../global/components/headerBackToLogin/index.js'
 import RegisterForm from './components/form.js';
+import {cnpjMask, phoneMask} from '../../global/utils'
 
 
 function Register() {
@@ -101,24 +102,6 @@ function Register() {
         }
     }
 
-    const cnpjMask = (value) => {
-        return value
-            .replace(/\D+/g, '')
-            .replace(/(\d{2})(\d)/, '$1.$2')
-            .replace(/(\d{3})(\d)/, '$1.$2')
-            .replace(/(\d{3})(\d)/, '$1/$2')
-            .replace(/(\d{4})(\d)/, '$1-$2')
-            .replace(/(-\d{2})\d+?$/, '$1')
-    }
-
-    const phoneMask = (value) => {
-        return value
-            .replace(/\D/g, "")
-            .substr(0, 11)
-            .replace(/^(\d{2})(\d)/g, "($1) $2")
-            .replace(/(\d)(\d{4})$/, "$1-$2")
-    }
-
     return (
         <>
             <Background />
@@ -130,7 +113,7 @@ function Register() {
                 setModalOpen={setModalOpen} />)}
             <div className="div-register-form">
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <HeaderArrow title='CADASTRE SUA EMPRESA' />
+                    <HeaderArrow customStyle={'div-login-form-header'} margin='3%' title='CADASTRE SUA EMPRESA' />
                     <div style={{ marginLeft: '40px', marginTop: '30px', fontWeight: '700' }}>
                         <h5 className=''>Para criar um conta na <span className='span-company-name'>BM</span>, entre com os dados da sua empresa</h5>
                     </div>

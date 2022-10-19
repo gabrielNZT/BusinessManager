@@ -1,5 +1,6 @@
 package security
 
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugins.mail.MailService
 import grails.validation.ValidationException
 
@@ -16,6 +17,7 @@ import grails.gorm.transactions.Transactional
 @ReadOnly
 class UserController {
 
+    SpringSecurityService springSecurityService
     UserService userService
     MailService mailService
 
@@ -128,5 +130,11 @@ class UserController {
         }
 
         respond User.findByUsername(username), [status: OK, view: "show"]
+    }
+
+    @ReadOnly
+    def currentUser(){
+        User user = userService.get(springSecurityService.principal.id)
+        respond user, [status: OK]
     }
 }

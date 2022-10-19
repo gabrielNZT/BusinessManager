@@ -1,0 +1,112 @@
+#components-layout-demo-custom-trigger .trigger {
+    padding: 0 24px;
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  #components-layout-demo-custom-trigger .trigger:hover {
+    color: #1890ff;
+  }
+  
+  #components-layout-demo-custom-trigger .logo {
+    height: 32px;
+    margin: 16px;
+    background: rgba(255, 255, 255, 0.3);
+  }
+  
+  .site-layout .site-layout-background {
+    background: #fff;
+  }
+
+  .layout-home {
+    height: 100vh;
+  }
+
+  .ant-layout {
+    background: #ffffff;
+  }
+
+  .ant-layout-sider {
+    min-width: 90px !important;
+    max-width: 350px !important;
+  }
+  .ant-menu {
+    background: none;
+  }
+  .ant-menu-item {
+    font-size: 18px;
+    color: #fff;
+  }
+  .ant-menu.ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item .ant-menu-item-icon, .ant-menu.ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-item .anticon, .ant-menu.ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-submenu>.ant-menu-submenu-title .ant-menu-item-icon, .ant-menu.ant-menu-inline-collapsed>.ant-menu-item-group>.ant-menu-item-group-list>.ant-menu-submenu>.ant-menu-submenu-title .anticon, .ant-menu.ant-menu-inline-collapsed>.ant-menu-item .ant-menu-item-icon, .ant-menu.ant-menu-inline-collapsed>.ant-menu-item .anticon, .ant-menu.ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title .ant-menu-item-icon, .ant-menu.ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title .anticon {
+    margin: 0;
+    font-size: 25px;
+    line-height: 40px;
+}
+
+.sider {
+  background: #831e81;
+  flex: 0 0 300px !important;
+}
+
+.span-version {
+  color: #fff;
+  font-size: 16px;
+  margin-left: 30px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.ant-menu {
+  border: transparent !important;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #e6f7ff;
+  color: #831e81 !important;
+}
+
+.ant-menu-item .ant-menu-item-icon, .ant-menu-item .anticon, .ant-menu-submenu-title .ant-menu-item-icon, .ant-menu-submenu-title .anticon {
+  min-width: 14px;
+  font-size: 20px;
+  transition: font-size .15s cubic-bezier(.215,.61,.355,1),margin .3s cubic-bezier(.645,.045,.355,1),color .3s;
+}
+
+.logout-footer {
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: 500ms;
+}
+
+.logout-footer-collapsed {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.collapsed {
+  background: #831e81 !important;
+  flex: 0 0 80px !important;
+}
+
+.not-collapsed {
+  background: #831e81 !important;
+  flex: 0 0 270px !important; 
+}
+
+.div-logout {
+  width: max-content;
+  height: max-content;
+}
+
+.div-logout:hover {
+  color: red;
+}
+
+.site-layout-background {
+  margin-top: 0px !important;
+}

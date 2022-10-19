@@ -3,7 +3,15 @@ const INITIAL_STATE = {
     username: '',
     access_token: '',
     hasTemporaryPassword: ''
-  }
+  },
+  company: {
+    name: ''
+  },
+  allPermission: [
+    {role: 'Administrador'},
+    {role: 'Gerente'},
+    {role: 'Operador'}
+  ]
 };
 
 function auth(state = INITIAL_STATE, action) {
@@ -17,7 +25,12 @@ function auth(state = INITIAL_STATE, action) {
         }
       }
     case 'HAS_TEMPORARY_PASSWORD':
-      return { ...state, hasTemporaryPassword: !INITIAL_STATE.hasTemporaryPassword }
+      return {
+        ...state, user: {
+          ...state.user,
+          hasTemporaryPassword: !INITIAL_STATE.user.hasTemporaryPassword
+        }
+      }
     case 'FETCH_USER_DATA':
       return {
         ...state, user: {
@@ -25,6 +38,25 @@ function auth(state = INITIAL_STATE, action) {
           hasTemporaryPassword: action.user.hasTemporaryPassword
         }
       }
+    case 'FETCH_COMPANY_NAME':
+      return {
+        ...state, company: {
+          ...action.company,
+          name: action.company.name
+        }
+      }
+    case 'FETCH_COMPANY_NAME_CONFIG_PAGE':
+      return {
+        ...state, user: {
+          ...state.user,
+          hasTemporaryPassword: !state.user.hasTemporaryPassword
+        }, company: {
+          ...action.company,
+          name: action.company.name
+        }
+      }
+    case 'LOGOUT':
+      return { INITIAL_STATE }
     default:
       return state;
   }

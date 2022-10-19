@@ -83,12 +83,12 @@ class UserService{
 
     User configPassword (Object request) {
         User user = findUser(request.name)
+
         if(user == null) return null
 
         String newPassword = generatePassword()
         user.setHasTemporaryPassword(false)
         user.setPassword(newPassword)
-        user.setVersion(user.version + 1)
 
         return user
     }

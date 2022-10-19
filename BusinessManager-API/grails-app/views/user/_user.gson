@@ -9,4 +9,5 @@ json {
 	username user.username
 	hasTemporaryPassword user.hasTemporaryPassword
 	enabled user.enabled
+	company g.render(template: 'company', model: [company: user.company])
 }

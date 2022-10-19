@@ -27,24 +27,26 @@ class BootStrap {
         }
 
         if(User.findByUsername('gabrielAdmin') == null){
-            new User(username: 'gabrielAdmin', password: 'admin', phone: "892243",
+            new User(name: "Gbariel gerente" ,username: 'gabrielAdmin', password: 'admin', phone: "892243",
+                    birthDate: new Date(), contractDate: new Date(), cpf: '123.222.202-11',
                     email: 'gabrielnunescesarino@gmail.com', company: company).save(flush: true)
         }
 
 
         if(User.findByUsername('gabrielUser') == null){
-            new User(username: 'gabrielUser', phone: "892243", password: 'admin', email: 'user@gmail.com',
+            new User(name: "vitor gabriel", birthDate: new Date(),username: 'gabrielUser', phone: "892243",
+                    password: 'admin', email: 'user@gmail.com', contractDate: new Date(), cpf: '652.123.125-66',
                     company: company).save(flush: true)
         }
 
         if(User.findByUsername('gabrielAdmin') != null && Role.findByAuthority('ROLE_ADMIN') != null){
             new UserRole(user: User.findByUsername('gabrielAdmin'),
-                    role: Role.findByAuthority('ROLE_ADMIN')).save(flush: true)
+                    role: Role.findByAuthority('GERENTE')).save(flush: true)
         }
 
         if(User.findByUsername('gabrielUser') != null && Role.findByAuthority('ROLE_USER') != null){
             new UserRole(user: User.findByUsername('gabrielUser'),
-            role: Role.findByAuthority('ROLE_USER')).save(flush: true)
+            role: Role.findByAuthority('OPERADOR')).save(flush: true)
         }
     }
     def destroy = {

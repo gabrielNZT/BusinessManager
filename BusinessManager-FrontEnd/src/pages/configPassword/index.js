@@ -3,11 +3,13 @@ import { useEffect, useState } from "react"
 import './style/style.css'
 import { useDispatch, useSelector } from "react-redux"
 import { ChangePassword } from "../../services/request"
-import { HasTemporaryPassword } from "../login/reducer/actions"
+import { FetchCompanyNameConfigPage } from "../login/reducer/actions"
 import HeaderArrow from "../../global/components/headerBackToLogin"
 import ConfigPasswordForm from "./components/form";
+import { useNavigate } from "react-router-dom"
 
 function ConfigPassword() {
+    let navigate = useNavigate()
     const dispatch = useDispatch()
 
     const name = useSelector(state => state.user.username)
@@ -28,8 +30,14 @@ function ConfigPassword() {
 
         } else {
             setValidate(true)
-            ChangePassword(name, fieldValues.password).then(() => dispatch(HasTemporaryPassword()))
+            handleDispatch()
         }
+    }
+
+    async function handleDispatch() {
+        await ChangePassword(name, fieldValues.password).then((response) => {
+            dispatch(FetchCompanyNameConfigPage(response.data.company))
+        }).then(() => navigate("../home", { replace: true }))
     }
 
     useEffect(() => {
@@ -41,7 +49,7 @@ function ConfigPassword() {
             <Background />
             <Logo />
             <div className="div-login-form">
-                <HeaderArrow title='Configurar nova senha' />
+                <HeaderArrow customStyle={'div-login-form-header'} margin='3%' title='Configurar nova senha' />
                 <div className='form-loginform'>
                     <p>Para sua segurança, informe uma nova senha para acessar o sistema. </p>
                     <ConfigPasswordForm

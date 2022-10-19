@@ -10,8 +10,8 @@ const items = [
     { type: 'input', label: 'CPF', placeholder: 'Digite o CPF', tag: 'cpf' },
     { type: 'select', label: 'Permissão', placeholder: 'Escolha a permissão', tag: 'permission' },
     { type: 'switch', label: 'Ativo?', tag: 'isEnable' },
-    { type: 'input', label: 'Senha', mask: 'password', placeholder: 'Digite a senha', tag: 'password' },
-    { type: 'input', label: 'Confirmar senha', mask: 'password', placeholder: 'Confirme a senha', tag: 'repeatPassword' },
+    { type: 'password', label: 'Senha', placeholder: 'Digite a senha', tag: 'password' },
+    { type: 'password', label: 'Confirmar senha', placeholder: 'Confirme a senha', tag: 'repeatPassword' },
     { type: 'upload', label: 'Imagem de perfil', body: 'Clique ou arraste a imagem para esta área para fazer o upload' },
     { type: 'data', label: 'Data de Nascimento', tag: 'birthDate' },
     { type: 'data', label: 'Data de contrato', tag: 'contractDate' }

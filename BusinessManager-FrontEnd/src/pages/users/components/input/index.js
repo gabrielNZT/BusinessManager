@@ -1,10 +1,9 @@
 import { Form } from 'react-bootstrap'
 import { cpfMask, phoneMask } from '../../../../global/utils'
-import PasswordField from '../passwordInput'
 
 function InputLabel(props) {
     const { formData } = props
-    const { name, type, label, mask, placeholder } = props.item
+    const { tag: name, type, label, placeholder } = props.item
 
     const handleState = (event) => {
         const { name: tag, value } = event.target
@@ -15,14 +14,13 @@ function InputLabel(props) {
         <Form.Group className="div-register-user">
             <Form.Label bsPrefix="label-register-user">
                 {label}
-                {mask !== 'password' ? (<Form.Control
+                <Form.Control
                     name={name}
                     value={formData[name]}
                     type={type ? type : 'text'}
                     onChange={(e) => handleState(e)}
                     placeholder={placeholder}
-                />) : (<PasswordField />)}
-
+                />
             </Form.Label>
         </Form.Group>
     )

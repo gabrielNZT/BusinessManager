@@ -3,6 +3,7 @@
     display: flex;
     justify-content: flex-start;
     gap: 20px;
+    row-gap: 8vh;
     flex-wrap: wrap;
     max-width: max-content;
     
@@ -13,13 +14,11 @@
 }
 
 .div-register-user {
-    height: 70px;
     width: 31.6%;
 }
 
 .label-register-user {
     width: 100% !important;
-    height: 100px;
 }
 
 .div-custom-label {
@@ -100,4 +99,31 @@
 .icon-register-user {
     position: fixed;
     right: 5%;
+}
+
+.ant-input-password {
+    border: none !important;
+    border-bottom: 2px solid black !important;
+    box-shadow: none !important;
+    transition: none !important;
+}
+
+.ant-input-affix-wrapper-focused {
+    border-bottom: 3px solid #831e81 !important;
+}
+
+.ant-input-password  input::placeholder {
+    color: #8e8e8e !important;
+}
+
+.ant-picker-suffix {
+    font-size: 1.3em;
+}
+
+.ant-input-suffix {
+    font-size: 1.3em;
+}
+
+.ant-select-arrow {
+    color: black;
 }

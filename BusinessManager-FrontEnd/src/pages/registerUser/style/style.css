@@ -21,6 +21,10 @@
     width: 100% !important;
 }
 
+.div-label {
+    width: max-content;
+}
+
 .div-custom-label {
     display: flex;
     flex-direction: column;

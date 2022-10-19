@@ -12,7 +12,7 @@ function SwitchEnableUser(props) {
 
     return (
         <div className='div-custom-label'>
-            <div>
+            <div className='div-label'>
                 <label> {props.label} </label>
             </div>
             <Switch

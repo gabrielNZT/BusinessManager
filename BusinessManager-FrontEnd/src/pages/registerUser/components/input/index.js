@@ -3,7 +3,7 @@ import { cpfMask, phoneMask } from '../../../../global/utils'
 
 function InputLabel(props) {
     const { formData } = props
-    const { tag: name, type, label, placeholder } = props.item
+    const { tag: name, type, label, placeholder, disabled, value } = props.item
 
     const handleState = (event) => {
         const { name: tag, value } = event.target
@@ -15,8 +15,9 @@ function InputLabel(props) {
             <Form.Label bsPrefix="label-register-user">
                 {label}
                 <Form.Control
+                    disabled={disabled === true? true : false}
                     name={name}
-                    value={formData[name]}
+                    value={disabled === true? value : formData[name]}
                     type={type ? type : 'text'}
                     onChange={(e) => handleState(e)}
                     placeholder={placeholder}

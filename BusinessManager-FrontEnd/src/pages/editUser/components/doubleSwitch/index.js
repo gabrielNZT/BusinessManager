@@ -6,7 +6,9 @@ function DoubleSwitch(props) {
             {
                 props.items.map((item, index) => {
                     return (
+                        <div style={{ width: '35%' }}>
                             <SwitchEnableUser name={item.tag} label={item.label} key={index} />
+                        </div>
                     )
                 })
             }

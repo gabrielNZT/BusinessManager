@@ -21,7 +21,6 @@ export function ChangePassword(name, newPassword){
         name: name,
         password: newPassword
     }
-    console.log(user)
     return api
     .post("/configPassword", user).then()
 }

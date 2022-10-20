@@ -1,42 +1,47 @@
-import { useState } from "react"
 import { Form } from "react-bootstrap"
 import { DateEntry, InputLabel, SelectPermission, UploadUserPhoto, SwitchEnableUser, PasswordField } from '..'
 import DoubleSwitch from "../../../editUser/components/doubleSwitch";
+import ClickSubmit from "../../../../contexts/clickSubmit";
+import { useContext } from "react";
 
 function FormRegisterUser(props) {
-    const [formData, setFormData] = useState({});
+    const { handleSubmit } = useContext(ClickSubmit)
+    const { formData, setFormData } = props
     const handleSetData = (data) => setFormData(data);
+    const handleKeyDown = (event) => event.code === 'Enter' ? handleSubmit(formData) : null
 
-    console.log(formData)
     return (
-        <Form className="form-register-user">
+        <Form onKeyDown={(event) => handleKeyDown(event)} style={{ rowGap: props.rowGap }} className="form-register-user">
             {props.items.map((item, index) => {
                 switch (item.type) {
                     case 'input':
                         return (<InputLabel
                             item={item}
-                            name={item.name}
+                            name={item.tag}
                             formData={formData}
                             handleSetData={handleSetData}
                             key={index} />)
                     case 'password':
                         return (<PasswordField
-                            formData={formData}
+                            formData={props.formData}
                             handleSetData={handleSetData}
                             item={item}
                             key={index}
                         />)
                     case 'switchs':
-                        return (<DoubleSwitch items={item.items}/>)
+                        return (<DoubleSwitch key={index} items={item.items} />)
                     case 'select':
                         return (<SelectPermission
-                            name={item.tag}
+                            item={item}
                             formData={formData}
                             handleSetData={handleSetData}
-                            label={item.label}
                             key={index} />)
                     case 'upload':
-                        return (<UploadUserPhoto body={item.body} label={item.label} key={index} />)
+                        return (<UploadUserPhoto
+                            formData={formData}
+                            handleSetData={handleSetData}
+                            item={item}
+                            key={index} />)
                     case 'switch':
                         return (<SwitchEnableUser
                             name={item.tag}

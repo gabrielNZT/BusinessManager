@@ -1,18 +1,16 @@
 import { Select } from 'antd';
 import React from 'react';
-import { useSelector } from 'react-redux';
 const { Option } = Select;
 
 
 function SelectPermission(props) {
     const {formData} = props;
-    const allPermission = useSelector(state => state.allPermission)
     
-    const handleChange = (value) => props.handleSetData({...formData, [props.name]: value})
+    const handleChange = (value) => props.handleSetData({...formData, [props.item.name]: value})
 
     return (
         <div style={{display: 'flex', flexDirection: 'column', width: '31.6%'}}>
-            <label> {props.label} </label>
+            <label> {props.item.label} </label>
             <Select
             size='large'
             placeholder='Escolha a permissão'
@@ -21,7 +19,7 @@ function SelectPermission(props) {
                 }}
                 onChange={handleChange}
             >
-                {allPermission.map((item, index) => (<Option key={index} value={item.role}/>))}
+                {props.item.elements.map((item, index) => (<Option key={index} value={item.role}/>))}
             </Select>
         </div>
     )

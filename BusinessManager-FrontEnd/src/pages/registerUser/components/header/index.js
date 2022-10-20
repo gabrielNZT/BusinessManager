@@ -10,9 +10,9 @@ function HeaderRegisterForm(props) {
                     customStyle={'div-user-form-header'}
                     margin={'1%'} size={'24px'}
                     bold={'bold'}
-                    title={props.title}/>
+                    title={props.title} />
             </div>
-            <ButtonSubmit />
+            <ButtonSubmit formData={props.formData}/>
         </div>
     )
 }

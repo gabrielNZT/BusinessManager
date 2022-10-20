@@ -1,5 +1,5 @@
 import { Form } from 'react-bootstrap'
-import { cpfMask, phoneMask } from '../../../../global/utils'
+import { cpfMask, moneyMask, phoneMask } from '../../../../global/utils'
 
 function InputLabel(props) {
     const { formData } = props
@@ -7,7 +7,10 @@ function InputLabel(props) {
 
     const handleState = (event) => {
         const { name: tag, value } = event.target
-        props.handleSetData({ ...formData, [tag]: tag === 'cpf' ? cpfMask(value) : tag === 'phone' ? phoneMask(value) : value })
+        props.handleSetData({
+            ...formData, [tag]: tag === 'cpf' ? cpfMask(value) :
+                tag === 'phone' ? phoneMask(value) : tag === 'price'? moneyMask(value) : value
+        })
     }
 
     return (
@@ -15,9 +18,9 @@ function InputLabel(props) {
             <Form.Label bsPrefix="label-register-user">
                 {label}
                 <Form.Control
-                    disabled={disabled === true? true : false}
+                    disabled={disabled === true ? true : false}
                     name={name}
-                    value={disabled === true? value : formData[name]}
+                    value={disabled === true ? value : formData[name]}
                     type={type ? type : 'text'}
                     onChange={(e) => handleState(e)}
                     placeholder={placeholder}

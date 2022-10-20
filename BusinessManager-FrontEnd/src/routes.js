@@ -12,7 +12,7 @@ export default function PagesRoutes() {
                 <Route element={(<ConfigPassword />)} path={'/config-password'} />
                 <Route element={(<HomePage />)} path={'/home'} />
                 <Route element={(<UserPage />)} path={'/user'} />
-                <Route element={(<RegisterProduct />)} path={'/product/register'} />
+                <Route element={(<RegisterProduct />)} path={'/product'} />
                 <Route element={(<EditProduct />)} path={'/product/edit'} />
                 <Route element={(<EditUser />)} path={'/user/edit'} />
             </Routes>

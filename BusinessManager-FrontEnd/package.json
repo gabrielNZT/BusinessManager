@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "ant": "^0.2.0",
     "antd": "^4.23.2",
+    "antd-img-crop": "^4.2.8",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.1",
     "react": "^18.2.0",

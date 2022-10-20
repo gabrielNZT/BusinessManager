@@ -10,7 +10,6 @@ const UploadUserPhoto = (props) => {
     const [fileList, setFileList] = useState([]);
     const onChange = ({ fileList: newFileList }) => {
         setFileList(newFileList);
-        console.log(newFileList[INITIAL_VALUE]?.originFileObj)
         handleSetData({...formData, [props.item.tag]: newFileList[INITIAL_VALUE]?.originFileObj});
     };
     const onPreview = async (file) => {
@@ -57,7 +56,7 @@ const UploadUserPhoto = (props) => {
                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     listType="picture-card"
                     fileList={fileList}
-                    onChange={onChange}
+                    onChange={ (file) => onChange(file)}
                     onPreview={onPreview}
                 >
                    { uploadButton }

@@ -15,6 +15,7 @@ class UrlMappings {
         "/api/configPassword"(controller: 'user', action: 'configPassword')
         "/api/userProperties"(controller: 'user', action: 'userProperties')
         "/api/currentUser"(controller: 'user', action: 'currentUser')
+        "/api/registerUser"(controller: 'user', action: 'registerUser')
 
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')

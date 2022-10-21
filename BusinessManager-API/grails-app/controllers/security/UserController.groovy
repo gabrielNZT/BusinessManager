@@ -3,6 +3,7 @@ package security
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugins.mail.MailService
 import grails.validation.ValidationException
+import org.springframework.validation.BindingResult
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST
 import static org.springframework.http.HttpStatus.CREATED
@@ -136,5 +137,19 @@ class UserController {
     def currentUser(){
         User user = userService.get(springSecurityService.principal.id)
         respond user, [status: OK]
+    }
+
+    @Transactional
+    def registerUser() {
+        User user = new User()
+        def request = request
+        user.properties = request
+        def requestJSON = request.getJSON()
+       try {
+           userService.registerUser(user, requestJSON)
+       } catch (ValidationException e) {
+           respond BAD_REQUEST
+       }
+        respond status: CREATED
     }
 }

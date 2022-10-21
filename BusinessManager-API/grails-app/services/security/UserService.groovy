@@ -3,6 +3,9 @@ package security
 import exceptions.RegisterCompanyException
 import grails.gorm.transactions.Transactional
 import grails.plugins.mail.MailService
+import grails.views.api.http.Request
+import org.codehaus.groovy.runtime.EncodingGroovyMethods
+import org.springframework.validation.BindingResult
 
 @Transactional
 class UserService{
@@ -97,4 +100,12 @@ class UserService{
         if(User.findByUsername(name) != null) return User.findByUsername(name)
         else return User.findByEmail(name)
     }
+
+    void registerUser(User user, Object requestJSON) {
+
+        user.imageBytes = requestJSON.userPhoto? null : requestJSON.userPhoto.base64
+        user.contentType = requestJSON.userPhoto? null : requestJSON.userPhoto.contentType
+        save(user)
+    }
+
 }

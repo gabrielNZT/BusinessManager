@@ -28,7 +28,7 @@ export function ChangePassword(name, newPassword){
 export const SignIn = (user) => {
 
     return api
-    .post("/api/login", {
+    .post("/login", {
         username: user.name,
         password: user.password
     })
@@ -46,7 +46,8 @@ export const GetCurrentUser = () => {
 }
 
 export const RegisterUser = (user) => {
+    console.log(user)
     return api
-    .post('/RegisterUser', user)
+    .post('/registerUser', user)
     .then()
 }

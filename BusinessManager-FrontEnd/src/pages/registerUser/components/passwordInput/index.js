@@ -9,6 +9,7 @@ function PasswordField(props) {
             <label> {props.item.label} </label>
             <Space direction="vertical" className='password-field'>
                 <Input.Password
+                    value={formData[props.item.tag]}
                     autoComplete='false'
                     onChange={(event) => props.handleSetData({ ...formData, [props.item.tag]: event.target.value })}
                     size='large'

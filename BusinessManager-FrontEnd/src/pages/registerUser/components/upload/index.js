@@ -5,18 +5,20 @@ import React, { useState } from 'react';
 
 const FILE_POSITION = 0;
 const BASE_64 = 1;
+const CONTENT_TYPE = 0;
 
-const getBase64 = async (file) => file? (await getSRCImage(file)).split('base64,')[BASE_64] : null
+const getBase64 = async (file) => file ? (await getSRCImage(file)).split('base64,')[BASE_64] : null
+const getContentType = async (file) => file? (await getSRCImage(file)).split('base64,')[CONTENT_TYPE] : null 
 const getSRCImage = async (file) => {
-        let src = file.url;
-        if(!src) {
-            src = await new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file.originFileObj);
-                reader.onload = () => resolve(reader.result);
-            })
-        }
-        return src
+    let src = file.url;
+    if (!src) {
+        src = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file.originFileObj);
+            reader.onload = () => resolve(reader.result);
+        })
+    }
+    return src
 }
 
 const UploadUserPhoto = (props) => {
@@ -24,13 +26,17 @@ const UploadUserPhoto = (props) => {
     const [fileList, setFileList] = useState([]);
     const onChange = async ({ fileList: newFileList }) => {
         setFileList(newFileList);
-        console.log(await getBase64(newFileList[FILE_POSITION]))
         const base64 = await getBase64(newFileList[FILE_POSITION])
-        handleSetData({ ...formData, [props.item.tag]: base64});
+        const contentType = `${(await getContentType(newFileList[FILE_POSITION]))}base64,`
+        handleSetData({
+            ...formData, [props.item.tag]: {
+                base64: base64,
+                contentType: contentType
+            }
+        });
     };
     const onPreview = async (file) => {
         const src = await getSRCImage(file);
-        console.log(src.split('base64,'))
         const image = new Image();
         image.src = src;
         const imgWindow = window.open(src);

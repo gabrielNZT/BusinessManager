@@ -3,6 +3,8 @@ import LayoutHome from "../../global/components/layout"
 import { FormRegisterUser, HeaderRegisterForm } from "./components"
 import ClickSubmit from "../../contexts/clickSubmit"
 import "./style/style.css"
+import { toast } from "react-toastify"
+import { RegisterUser } from "../../services/request"
 
 const items = [
     { type: 'input', label: 'Nome', placeholder: 'Digite o nome', tag: 'name' },
@@ -32,8 +34,15 @@ function UserPage() {
     const [formData, setFormData] = useState({})
 
     const handleSubmit = (data) => {
-        console.log(data)
+        if (data.password !== data.repeatPassword) {
+            toast.error('Senha de confirmação não corresponde com a senha!')
+            setFormData({...formData, repeatPassword: ''})
+        }
+        else {
+            RegisterUser(data)
+        }
     }
+    
 
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>

@@ -39,7 +39,7 @@ function UserPage() {
             setFormData({...formData, repeatPassword: ''})
         }
         else {
-            RegisterUser(data)
+            RegisterUser({...data, company: JSON.parse((localStorage.getItem('company'))).id}).catch((request) => toast.error(request.response.data.message))
         }
     }
     

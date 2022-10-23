@@ -1,16 +1,16 @@
 package security
 
+
 import exceptions.RegisterCompanyException
 import grails.gorm.transactions.Transactional
 import grails.plugins.mail.MailService
-import grails.views.api.http.Request
-import org.codehaus.groovy.runtime.EncodingGroovyMethods
-import org.springframework.validation.BindingResult
 
 @Transactional
 class UserService{
 
+    UserRoleService userRoleService
     MailService mailService
+    RoleService roleService
 
     Long count(){
         return User.count
@@ -101,11 +101,21 @@ class UserService{
         else return User.findByEmail(name)
     }
 
-    void registerUser(User user, Object requestJSON) {
+    void registerUser( Object requestJSON ) {
+        User user = new User()
+        Role role = new Role(authority: (requestJSON.permission).toUpperCase())
 
-        user.imageBytes = requestJSON.userPhoto? null : requestJSON.userPhoto.base64
-        user.contentType = requestJSON.userPhoto? null : requestJSON.userPhoto.contentType
+        def map = [:]
+        map = requestJSON
+
+        user.properties = map
+        user.enabled = requestJSON.isEnabled
+        user.imageBytes = requestJSON.userPhoto.base64
+        user.contentType = requestJSON.userPhoto.contentType
         save(user)
+
+        roleService.save(role)
+        userRoleService.save(new UserRole(user: user, role: role))
     }
 
 }

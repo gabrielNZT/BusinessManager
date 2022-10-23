@@ -1,5 +1,6 @@
 package security
 
+import exceptions.RegisterCompanyException
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugins.mail.MailService
 import grails.validation.ValidationException
@@ -141,14 +142,10 @@ class UserController {
 
     @Transactional
     def registerUser() {
-        User user = new User()
-        def request = request
-        user.properties = request
-        def requestJSON = request.getJSON()
        try {
-           userService.registerUser(user, requestJSON)
-       } catch (ValidationException e) {
-           respond BAD_REQUEST
+           userService.registerUser(request.getJSON())
+       } catch (RegisterCompanyException ex) {
+           respond ex.errors
        }
         respond status: CREATED
     }

@@ -27,11 +27,11 @@ const UploadUserPhoto = (props) => {
     const onChange = async ({ fileList: newFileList }) => {
         setFileList(newFileList);
         const base64 = await getBase64(newFileList[FILE_POSITION])
-        const contentType = `${(await getContentType(newFileList[FILE_POSITION]))}base64,`
+        const contentType = `${(await getContentType(newFileList[FILE_POSITION]))}`
         handleSetData({
             ...formData, [props.item.tag]: {
                 base64: base64,
-                contentType: contentType
+                contentType: contentType?  null : `${contentType}base64,`
             }
         });
     };

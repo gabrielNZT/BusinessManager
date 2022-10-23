@@ -31,7 +31,9 @@ const items = [
 ]
 
 function UserPage() {
-    const [formData, setFormData] = useState({})
+    const [formData, setFormData] = useState({
+        isEnabled: true
+    })
 
     const handleSubmit = (data) => {
         if (data.password !== data.repeatPassword) {

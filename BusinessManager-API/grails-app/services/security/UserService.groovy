@@ -105,8 +105,7 @@ class UserService{
         User user = new User()
         Role role = new Role(authority: (requestJSON.permission).toUpperCase())
 
-        def map = [:]
-        map = requestJSON
+        def map = requestJSON as Map
 
         user.properties = map
         user.enabled = requestJSON.isEnabled

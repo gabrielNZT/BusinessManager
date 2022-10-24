@@ -16,38 +16,45 @@ export function RegisterCompany(company, user) {
         .post("/registerCompany", userCompany).then()
 }
 
-export function ChangePassword(name, newPassword){
+export function ChangePassword(name, newPassword) {
     const user = {
         name: name,
         password: newPassword
     }
     return api
-    .post("/configPassword", user).then()
+        .post("/configPassword", user).then()
 }
 
 export const SignIn = (user) => {
 
     return api
-    .post("/login", {
-        username: user.name,
-        password: user.password
-    })
-    .then()
+        .post("/login", {
+            username: user.name,
+            password: user.password
+        })
+        .then()
 }
 
 export const GetUserProperties = (username) => {
     return api
-    .get(`/userProperties?username=${username}`).then()
+        .get(`/userProperties?username=${username}`).then()
 }
 
 export const GetCurrentUser = () => {
     return api
-    .get('/currentUser').then()
+        .get('/currentUser').then()
 }
 
 export const RegisterUser = (user) => {
     console.log(user)
     return api
-    .post('/registerUser', user)
-    .then()
+        .post('/registerUser', user)
+        .then()
+}
+
+export const SaveProduct = (product) => {
+    console.log(product)
+    return api
+        .post("/saveProduct", product)
+        .then()
 }

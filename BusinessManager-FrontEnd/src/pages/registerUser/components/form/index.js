@@ -1,5 +1,5 @@
 import { Form } from "react-bootstrap"
-import { DateEntry, InputLabel, SelectPermission, UploadUserPhoto, SwitchEnableUser, PasswordField } from '..'
+import { DateEntry, InputLabel, SelectPermission, UploadUserPhoto, SwitchEnableUser, PasswordField, SelectUnity } from '..'
 import DoubleSwitch from "../../../editUser/components/doubleSwitch";
 import ClickSubmit from "../../../../contexts/clickSubmit";
 import { useContext } from "react";
@@ -30,6 +30,8 @@ function FormRegisterUser(props) {
                         />)
                     case 'switchs':
                         return (<DoubleSwitch key={index} items={item.items} />)
+                    case 'selectUnity':
+                        return (<SelectUnity item={item} formData={formData} key={index} handleSetData={handleSetData} />)
                     case 'select':
                         return (<SelectPermission
                             item={item}
@@ -58,7 +60,6 @@ function FormRegisterUser(props) {
                             key={index} />)
                     default:
                         return null
-
                 }
             })}
         </Form>

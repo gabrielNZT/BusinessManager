@@ -31,7 +31,7 @@ const UploadUserPhoto = (props) => {
         handleSetData({
             ...formData, [props.item.tag]: {
                 base64: base64,
-                contentType: contentType?  null : `${contentType}base64,`
+                contentType: contentType?  `${contentType}base64,` : null
             }
         });
     };

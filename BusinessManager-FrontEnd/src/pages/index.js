@@ -7,3 +7,6 @@ export {default as ConfigPassword} from './configPassword'
 export {default as RegisterProduct} from './registerProduct'
 export {default as EditProduct} from './editProduct'
 export {default as EditUser} from './editUser'
+export {default as ListUser} from './listUser'
+export {default as ListProduct} from './listProduct'
+    

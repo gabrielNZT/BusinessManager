@@ -22,6 +22,8 @@ class User implements Serializable {
     String email
     String phone
     String cpf
+    byte[] imageBytes
+    String contentType
     boolean hasTemporaryPassword = false
     boolean enabled = true
     boolean accountExpired = false
@@ -40,9 +42,12 @@ class User implements Serializable {
         password nullable: false, blank: false, password: true
         username nullable: false, blank: false, unique: true
         email unique: true, nullable: false, blank: false, email: true
+        imageBytes nullable: true, blank: true
+        contentType nullable: true, blank: true
     }
 
     static mapping = {
+        imageBytes column: 'image_bytes', sqlType: 'longblob'
 	    password column: '`password`'
     }
 }

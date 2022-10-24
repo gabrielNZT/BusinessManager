@@ -1,8 +1,10 @@
 package security
 
+import exceptions.RegisterCompanyException
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugins.mail.MailService
 import grails.validation.ValidationException
+import org.springframework.validation.BindingResult
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST
 import static org.springframework.http.HttpStatus.CREATED
@@ -136,5 +138,15 @@ class UserController {
     def currentUser(){
         User user = userService.get(springSecurityService.principal.id)
         respond user, [status: OK]
+    }
+
+    @Transactional
+    def registerUser() {
+       try {
+           userService.registerUser(request.getJSON())
+       } catch (RegisterCompanyException ex) {
+           respond ex.errors
+       }
+        respond status: CREATED
     }
 }

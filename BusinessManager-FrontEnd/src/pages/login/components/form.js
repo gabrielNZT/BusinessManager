@@ -48,7 +48,7 @@ function LoginForm() {
     const response = await GetUserProperties(username)
     dispatch(FetchCompanyName(response.data.company))
     dispatch(FetchUserData(response.data))
-    localStorage.setItem('company', JSON.stringify({name: response.data.company.name}));
+    localStorage.setItem('company', JSON.stringify({name: response.data.company.name, id: response.data.company.id}));
     handleNavigate(response.data?.hasTemporaryPassword ? 'CONFIG_PASSWORD' : 'HOME_PAGE')
   }
 

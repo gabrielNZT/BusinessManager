@@ -3,10 +3,9 @@
     display: flex;
     justify-content: flex-start;
     gap: 20px;
-    row-gap: 5vh;
     flex-wrap: wrap;
     max-width: max-content;
-    
+    height: min-content !important;
 }
 
 .div-upload {
@@ -15,10 +14,16 @@
 
 .div-register-user {
     width: 31.6%;
+    
+}
+
+.form-control {
+    height: 40px !important;
 }
 
 .label-register-user {
     width: 100% !important;
+    height: 60.43px;
 }
 
 .div-label {
@@ -32,9 +37,6 @@
     width: 31.6% !important;
 }
 
-.ant-switch {
-    width: 17%;
-}
 
 .ant-picker {
     width: 100% !important;
@@ -136,4 +138,13 @@
 .ant-upload {
     width: 200px !important;
     height: 150px !important;
+}
+
+.ant-btn-primary {
+    background-color: #831e81 !important;
+    border-color: transparent !important;
+}
+
+.ant-btn-primary:hover {
+    color: black !important;
 }

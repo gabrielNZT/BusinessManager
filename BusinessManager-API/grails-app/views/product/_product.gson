@@ -1,0 +1,7 @@
+import businessmanager.api.Product
+
+model {
+	Product product
+}
+
+json g.render(product, [resolveTemplate: false])

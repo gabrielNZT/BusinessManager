@@ -5,19 +5,7 @@ import { binToBase64 } from '../../utils';
 
 function DefaultAvatar() {
     const userDetails = JSON.parse(localStorage.getItem('user'))
-    console.log(userDetails)
     const src = userDetails?.imageBytes === undefined ? null : (userDetails.cotentType + binToBase64(userDetails?.imageBytes))
-    console.log(src)
-
-    async function getSRC(src) {
-        if(src === null) return null
-        const readerSRC = await new Promise((resolve) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(src);
-            reader.onload = () => resolve(reader.result);
-        })
-        return readerSRC
-     }
 
     return (
         <div style={{ position: 'fixed', right: '2%', top: '2%', cursor: 'pointer' }}>

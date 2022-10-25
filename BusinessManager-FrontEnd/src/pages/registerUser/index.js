@@ -38,13 +38,13 @@ function UserPage() {
     const handleSubmit = (data) => {
         if (data.password !== data.repeatPassword) {
             toast.error('Senha de confirmação não corresponde com a senha!')
-            setFormData({...formData, repeatPassword: ''})
+            setFormData({ ...formData, repeatPassword: '' })
         }
         else {
-            RegisterUser({...data, company: JSON.parse((localStorage.getItem('company'))).id}).catch((request) => toast.error(request.response.data.message))
+            RegisterUser({ ...data, company: JSON.parse((localStorage.getItem('company'))).id }).catch((request) =>
+                toast.error(request.response.data.message));
         }
     }
-    
 
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>

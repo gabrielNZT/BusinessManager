@@ -3,9 +3,9 @@ export function handleNavigate(key) {
         case '1':
             return "../home" // Dashboard
         case '2':
-            return "../home" // Produtos
+            return "../product" // Produtos
         case '3':
-            return "../home" // Usuários
+            return "../user" // Usuários
         case '4':
             return "../home" // Configurações
         default:    

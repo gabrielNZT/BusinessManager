@@ -9,5 +9,7 @@ json {
 	username user.username
 	hasTemporaryPassword user.hasTemporaryPassword
 	enabled user.enabled
+	imageBytes user.imageBytes
+	cotentType user.contentType
 	company g.render(template: 'company', model: [company: user.company])
 }

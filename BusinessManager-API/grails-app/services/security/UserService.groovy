@@ -109,7 +109,7 @@ class UserService{
 
         user.properties = map
         user.enabled = requestJSON.isEnabled
-        user.imageBytes = requestJSON.userPhoto == null? null : requestJSON.userPhoto.base64
+        user.imageBytes = requestJSON.userPhoto == null? null : requestJSON.userPhoto.base64.decodeBase64()
         user.contentType = requestJSON.userPhoto == null? null : requestJSON.userPhoto.contentType
         save(user)
 

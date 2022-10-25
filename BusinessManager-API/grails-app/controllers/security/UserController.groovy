@@ -146,6 +146,7 @@ class UserController {
            userService.registerUser(request.getJSON())
        } catch (RegisterCompanyException ex) {
            respond ex.errors
+           return
        }
         respond status: CREATED
     }

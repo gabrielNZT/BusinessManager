@@ -1,13 +1,13 @@
 export function handleNavigate(key) {
     switch(key){
         case '1':
-            return "../home"
+            return "../home" // Dashboard
         case '2':
-            return "../home"
+            return "../product" // Produtos
         case '3':
-            return "../user"
+            return "../user" // Usuários
         case '4':
-            return "../home"
+            return "../home" // Configurações
         default:    
             return 
     };

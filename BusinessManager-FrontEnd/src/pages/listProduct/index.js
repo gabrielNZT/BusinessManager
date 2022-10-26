@@ -1,15 +1,17 @@
 import { useState } from "react"
 import LayoutHome from "../../global/components/layout"
+import { DATA_PRODUCT } from "../../services/mock"
 import { ButtonsActions, ContainerList } from "../listUser/components"
 
+const width = 100
 const INITIAL_COLUMNS = [
-    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: 100 },
-    { key: 'code', title: 'Código', dataIndex: 'code', width: 100 },
-    { key: 'price', title: 'Preço', dataIndex: 'price', width: 100 },
-    { key: 'stock', title: 'Qtd. estoque', dataIndex: 'stock', width: 100 },
-    { key: 'minStock', title: 'Estoque Mínimo', dataIndex: 'minStock', width: 100 },
-    { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: 100 },
-    { key: 'operation', title: 'Ações', fixed: 'right', width: 100, render: () => <ButtonsActions /> }
+    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width },
+    { key: 'code', title: 'Código', dataIndex: 'code', width: width },
+    { key: 'price', title: 'Preço', dataIndex: 'price', width: width },
+    { key: 'stock', title: 'Qtd. estoque', dataIndex: 'stock', width: width },
+    { key: 'minStock', title: 'Estoque Mínimo', dataIndex: 'minStock', width: width },
+    { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width },
+    { key: 'operation', title: 'Ações', fixed: 'right', width: width, render: () => <ButtonsActions path={'../product/edit'} /> }
 ]
 
 const config = {
@@ -25,6 +27,7 @@ function ListProduct() {
             <ContainerList
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
+                data={DATA_PRODUCT}
                 config={config}
                 columns={columns}
                 setColumns={setColumns} />

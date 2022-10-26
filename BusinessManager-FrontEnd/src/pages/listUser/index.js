@@ -1,19 +1,21 @@
 import { useState } from "react";
 import LayoutHome from "../../global/components/layout";
+import { DATA_USER } from "../../services/mock";
 import { ButtonsActions, ContainerList } from "./components";
 import './style/style.css'
 
+const width = '200px'
 const INITIAL_COLUMNS = [
-    { key: 'name', title: 'Nome', dataIndex: 'name' },
-    { key: 'username', title: 'Nome de usuário', dataIndex: 'username' },
-    { key: 'email', title: 'Email', dataIndex: 'email' },
-    { key: 'phone', title: 'Telefone', dataIndex: 'phone' },
-    { key: 'cpf', title: 'CPF', dataIndex: 'cpf' },
-    { key: 'birthDate', title: 'Data de Nascimento', dataIndex: 'birthDate' },
-    { key: 'enabled', title: 'Ativo', dataIndex: 'enabled' },
-    { key: 'permission', title: 'Permissão', dataIndex: 'permission' },
-    { key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate' },
-    { key: 'operation', title: 'Ações', fixed: 'right', width: 100, render: () => <ButtonsActions /> }
+    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left' ,width: width },
+    { key: 'username', title: 'Nome de usuário', dataIndex: 'username', width: width  },
+    { key: 'email', title: 'Email', dataIndex: 'email', width: width  },
+    { key: 'phone', title: 'Telefone', dataIndex: 'phone', width: width  },
+    { key: 'cpf', title: 'CPF', dataIndex: 'cpf', width: width  },
+    { key: 'birthDate', title: 'Data de Nascimento', dataIndex: 'birthDate', width: width  },
+    { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width  },
+    { key: 'permission', title: 'Permissão', dataIndex: 'permission', width: width  },
+    { key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate', width: width  },
+    { key: 'operation', title: 'Ações', fixed: 'right', width: 100, render: () => <ButtonsActions path={'../user/edit'} /> }
 ]
 
 const config = {
@@ -32,6 +34,7 @@ function ListUser() {
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
                 config={config} columns={columns}
+                data={DATA_USER}
                 setColumns={setColumns} />
         </LayoutHome>
     )

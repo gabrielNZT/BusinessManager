@@ -9,7 +9,9 @@ function ContainerList(props) {
                 defaultColumns={props.defaultColumns}
                 setColumns={props.setColumns}
                 columns={props.columns} />
-            <TableUser columns={props.columns}/>
+            <TableUser 
+            data={props.data}
+            columns={props.columns}/>
         </div>
     )
 }

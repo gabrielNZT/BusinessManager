@@ -15,7 +15,7 @@ const INITIAL_COLUMNS = [
     { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width  },
     { key: 'permission', title: 'Permissão', dataIndex: 'permission', width: width  },
     { key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate', width: width  },
-    { key: 'operation', title: 'Ações', fixed: 'right', width: 100, render: (_, record) => <ButtonsActions record={record} path={'../user/edit'} /> }
+    { key: 'operation', title: 'Ações', fixed: 'right', width: "150px", render: (_, record) => <ButtonsActions record={record} path={'../user/edit'} /> }
 ]
 
 const config = {
@@ -23,7 +23,6 @@ const config = {
     path: '../user/register',
     title: 'Usuários'
 }
-
 
 function ListUser() {
     const [columns, setColumns] = useState(INITIAL_COLUMNS)

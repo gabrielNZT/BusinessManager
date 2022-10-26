@@ -3,7 +3,7 @@ import { FiEdit } from "react-icons/fi"
 import {AiFillWarning} from 'react-icons/ai'
 import { useNavigate } from "react-router-dom"
 import { Popconfirm } from 'antd'
-//
+
 function ButtonsActions(props) {
     let navigate = useNavigate()
     const handleNavigate = () => navigate(props.path, { replace: true, state: { ...props.record } })

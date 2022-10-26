@@ -27,7 +27,7 @@ function EditProduct() {
     ]
 
     return (
-        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/product' }, { name: state?.name, link: '/user/edit' }]}>
+        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/product' }, { name: state?.name, link: '/product/edit' }]}>
             <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>
                 <HeaderRegisterForm
                     formData={formData}

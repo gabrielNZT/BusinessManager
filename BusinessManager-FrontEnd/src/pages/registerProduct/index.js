@@ -26,11 +26,14 @@ function RegisterProduct() {
     })
     const handleSubmit = (data) =>
         SaveProduct({ ...data, company: JSON.parse(localStorage.getItem('company')).id })
+            .then(() => localStorage.setItem('product', JSON.stringify({
+                code: JSON.parse(localStorage.getItem('product'))?.code ? JSON.parse(localStorage.getItem('product'))?.code : '000001'
+            })))
             .catch(request => toast.error(request.response.data.message));
 
 
     return (
-        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/product' }]}>
+        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/product' }, { name: 'Novo Produto', link: '/product/edit'}]}>
             <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>
                 <HeaderRegisterForm
                     formData={formData}

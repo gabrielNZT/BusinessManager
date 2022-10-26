@@ -27,7 +27,7 @@ function RegisterProduct() {
     const handleSubmit = (data) =>
         SaveProduct({ ...data, company: JSON.parse(localStorage.getItem('company')).id })
             .then(() => localStorage.setItem('product', JSON.stringify({
-                code: JSON.parse(localStorage.getItem('product'))?.code ? JSON.parse(localStorage.getItem('product'))?.code : '000001'
+                code: JSON.parse(localStorage.getItem('product'))?.code ? JSON.parse(localStorage.getItem('product'))?.code : 1
             })))
             .catch(request => toast.error(request.response.data.message));
 

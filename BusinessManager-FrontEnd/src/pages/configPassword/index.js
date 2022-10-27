@@ -12,7 +12,7 @@ function ConfigPassword() {
     let navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const name = useSelector(state => state.user.username)
+    const name = useSelector(state => state.auth.user.username)
     const [validate, setValidate] = useState(true);
 
     const [fieldValues, setFieldValues] = useState({

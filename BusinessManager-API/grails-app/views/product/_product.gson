@@ -4,4 +4,13 @@ model {
 	Product product
 }
 
-json g.render(product, [resolveTemplate: false])
+json {
+	id product.id
+	name product.name
+	code product.code
+	contentType product.contentType
+	productImage product.productImage
+	stock product.stock
+	minStock product.minStock
+	enabled product.isEnabled
+}

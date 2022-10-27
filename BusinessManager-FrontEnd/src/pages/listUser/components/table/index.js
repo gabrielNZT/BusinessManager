@@ -1,17 +1,16 @@
 import { Table } from 'antd';
 import React from 'react';
 
-
-const data = [];
+const justHaveActionColum = (columns) => columns.length > 1 ? false : true
 
 function TableUser(props) {
   return (
     <Table
       style={{ marginTop: '5vh' }}
-      columns={props.columns}
-      dataSource={data}
+      columns={!justHaveActionColum(props.columns) ? props.columns : []}
+      dataSource={props.data}
       scroll={{
-        x: 800,
+        x: 1000,
         y: 300,
       }}
     />

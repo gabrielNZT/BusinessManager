@@ -42,6 +42,7 @@ function FormRegisterUser(props) {
                         return (<UploadUserPhoto
                             formData={formData}
                             handleSetData={handleSetData}
+                            src={props.src}
                             item={item}
                             key={index} />)
                     case 'switch':

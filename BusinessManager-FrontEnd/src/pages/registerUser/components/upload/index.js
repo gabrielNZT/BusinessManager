@@ -8,7 +8,7 @@ const BASE_64 = 1;
 const CONTENT_TYPE = 0;
 
 const getBase64 = async (file) => file ? (await getSRCImage(file)).split('base64,')[BASE_64] : null
-const getContentType = async (file) => file? (await getSRCImage(file)).split('base64,')[CONTENT_TYPE] : null 
+const getContentType = async (file) => file ? (await getSRCImage(file)).split('base64,')[CONTENT_TYPE] : null
 const getSRCImage = async (file) => {
     let src = file.url;
     if (!src) {
@@ -31,10 +31,22 @@ const UploadUserPhoto = (props) => {
         handleSetData({
             ...formData, [props.item.tag]: {
                 base64: base64,
-                contentType: contentType?  `${contentType}base64,` : null
+                contentType: contentType ? `${contentType}base64,` : null
             }
         });
     };
+    const defaultList = props.src === 'null' || props.src === undefined ? [] : [
+        {
+            uid: '-1',
+            name: 'image.png',
+            status: 'done',
+            url: props.src
+        },
+    ];
+    const handleList = (defaultList, list) => {
+        return list.length === 0 && defaultList.length === 1 ? defaultList : list.length === 1 ? list : []
+    }
+
     const onPreview = async (file) => {
         const src = await getSRCImage(file);
         const image = new Image();
@@ -70,7 +82,7 @@ const UploadUserPhoto = (props) => {
                     showUploadList={true}
                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                     listType="picture-card"
-                    fileList={fileList}
+                    fileList={handleList(defaultList, fileList)}
                     onChange={(file) => onChange(file)}
                     onPreview={onPreview}
                 >

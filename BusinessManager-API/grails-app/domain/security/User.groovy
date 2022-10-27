@@ -44,6 +44,10 @@ class User implements Serializable {
         email unique: true, nullable: false, blank: false, email: true
         imageBytes nullable: true, blank: true
         contentType nullable: true, blank: true
+        cpf nullable: true
+        birthDate nullable: true
+        contractDate nullable: true
+        phone nullable: true
     }
 
     static mapping = {

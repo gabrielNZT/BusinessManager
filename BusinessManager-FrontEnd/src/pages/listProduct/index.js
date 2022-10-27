@@ -1,15 +1,23 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import LayoutHome from "../../global/components/layout"
+import { GetListProduct } from "../../services/request"
 import { ButtonsActions, ContainerList } from "../listUser/components"
+import {StockNumber} from "../listUser/components"
+import { FetchProductList } from "../listUser/reducer/actions"
 
+const width = 100
 const INITIAL_COLUMNS = [
-    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: 100 },
-    { key: 'code', title: 'Código', dataIndex: 'code', width: 100 },
-    { key: 'price', title: 'Preço', dataIndex: 'price', width: 100 },
-    { key: 'stock', title: 'Qtd. estoque', dataIndex: 'stock', width: 100 },
-    { key: 'minStock', title: 'Estoque Mínimo', dataIndex: 'minStock', width: 100 },
-    { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: 100 },
-    { key: 'operation', title: 'Ações', fixed: 'right', width: 100, render: () => <ButtonsActions /> }
+    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width },
+    { key: 'code', title: 'Código', dataIndex: 'code', width: width },
+    { key: 'price', title: 'Preço', dataIndex: 'price', width: width },
+    { key: 'stock', title: 'Qtd. estoque', dataIndex: 'stock', width: width, render: (_, record) => <StockNumber record={record} /> },
+    { key: 'minStock', title: 'Estoque Mínimo', dataIndex: 'minStock', width: width},
+    { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width },
+    {
+        key: 'operation', title: 'Ações', fixed: 'right', width: width, render: (_, record) =>
+            <ButtonsActions record={record} path={'../product/edit'} />
+    }
 ]
 
 const config = {
@@ -19,13 +27,21 @@ const config = {
 }
 
 function ListProduct() {
+    const dispatch = useDispatch()
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
+    const productList = useSelector(state => state.list.productList)
+
+    useEffect(() => {
+        GetListProduct().then(response => dispatch(FetchProductList(response.data)))        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     return (
         <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Usuários', link: '/user' }]} >
             <ContainerList
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
                 config={config}
+                data={productList}
                 columns={columns}
                 setColumns={setColumns} />
         </LayoutHome>

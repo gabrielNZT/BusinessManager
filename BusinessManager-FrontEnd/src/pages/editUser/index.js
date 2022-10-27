@@ -1,12 +1,14 @@
 import { useState } from "react"
+import { useLocation } from "react-router-dom"
 import ClickSubmit from "../../contexts/clickSubmit"
 import LayoutHome from "../../global/components/layout"
+import { binToBase64 } from "../../global/utils"
 import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
 import './style/style.css'
 
-const nameUser = 'Gabriel Nunes'
-const items = [
-    { type: 'input', label: 'Nome', value: nameUser, disabled: true },
+const NAME_POSITION = 0
+const DEFAULT_ITEMS = [
+    { type: 'input', label: 'Nome' },
     { type: 'input', label: 'Nome de Usuário', placeholder: 'Digite o nome de usuário', tag: 'username' },
     { type: 'input', label: 'Email', placeholder: 'Digite o email', tag: 'email' },
     { type: 'input', label: 'Telefone', placeholder: 'Digite o telefone', tag: 'phone' },
@@ -26,25 +28,28 @@ const items = [
     { type: 'data', label: 'Data de contrato', tag: 'contractDate' }
 ]
 
-
 function EditUser() {
-    const [formData, setFormData] = useState({
-        name: nameUser
-    })
     const handleSubmit = (data) => console.log(data)
-
+    const { state } = useLocation();
+    const [formData, setFormData] = useState({
+        name: state?.name
+    })
+    const srcUserPhoto = state?.imageBytes === undefined ? null : (state.cotentType + binToBase64(state?.imageBytes))
+    DEFAULT_ITEMS[NAME_POSITION] = { ...DEFAULT_ITEMS[NAME_POSITION], value: state?.name, disabled: true }
+    console.log(state)
     return (
-        <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }, { name: nameUser, link: '/user/edit' }]}>
+        <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }, { name: state?.name, link: '/user/edit' }]}>
             <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>
                 <HeaderRegisterForm
                     formData={formData}
-                    title={nameUser}
+                    title={state?.name}
                     path={'../user'} />
                 <FormRegisterUser
-                rowGap={'5vh'}
+                    rowGap={'5vh'}
                     setFormData={setFormData}
                     formData={formData}
-                    items={items} />
+                    src={srcUserPhoto}
+                    items={DEFAULT_ITEMS} />
             </ClickSubmit.Provider>
         </LayoutHome>
     )

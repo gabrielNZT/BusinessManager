@@ -47,7 +47,7 @@ function UserPage() {
     }
 
     return (
-        <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>
+        <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }, {name: 'Novo Usuário', link: '/user/register'}]}>
             <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>
                 <HeaderRegisterForm
                     formData={formData}

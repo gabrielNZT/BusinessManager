@@ -6,7 +6,13 @@ model {
 
 json {
 	id user.id
+	phone user.phone
+	name user.name
+	email user.email
 	username user.username
+	birthDate user.birthDate
+	contractDate user.contractDate
+	cpf user.cpf
 	hasTemporaryPassword user.hasTemporaryPassword
 	enabled user.enabled
 	imageBytes user.imageBytes

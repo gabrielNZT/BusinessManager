@@ -28,7 +28,7 @@ class UserController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond userService.list(params), model:[userCount: userService.count()]
+        respond userService.list(), model:[userCount: userService.count()]
     }
 
     @Transactional

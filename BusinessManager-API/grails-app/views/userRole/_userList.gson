@@ -1,0 +1,18 @@
+import security.UserRole
+
+model {
+    UserRole userRole
+}
+
+json {
+    id userRole.user.id
+    name userRole.user.name
+    email userRole.user.email
+    username userRole.user.email
+    cpf userRole.user.cpf
+    phone userRole.user.phone
+    birthDate userRole.user.birthDate
+    contractDate userRole.user.contractDate
+    enabled userRole.user.enabled
+    permission userRole.role.authority
+}

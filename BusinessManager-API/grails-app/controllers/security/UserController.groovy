@@ -95,6 +95,10 @@ class UserController {
         respond user, [status: OK, view:"show"]
     }
 
+    def getUserImage(Long id) {
+        respond User.findById(id), [status: OK, view: "showImage"]
+    }
+
     @Transactional
     def delete(Long id) {
         if (id == null || userService.delete(id) == null) {

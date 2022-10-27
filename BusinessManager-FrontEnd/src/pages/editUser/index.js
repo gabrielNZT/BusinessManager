@@ -1,8 +1,9 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import ClickSubmit from "../../contexts/clickSubmit"
 import LayoutHome from "../../global/components/layout"
 import { binToBase64 } from "../../global/utils"
+import { GetImageUser } from "../../services/request"
 import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
 import './style/style.css'
 
@@ -31,12 +32,21 @@ const DEFAULT_ITEMS = [
 function EditUser() {
     const handleSubmit = (data) => console.log(data)
     const { state } = useLocation();
+    const [src, setSrc] = useState(null)
     const [formData, setFormData] = useState({
         name: state?.name
     })
-    const srcUserPhoto = state?.imageBytes === undefined ? null : (state.cotentType + binToBase64(state?.imageBytes))
+    const handleRequest = async (id) => {
+        const responseData = await GetImageUser(id).then(response => response.data)
+        return responseData?.imageBytes === undefined ? null : (responseData.contentType + binToBase64(responseData?.imageBytes))
+    }
+    useEffect(() => {
+        handleRequest(state.id).then(response => setSrc(response))
+    }, [state.id]);
+
+    console.log(src)
     DEFAULT_ITEMS[NAME_POSITION] = { ...DEFAULT_ITEMS[NAME_POSITION], value: state?.name, disabled: true }
-    console.log(state)
+
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }, { name: state?.name, link: '/user/edit' }]}>
             <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>
@@ -48,7 +58,7 @@ function EditUser() {
                     rowGap={'5vh'}
                     setFormData={setFormData}
                     formData={formData}
-                    src={srcUserPhoto}
+                    src={src}
                     items={DEFAULT_ITEMS} />
             </ClickSubmit.Provider>
         </LayoutHome>

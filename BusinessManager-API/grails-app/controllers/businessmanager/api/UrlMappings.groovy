@@ -17,6 +17,8 @@ class UrlMappings {
         "/api/currentUser"(controller: 'user', action: 'currentUser')
         "/api/registerUser"(controller: 'user', action: 'registerUser')
         "/api/saveProduct"(controller: 'product', action: 'saveProduct')
+        "/api/getUserList"(controller: 'userRole', action: 'getListUser')
+        "/api/getUserImage/$id(.$format)?"(controller: 'user', action: 'getUserImage')
 
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')

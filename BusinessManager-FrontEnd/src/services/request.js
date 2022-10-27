@@ -66,12 +66,18 @@ export const showProduct = (product_id) => {
 
 export const GetListUser = _ => {
     return api
-        .get("/user")
+        .get("/getUserList")
         .then()
 }
 
 export const GetListProduct = _ => {
     return api
         .get("/product")
+        .then()
+}
+
+export const GetImageUser = (user_id) => {
+    return api
+        .get("/getUserImage/" + user_id)
         .then()
 }

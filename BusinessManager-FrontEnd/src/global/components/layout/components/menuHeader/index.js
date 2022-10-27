@@ -6,14 +6,14 @@ import { FetchCompanyName } from "../../../../../pages/login/reducer/actions.js"
 
 function MenuHeader() {
     const dispatch = useDispatch()
-    const companyName = useSelector(state => state.company.name)
+    const companyName = useSelector(state => state.auth.company.name)
 
     useEffect(() => {
         if (localStorage.getItem('company') === null) {
             GetCurrentUser()
                 .then(response => dispatch(FetchCompanyName(response.data.company)))
         } else {
-            dispatch(FetchCompanyName( JSON.parse(localStorage.getItem('company')) ))
+            dispatch(FetchCompanyName(JSON.parse(localStorage.getItem('company'))))
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

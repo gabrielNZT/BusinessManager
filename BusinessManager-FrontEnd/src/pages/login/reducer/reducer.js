@@ -7,7 +7,6 @@ const INITIAL_STATE = {
   company: {
     name: ''
   },
-
 };
 
 function auth(state = INITIAL_STATE, action) {

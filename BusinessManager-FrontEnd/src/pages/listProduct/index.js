@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import LayoutHome from "../../global/components/layout"
-import { DATA_PRODUCT } from "../../services/mock"
+import { GetListProduct } from "../../services/request"
 import { ButtonsActions, ContainerList } from "../listUser/components"
 import {StockNumber} from "../listUser/components"
+import { FetchProductList } from "../listUser/reducer/actions"
 
 const width = 100
 const INITIAL_COLUMNS = [
@@ -25,14 +27,21 @@ const config = {
 }
 
 function ListProduct() {
+    const dispatch = useDispatch()
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
+    const productList = useSelector(state => state.list.productList)
+
+    useEffect(() => {
+        GetListProduct().then(response => dispatch(FetchProductList(response.data)))        
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     return (
         <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Usuários', link: '/user' }]} >
             <ContainerList
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
-                data={DATA_PRODUCT}
                 config={config}
+                data={productList}
                 columns={columns}
                 setColumns={setColumns} />
         </LayoutHome>

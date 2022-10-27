@@ -11,7 +11,7 @@ function ButtonsActions(props) {
         fontSize: '1.2rem',
         cursor: 'pointer'
     }
-
+ 
     return (
         <div style={{ display: 'flex', gap: '2vh' }}>
             <FiEdit style={{ ...style, color: '#4ab3b4' }} onClick={() => handleNavigate()} />

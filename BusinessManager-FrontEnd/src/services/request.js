@@ -53,8 +53,25 @@ export const RegisterUser = (user) => {
 }
 
 export const SaveProduct = (product) => {
-    console.log(product)
     return api
         .post("/saveProduct", product)
+        .then()
+}
+
+export const showProduct = (product_id) => {
+    return api
+        .get("/product/" + product_id)
+        .then()
+}
+
+export const GetListUser = _ => {
+    return api
+        .get("/user")
+        .then()
+}
+
+export const GetListProduct = _ => {
+    return api
+        .get("/product")
         .then()
 }

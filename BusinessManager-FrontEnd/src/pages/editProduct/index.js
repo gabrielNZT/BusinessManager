@@ -1,8 +1,9 @@
 import LayoutHome from "../../global/components/layout"
 import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ClickSubmit from "../../contexts/clickSubmit"
 import { useLocation } from "react-router-dom"
+import { showProduct } from "../../services/request"
 
 function EditProduct() {
     const handleSubmit = (data) => console.log(data)
@@ -22,9 +23,13 @@ function EditProduct() {
         },
         { type: 'input', label: 'Quantidade em Estoque', placeholder: 'Digite a quantidade em estoque', tag: 'stock' },
         { type: 'input', label: 'Estoque Mínimo', tag: 'minStock', placeholder: 'Digite a quantidade de estoque mínimo' },
-        { type: 'switch', label: 'Ativo?', tag: 'isEnabled' },
+        { type: 'switch', label: 'Ativo?', tag: 'enabled' },
         { type: 'upload', label: 'Imagem', body: 'Clique ou arraste a imagem para esta área para fazer o upload' }
     ]
+
+    useEffect(() => {
+        //showProduct(state.id).then( response => setFormData(response.data))
+    }, [state.id]);
 
     return (
         <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/product' }, { name: state?.name, link: '/product/edit' }]}>

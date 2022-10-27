@@ -23,6 +23,11 @@ class UserRoleController {
         respond userRoleService.list(params), model:[userRoleCount: userRoleService.count()]
     }
 
+    def getListUser(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond userRoleService.list(params), [status: OK, view: "showList"]
+    }
+
     def show(Long id) {
         respond userRoleService.get(id)
     }

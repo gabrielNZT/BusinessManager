@@ -1,0 +1,7 @@
+import security.UserRole
+
+model {
+    Iterable<UserRole> userRoleList
+}
+
+json tmpl.userList(userRoleList?: [])

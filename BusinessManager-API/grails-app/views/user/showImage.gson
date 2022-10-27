@@ -1,0 +1,10 @@
+import security.User
+
+model {
+    User user
+}
+
+json {
+    imageBytes user.imageBytes
+    contentType user.contentType
+}

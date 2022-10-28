@@ -1,18 +1,35 @@
 package security
 
-import grails.gorm.services.Service
+import exceptions.UpdateUserException
 
-@Service(UserRole)
-interface UserRoleService {
+class UserRoleService {
 
-    UserRole get(Serializable id)
+    UserRole get(Long id) {
+        return UserRole.findById(id)
+    }
 
-    List<UserRole> list(Map args)
+    List<UserRole> list() {
+        return UserRole.list()
+    }
 
-    Long count()
+    Long count() {
+        return UserRole.count()
+    }
 
-    UserRole delete(Serializable id)
+    UserRole delete(Long id) {
+        return UserRole.findById(id).delete()
+    }
 
-    UserRole save(UserRole userRole)
+    UserRole save(UserRole userRole) {
+        return userRole.save()
+    }
 
+    void updateUser(Object request) throws UpdateUserException{
+        def map = request as Map
+        UserRole userRole = UserRole.findByUser(User.findById(request.user?.id))
+        userRole.properties = map
+        if(userRole.hasErrors()){
+            throw new UpdateUserException(userRole.errors)
+        }
+    }
 }

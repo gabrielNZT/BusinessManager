@@ -1,0 +1,15 @@
+import businessmanager.api.Product
+
+model {
+    Product product
+}
+
+json {
+    key product.id
+    name product.name
+    code product.code
+    price product.price
+    stock product.stock
+    minStock product.minStock
+    enabled product.isEnabled
+}

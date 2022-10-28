@@ -19,9 +19,8 @@ class ProductController {
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond productService.list(params), model:[productCount: productService.count()]
+    def index() {
+        respond productService.list(), [status: OK, view: "showList"]
     }
 
     def show(Long id) {

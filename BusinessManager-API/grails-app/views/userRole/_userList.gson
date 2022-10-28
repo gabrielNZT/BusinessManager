@@ -5,7 +5,7 @@ model {
 }
 
 json {
-    id userRole.user.id
+    key userRole.user.id
     name userRole.user.name
     email userRole.user.email
     username userRole.user.email

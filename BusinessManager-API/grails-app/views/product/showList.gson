@@ -1,0 +1,7 @@
+import businessmanager.api.Product
+
+model {
+    Iterable<Product> productList
+}
+
+json tmpl.productList(productList ?: [])

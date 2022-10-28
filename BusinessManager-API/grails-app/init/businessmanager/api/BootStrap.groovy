@@ -10,15 +10,15 @@ class BootStrap {
 
     def init = { servletContext ->
         addUsers()
+        addProducts()
     }
 
     @Transactional
     void addUsers(){
 
+        Role.findByAuthority('ADMINISTRADOR')?: new Role(authority: 'ADMINISTRADOR').save(flush: true)
 
-        Role.findByAuthority('ROLE_USER')?: new Role(authority: 'ROLE_USER').save(flush: true)
-
-        Role.findByAuthority('ROLE_ADMIN')?: new Role(authority: 'ROLE_ADMIN').save(flush: true)
+        Role.findByAuthority('OPERADOR')?: new Role(authority: 'OPERADOR').save(flush: true)
 
         Company company = Company.findByName("RAV")
         if(company == null){
@@ -39,15 +39,24 @@ class BootStrap {
                     company: company).save(flush: true)
         }
 
-        if(User.findByUsername('gabrielAdmin') != null && Role.findByAuthority('ROLE_ADMIN') != null){
+        if(User.findByUsername('gabrielAdmin') != null && Role.findByAuthority('ADMINISTRADOR') != null){
             new UserRole(user: User.findByUsername('gabrielAdmin'),
-                    role: Role.findByAuthority('GERENTE')).save(flush: true)
+                    role: Role.findByAuthority('ADMINISTRADOR')).save(flush: true)
         }
 
-        if(User.findByUsername('gabrielUser') != null && Role.findByAuthority('ROLE_USER') != null){
+        if(User.findByUsername('gabrielUser') != null && Role.findByAuthority('OPERADOR') != null){
             new UserRole(user: User.findByUsername('gabrielUser'),
             role: Role.findByAuthority('OPERADOR')).save(flush: true)
         }
+
+    }
+
+    @Transactional
+    void addProducts() {
+        new Product(name: 'maça', code: '00001', company: Company.findById(1), price: 'R$ 10,00',
+                isEnabled: true, stock: 10, minStock: 5, unity: 'KG' ).save(flush: true)
+        new Product(name: 'pera', code: '00002', company: Company.findById(1), price: 'R$ 10,00',
+                isEnabled: true, stock: 20, minStock: 3, unity: 'UN').save(flush: true)
     }
     def destroy = {
     }

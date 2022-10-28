@@ -1,6 +1,9 @@
 package security
 
+import exceptions.UpdateUserException
 import grails.validation.ValidationException
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
@@ -24,8 +27,7 @@ class UserRoleController {
     }
 
     def getListUser(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond userRoleService.list(params), [status: OK, view: "showList"]
+        respond userRoleService.list(), [status: OK, view: "showList"]
     }
 
     def show(Long id) {
@@ -84,5 +86,15 @@ class UserRoleController {
         }
 
         render status: NO_CONTENT
+    }
+
+    @Transactional
+    def updateUser() {
+        try {
+            userRoleService.updateUser(request.getJSON())
+        } catch (UpdateUserException ex) {
+            respond ex.errors
+        }
+        respond status: OK
     }
 }

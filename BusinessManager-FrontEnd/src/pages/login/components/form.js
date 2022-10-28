@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import { GetUserProperties } from '../../../services/request.js';
 
 function LoginForm() {
-
   const dispatch = useDispatch()
 
   const [visibleIcon, setVisibleIcon] = useState('password')
@@ -53,8 +52,8 @@ function LoginForm() {
       id: response.data.company.id
     }));
     localStorage.setItem('user', JSON.stringify({
-      cotentType: response.data.cotentType,
-      imageBytes:(response.data.imageBytes) 
+      contentType: response.data.contentType,
+      imageBytes: (response.data.imageBytes)
     }));
     handleNavigate(response.data?.hasTemporaryPassword ? 'CONFIG_PASSWORD' : 'HOME_PAGE')
   }

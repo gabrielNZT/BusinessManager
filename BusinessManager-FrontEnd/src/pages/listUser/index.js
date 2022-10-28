@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LayoutHome from "../../global/components/layout";
 import { GetListUser } from "../../services/request";
+import { SwitchEnableUser } from "../registerUser/components";
 import { ButtonsActions, ContainerList } from "./components";
 import DateText from "./components/dateText";
 import { FetchUserList } from "./reducer/actions";
 import './style/style.css'
 
+const SWITCH_ELEMENT_POS = 6
 const width = '200px'
 const INITIAL_COLUMNS = [
     { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width },
@@ -31,6 +33,12 @@ function ListUser() {
     const dispatch = useDispatch()
     const userList = useSelector(state => state.list.userList)
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
+    const handleEnabledUser = (data) => console.log(data)
+
+    INITIAL_COLUMNS[SWITCH_ELEMENT_POS] = {
+        ...INITIAL_COLUMNS[SWITCH_ELEMENT_POS], render: (_, record) =>
+            <SwitchEnableUser formData={record} handleSetData={handleEnabledUser} />
+    }
 
     useEffect(() => {
         GetListUser().then(response => dispatch(FetchUserList(response.data)))

@@ -1,0 +1,10 @@
+import businessmanager.api.Product
+
+model {
+    Product product
+}
+
+json {
+    contentType product.contentType
+    imageBytes product.productImage
+}

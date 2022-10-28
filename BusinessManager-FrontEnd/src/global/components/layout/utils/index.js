@@ -1,5 +1,5 @@
-export function handleNavigate(key) {
-    switch(key){
+export function handleNavigate(key, collapsed) {
+    switch (key) {
         case '1':
             return "../home" // Dashboard
         case '2':
@@ -8,7 +8,7 @@ export function handleNavigate(key) {
             return "../user" // Usuários
         case '4':
             return "../home" // Configurações
-        default:    
-            return 
+        default:
+            return
     };
 }

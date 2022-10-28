@@ -1,6 +1,7 @@
 package businessmanager.api
 
 import exceptions.RegisterProductException
+import exceptions.UpdateProductException
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
@@ -19,9 +20,12 @@ class ProductController {
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond productService.list(params), model:[productCount: productService.count()]
+    def index() {
+        respond productService.list(), [status: OK, view: "showList"]
+    }
+
+    def getImage(Long id) {
+        respond Product.findById(id), [status: OK, view: "getImage"]
     }
 
     def show(Long id) {
@@ -90,5 +94,15 @@ class ProductController {
             respond ex.errors
         }
         respond CREATED
+    }
+
+    @Transactional
+    def updateProduct(){
+        try {
+            productService.updateProduct(request.getJSON())
+        } catch (UpdateProductException ex) {
+            respond ex.errors
+        }
+        respond status: OK
     }
 }

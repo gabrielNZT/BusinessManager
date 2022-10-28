@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import './style/style.css'
 import { Layout, Menu } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import { FaUsers, FaBoxes } from 'react-icons/fa'
 import LogoutFooter from './components/menuFooter/index.js';
 import MenuHeader from '../layout/components/menuHeader';
@@ -14,20 +14,23 @@ import BreadcrumbNavigation from '../breadcrumb';
 import DefaultAvatar from '../defaultAvatar';
 import { useNavigate } from 'react-router-dom';
 import { handleNavigate } from './utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { ChangeCollapsed } from './reducer/actions';
 const { Header, Sider, Content } = Layout;
 
-function LayoutHome (props) {
-    const [collapsed, setCollapsed] = useState(false);
+function LayoutHome(props) {
     let navigate = useNavigate()
+    const dispatch = useDispatch()
+    const collapsed = useSelector(state => state.siderCollapsed.collapsed)
 
     return (
         <Layout className='layout-home'>
-            <Sider className={collapsed? 'collapsed' : 'not-collapsed'} trigger={null} collapsible collapsed={collapsed}>
-                { !collapsed && <MenuHeader/>}
+            <Sider className={collapsed ? 'collapsed' : 'not-collapsed'} trigger={null} collapsible collapsed={collapsed}>
+                {!collapsed && <MenuHeader />}
                 <Menu
-                    onSelect={(item) => navigate(handleNavigate(item.key))}
+                    onSelect={(item) => navigate(handleNavigate(item.key), { state: { collapsed: collapsed } })}
                     mode="inline"
-                    defaultSelectedKeys={props.currentPage? props.currentPage : ['1']}
+                    defaultSelectedKeys={props.currentPage ? props.currentPage : ['1']}
                     items={[
                         {
                             key: '1',
@@ -51,7 +54,7 @@ function LayoutHome (props) {
                         }
                     ]}
                 />
-                <LogoutFooter collapsed={collapsed}/>
+                <LogoutFooter collapsed={collapsed} />
             </Sider>
             <Layout className="site-layout">
                 <Header
@@ -64,7 +67,7 @@ function LayoutHome (props) {
                 >
                     {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
-                        onClick: () => setCollapsed(!collapsed),
+                        onClick: () => dispatch(ChangeCollapsed()),
                     })}
                     <DefaultAvatar />
                 </Header>
@@ -75,8 +78,8 @@ function LayoutHome (props) {
                         padding: 24,
                         minHeight: 280,
                     }}
-                > 
-                    <BreadcrumbNavigation breadCrumb={props.breadCrumb}/>
+                >
+                    <BreadcrumbNavigation breadCrumb={props.breadCrumb} />
                     {props.children}
                 </Content>
             </Layout>

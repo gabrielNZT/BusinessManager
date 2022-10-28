@@ -2,6 +2,7 @@ package businessmanager.api
 
 import exceptions.RegisterCompanyException
 import exceptions.RegisterProductException
+import exceptions.UpdateProductException
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 
@@ -42,5 +43,14 @@ class ProductService {
         product.productImage = requestJSON.productPhoto == null? null : requestJSON.productPhoto.base64
         product.contentType = requestJSON.productPhoto == null? null : requestJSON.productPhoto.contentType
         save(product)
+    }
+
+    void updateProduct(Object request) throws UpdateProductException {
+        Product product = Product.findById(request.id)
+        def map = request as Map
+        product.properties = map
+        if(product.hasErrors()) {
+           throw new UpdateProductException(product.errors)
+        }
     }
 }

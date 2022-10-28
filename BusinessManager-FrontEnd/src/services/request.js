@@ -46,7 +46,6 @@ export const GetCurrentUser = () => {
 }
 
 export const RegisterUser = (user) => {
-    console.log(user)
     return api
         .post('/registerUser', user)
         .then()

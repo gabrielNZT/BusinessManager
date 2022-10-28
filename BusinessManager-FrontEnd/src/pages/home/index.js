@@ -1,8 +1,9 @@
 import LayoutHome from "../../global/components/layout";
 
-function HomePage () {
+function HomePage() {
+
     return (
-        <LayoutHome>
+        <LayoutHome  >
             <h5>Em Construção</h5>
         </LayoutHome>
     )

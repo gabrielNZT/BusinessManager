@@ -52,7 +52,7 @@ function UserPage() {
                 <HeaderRegisterForm
                     formData={formData}
                     title='Novo Usuário'
-                    path={"../home"} />
+                    path={"../product"} />
                 <FormRegisterUser
                     formData={formData}
                     setFormData={setFormData}

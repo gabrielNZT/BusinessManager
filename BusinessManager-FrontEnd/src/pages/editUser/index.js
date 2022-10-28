@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"
 import ClickSubmit from "../../contexts/clickSubmit"
 import LayoutHome from "../../global/components/layout"
 import { binToBase64 } from "../../global/utils"
-import { GetImageUser } from "../../services/request"
+import { GetImageUser, UpdateUser } from "../../services/request"
 import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
 import './style/style.css'
 
@@ -30,21 +30,24 @@ const DEFAULT_ITEMS = [
 ]
 
 function EditUser() {
-    const handleSubmit = (data) => console.log(data)
     const { state } = useLocation();
-    const [src, setSrc] = useState(null)
+    const { key: id, ...rest } = state
+    const [src, setSrc] = useState()
     const [formData, setFormData] = useState({
-        name: state?.name
+        id: id,
+        ...rest
     })
     const handleRequest = async (id) => {
         const responseData = await GetImageUser(id).then(response => response.data)
         return responseData?.imageBytes === undefined ? null : (responseData.contentType + binToBase64(responseData?.imageBytes))
     }
-    useEffect(() => {
-        handleRequest(state.id).then(response => setSrc(response))
-    }, [state.id]);
 
-    console.log(src)
+    const handleSubmit = (data) => UpdateUser(data).then(response => console.log(response))
+
+    useEffect(() => {
+        handleRequest(state.key).then(response => setSrc(response))
+    }, [state.key]);
+
     DEFAULT_ITEMS[NAME_POSITION] = { ...DEFAULT_ITEMS[NAME_POSITION], value: state?.name, disabled: true }
 
     return (

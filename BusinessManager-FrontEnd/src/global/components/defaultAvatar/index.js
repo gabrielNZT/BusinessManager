@@ -5,7 +5,7 @@ import { binToBase64 } from '../../utils';
 
 function DefaultAvatar() {
     const userDetails = JSON.parse(localStorage.getItem('user'))
-    const src = userDetails?.imageBytes === undefined ? null : (userDetails.cotentType + binToBase64(userDetails?.imageBytes))
+    const src = userDetails?.imageBytes === undefined ? null : (userDetails.contentType + binToBase64(userDetails?.imageBytes))
 
     return (
         <div style={{ position: 'fixed', right: '2%', top: '2%', cursor: 'pointer' }}>

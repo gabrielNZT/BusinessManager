@@ -3,11 +3,13 @@ import { combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import auth from '../pages/login/reducer/reducer.js'
 import list from '../pages/listUser/reducer/reducer.js'
+import siderCollapsed from '../global/components/layout/reducer/reducer.js'
 
 const sagaMiddleware = createSagaMiddleware()
 const allReducers = combineReducers({
     auth: auth,
-    list: list
+    list: list,
+    siderCollapsed: siderCollapsed
 })
 const store = createStore(allReducers,
     applyMiddleware(sagaMiddleware))

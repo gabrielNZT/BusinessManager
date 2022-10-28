@@ -80,3 +80,38 @@ export const GetImageUser = (user_id) => {
         .get("/getUserImage/" + user_id)
         .then()
 }
+
+export const GetProductImage = (image_id) => {
+    return api
+        .get("/getProductImage/" + image_id)
+        .then()
+}
+
+export const UpdateProduct = (product) => {
+    return api
+        .put("/updateProduct", product)
+        .then()
+}
+
+export const UpdateUser = (data) => {
+    const { permission, ...user } = data
+    const user_role = permission ? {
+        user: user,
+        role: permission
+    } : { user: user }
+    return api
+        .put("/updateUser", user_role)
+        .then()
+}
+
+export const DeleteUser = (user_id) => {
+    return api
+        .delete("/user/" + user_id)
+        .then()
+}
+
+export const DeleteProduct = (product_id) => {
+    return api
+        .delete("/product/" + product_id)
+        .then()
+}

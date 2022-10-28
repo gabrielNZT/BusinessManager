@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+
 import LayoutHome from "../../global/components/layout"
 import { GetListProduct } from "../../services/request"
 import { ButtonsActions, ContainerList } from "../listUser/components"
@@ -32,6 +33,7 @@ const config = {
 
 function ListProduct() {
     const dispatch = useDispatch()
+    
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
     const productList = useSelector(state => state.list.productList)
     const handleEnabledUser = (data) => {
@@ -47,7 +49,7 @@ function ListProduct() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Usuários', link: '/user' }]} >
+        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>
             <ContainerList
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}

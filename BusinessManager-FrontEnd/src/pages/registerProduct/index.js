@@ -51,7 +51,7 @@ function RegisterProduct() {
                 <HeaderRegisterForm
                     formData={formData}
                     title='Novo Produto'
-                    path={'../user'} />
+                    path={'../product'} />
                 <FormRegisterUser
                     formData={formData}
                     setFormData={setFormData}

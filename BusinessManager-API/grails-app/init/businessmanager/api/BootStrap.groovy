@@ -53,9 +53,9 @@ class BootStrap {
 
     @Transactional
     void addProducts() {
-        new Product(name: 'maça', code: '00001', company: Company.findById(1), price: 'R$ 10,00',
+        new Product(name: 'maça', code: '000001', company: Company.findById(1), price: 'R$ 10,00',
                 isEnabled: true, stock: 10, minStock: 5, unity: 'KG' ).save(flush: true)
-        new Product(name: 'pera', code: '00002', company: Company.findById(1), price: 'R$ 10,00',
+        new Product(name: 'pera', code: '000002', company: Company.findById(1), price: 'R$ 10,00',
                 isEnabled: true, stock: 20, minStock: 3, unity: 'UN').save(flush: true)
     }
     def destroy = {

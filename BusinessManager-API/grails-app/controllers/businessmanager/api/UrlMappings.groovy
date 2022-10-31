@@ -22,6 +22,9 @@ class UrlMappings {
         "/api/getProductImage/$id(.$format)?"(controller: 'product', action: 'getImage')
         "/api/updateUser"(controller: 'userRole', action: 'updateUser')
         "/api/updateProduct"(controller: 'product', action: 'updateProduct')
+        "/api/deleteUser/$id(.$format)?"(controller: 'userRole', action: 'deleteUser')
+        "/api/deleteProduct/$id(.$format)?"(controller: 'product', action: 'deleteProduct')
+        "/api/getProductCode/$id(.$format)?"(controller: 'product', action: 'getProductCode')
 
         "/"(controller: 'application', action:'index')
         "500"(view: '/error')

@@ -5,6 +5,7 @@ import ClickSubmit from "../../contexts/clickSubmit"
 import { useLocation } from "react-router-dom"
 import { GetProductImage, UpdateProduct } from "../../services/request"
 import { binToBase64 } from "../../global/utils"
+import { toast } from "react-toastify"
 
 const CODE_POS = 1
 const NAME_POS = 0
@@ -27,12 +28,13 @@ const DEFAULT_ITEMS = [
 function EditProduct() {
     const { state } = useLocation()
     const { key: id, ...rest } = state
+    const [loading, setLoading] = useState(false)
     const [src, setSrc] = useState()
     const [formData, setFormData] = useState({
         id: id,
         ...rest
     })
-    DEFAULT_ITEMS[CODE_POS] = { ...DEFAULT_ITEMS[CODE_POS], value: state?.code}
+    DEFAULT_ITEMS[CODE_POS] = { ...DEFAULT_ITEMS[CODE_POS], value: state?.code }
     DEFAULT_ITEMS[NAME_POS] = { ...DEFAULT_ITEMS[NAME_POS], value: state?.name }
 
     const handleRequest = async (id) => {
@@ -40,16 +42,18 @@ function EditProduct() {
         return responseData?.imageBytes === undefined ? null : (responseData.contentType + binToBase64(responseData?.imageBytes))
     }
 
-    const handleSubmit = (data) => UpdateProduct(data).then(response => console.log(response))
+    const handleSubmit = (data) => UpdateProduct(data).then(() => {
+        toast.success("Atualizado com sucesso!")
+        setLoading(false)
+    })
 
     useEffect(() => {
         handleRequest(state.key).then(response => setSrc(response))
     }, [state.key]);
 
-    console.log(src)
     return (
         <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/product' }, { name: state?.name, link: '/product/edit' }]}>
-            <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>
+            <ClickSubmit.Provider value={{ handleSubmit: handleSubmit, loading: loading, setLoading: setLoading }}>
                 <HeaderRegisterForm
                     formData={formData}
                     title={state?.name}

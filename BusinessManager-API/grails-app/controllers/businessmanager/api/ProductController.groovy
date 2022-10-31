@@ -3,6 +3,8 @@ package businessmanager.api
 import exceptions.RegisterProductException
 import exceptions.UpdateProductException
 import grails.validation.ValidationException
+
+import static org.springframework.http.HttpStatus.BAD_REQUEST
 import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
@@ -104,5 +106,26 @@ class ProductController {
             respond ex.errors
         }
         respond status: OK
+    }
+
+    @Transactional
+    def deleteProduct(Long id) {
+        Product product = Product.findById(id)
+        if(product == null) {
+            respond status: BAD_REQUEST
+            return
+        }
+        try {
+            product.delete()
+        } catch (ValidationException ex) {
+            respond ex.errors
+        }
+
+        respond status: NO_CONTENT
+    }
+
+    def getProductCode(Long id) {
+        String generatedCode = productService.getProductCode(id)
+        respond ([code: generatedCode], status: OK)
     }
 }

@@ -97,4 +97,20 @@ class UserRoleController {
         }
         respond status: OK
     }
+
+    @Transactional
+    def deleteUser(Long id) {
+        UserRole userRole = UserRole.findByUser(User.findById(id))
+
+        if(userRole == null) {
+            respond status: BAD_REQUEST
+            return
+        }
+        try {
+            userRole.delete()
+        } catch (ValidationException ex) {
+            respond ex.errors
+        }
+        respond status: NO_CONTENT
+    }
 }

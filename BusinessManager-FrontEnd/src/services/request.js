@@ -105,13 +105,21 @@ export const UpdateUser = (data) => {
 }
 
 export const DeleteUser = (user_id) => {
+    console.log(user_id)
     return api
-        .delete("/user/" + user_id)
+        .delete("/deleteUser/" + user_id)
         .then()
 }
 
 export const DeleteProduct = (product_id) => {
     return api
-        .delete("/product/" + product_id)
+        .delete("/deleteProduct/" + product_id)
         .then()
+}
+
+export const GetProductCode = (company_id) => {
+    console.log(company_id)
+    return api
+    .get("/getProductCode/" + company_id)
+    .then()
 }

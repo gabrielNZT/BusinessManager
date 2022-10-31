@@ -1,4 +1,4 @@
-import { FETCH_PRODUCT, FETCH_PRODUCT_LIST, FETCH_USER, FETCH_USER_LIST } from "../../../store/actionTypes"
+import { DELETE_PRODUCT_LIST, DELETE_USER_LIST, FETCH_PRODUCT, FETCH_PRODUCT_LIST, FETCH_USER, FETCH_USER_LIST } from "../../../store/actionTypes"
 
 const INITIAL_STATE = {
     productList: [],
@@ -17,6 +17,10 @@ function list(state = INITIAL_STATE, action) {
             return { ...state, userList: action.userList }
         case FETCH_PRODUCT_LIST:
             return { ...state, productList: action.productList }
+        case DELETE_PRODUCT_LIST:
+            return { ...state, productList: state.productList.filter(product => product.key !== action.product_id) }
+        case DELETE_USER_LIST:
+            return { ...state, userList: state.userList.filter(user => user.key !== action.user_id) }
         default:
             return state
     }

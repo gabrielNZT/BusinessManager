@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom"
 import { GetProductImage, UpdateProduct } from "../../services/request"
 import { binToBase64 } from "../../global/utils"
 
+const CODE_POS = 1
 const NAME_POS = 0
 const DEFAULT_ITEMS = [
     { type: 'input', tag: 'name', placeholder: 'Digite o nome do produto', label: 'Nome' },
@@ -31,6 +32,7 @@ function EditProduct() {
         id: id,
         ...rest
     })
+    DEFAULT_ITEMS[CODE_POS] = { ...DEFAULT_ITEMS[CODE_POS], value: state?.code}
     DEFAULT_ITEMS[NAME_POS] = { ...DEFAULT_ITEMS[NAME_POS], value: state?.name }
 
     const handleRequest = async (id) => {
@@ -44,7 +46,7 @@ function EditProduct() {
         handleRequest(state.key).then(response => setSrc(response))
     }, [state.key]);
 
-
+    console.log(src)
     return (
         <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/product' }, { name: state?.name, link: '/product/edit' }]}>
             <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>

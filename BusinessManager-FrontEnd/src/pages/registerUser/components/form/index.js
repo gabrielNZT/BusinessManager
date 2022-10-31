@@ -5,10 +5,15 @@ import ClickSubmit from "../../../../contexts/clickSubmit";
 import { useContext } from "react";
 
 function FormRegisterUser(props) {
-    const { handleSubmit } = useContext(ClickSubmit)
+    const { handleSubmit, setLoading } = useContext(ClickSubmit)
     const { formData, setFormData } = props
     const handleSetData = (data) => setFormData(data);
-    const handleKeyDown = (event) => event.code === 'Enter' ? handleSubmit(formData) : null
+    const handleKeyDown = (event) => {
+        if (event.code === 'Enter') {
+            setLoading(true)
+            handleSubmit(formData)
+        }
+    }
 
     return (
         <Form onKeyDown={(event) => handleKeyDown(event)} style={{ rowGap: props.rowGap }} className="form-register-user">

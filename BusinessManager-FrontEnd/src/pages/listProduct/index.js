@@ -21,7 +21,7 @@ const INITIAL_COLUMNS = [
     },
     {
         key: 'operation', title: 'Ações', fixed: 'right', width: width, render: (_, record) =>
-            <ButtonsActions record={record} path={'../product/edit'} />
+            <ButtonsActions record={record} path={'../product/edit'} listType={'product'}/>
     }
 ]
 
@@ -49,7 +49,7 @@ function ListProduct() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>
+        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/user' }]}>
             <ContainerList
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}

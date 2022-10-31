@@ -13,7 +13,7 @@ function SelectPermission(props) {
             <label> {props.item.label} </label>
             <Select
             size='large'
-            placeholder='Escolha a permissão'
+            placeholder={props.item.placeholder}
                 style={{
                     width: "100%"
                 }}

@@ -50,6 +50,7 @@ function EditUser() {
 
     DEFAULT_ITEMS[NAME_POSITION] = { ...DEFAULT_ITEMS[NAME_POSITION], value: state?.name, disabled: true }
 
+    console.log(src)
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }, { name: state?.name, link: '/user/edit' }]}>
             <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>

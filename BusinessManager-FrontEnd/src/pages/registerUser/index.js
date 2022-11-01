@@ -31,6 +31,7 @@ const items = [
 ]
 
 function UserPage() {
+    const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         isEnabled: true
     })
@@ -41,18 +42,23 @@ function UserPage() {
             setFormData({ ...formData, repeatPassword: '' })
         }
         else {
-            RegisterUser({ ...data, company: JSON.parse((localStorage.getItem('company'))).id }).catch((request) =>
-                toast.error(request.response.data.message));
+            RegisterUser({ ...data, company: JSON.parse((localStorage.getItem('company'))).id })
+            .then(() => {
+                toast.success("Usuário salvo!")
+                setLoading(false)
+            })
+                .catch((request) =>
+                    toast.error(request.response.data.message));
         }
     }
 
     return (
-        <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }, {name: 'Novo Usuário', link: '/user/register'}]}>
-            <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>
+        <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }, { name: 'Novo Usuário', link: '/user/register' }]}>
+            <ClickSubmit.Provider value={{ handleSubmit: handleSubmit, loading: loading, setLoading: setLoading }}>
                 <HeaderRegisterForm
                     formData={formData}
                     title='Novo Usuário'
-                    path={"../product"} />
+                    path={"../user"} />
                 <FormRegisterUser
                     formData={formData}
                     setFormData={setFormData}

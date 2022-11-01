@@ -88,6 +88,7 @@ export const GetProductImage = (image_id) => {
 }
 
 export const UpdateProduct = (product) => {
+    console.log(product)
     return api
         .put("/updateProduct", product)
         .then()
@@ -96,8 +97,12 @@ export const UpdateProduct = (product) => {
 export const UpdateUser = (data) => {
     const { permission, ...user } = data
     const user_role = permission ? {
-        user: user,
-        role: permission
+        user: {
+            ...user
+        },
+        role: {
+            authority: permission
+        }
     } : { user: user }
     return api
         .put("/updateUser", user_role)
@@ -105,13 +110,21 @@ export const UpdateUser = (data) => {
 }
 
 export const DeleteUser = (user_id) => {
+    console.log(user_id)
     return api
-        .delete("/user/" + user_id)
+        .delete("/deleteUser/" + user_id)
         .then()
 }
 
 export const DeleteProduct = (product_id) => {
     return api
-        .delete("/product/" + product_id)
+        .delete("/deleteProduct/" + product_id)
+        .then()
+}
+
+export const GetProductCode = (company_id) => {
+    console.log(company_id)
+    return api
+        .get("/getProductCode/" + company_id)
         .then()
 }

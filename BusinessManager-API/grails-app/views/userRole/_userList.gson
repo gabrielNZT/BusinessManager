@@ -8,7 +8,7 @@ json {
     key userRole.user.id
     name userRole.user.name
     email userRole.user.email
-    username userRole.user.email
+    username userRole.user.username
     cpf userRole.user.cpf
     phone userRole.user.phone
     birthDate userRole.user.birthDate

@@ -3,13 +3,13 @@ import { cpfMask, moneyMask, phoneMask } from '../../../../global/utils'
 
 function InputLabel(props) {
     const { formData } = props
-    const { tag: name, type, label, placeholder, disabled, value } = props.item
+    const { tag: name, type, label, placeholder, disabled } = props.item
 
     const handleState = (event) => {
         const { name: tag, value } = event.target
         props.handleSetData({
             ...formData, [tag]: tag === 'cpf' ? cpfMask(value) :
-                tag === 'phone' ? phoneMask(value) : tag === 'price'? moneyMask(value) : value
+                tag === 'phone' ? phoneMask(value) : tag === 'price' ? moneyMask(value) : value
         })
     }
 
@@ -20,7 +20,7 @@ function InputLabel(props) {
                 <Form.Control
                     disabled={disabled === true ? true : false}
                     name={name}
-                    value={disabled === true ? value : formData[name]}
+                    value={formData[name]}
                     type={type ? type : 'text'}
                     onChange={(e) => handleState(e)}
                     placeholder={placeholder}

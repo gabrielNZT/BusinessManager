@@ -5,12 +5,12 @@ const { Option } = Select;
 let index = 0;
 
 function SelectUnity(props) {
-    const { formData } = props;
+    const { formData, item } = props;
     const [items, setItems] = useState(props.item.elements);
     const [name, setName] = useState('');
     const inputRef = useRef(null);
 
-    const handleChange = (value) => props.handleSetData({ ...formData, [props.item.tag]: value })
+    const handleChange = (value) => props.handleSetData({ ...formData, [item.tag]: value })
     const addItem = (e) => {
         e.preventDefault();
         setItems([...items, name || `New item ${index++}`]);
@@ -22,11 +22,12 @@ function SelectUnity(props) {
     const onNameChange = (event) => {
         setName(event.target.value);
     };
-
+    
     return (
         <div style={{ display: 'flex', flexDirection: 'column', width: '31.6%' }}>
-            <label> {props.item.label} </label>
+            <label> {item.label} </label>
             <Select
+                defaultValue={formData[item.tag]}
                 onChange={handleChange}
                 size='large'
                 style={{

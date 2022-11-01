@@ -1,14 +1,14 @@
 import LayoutHome from "../../global/components/layout"
 import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
-import { SaveProduct } from "../../services/request"
-import { useState } from "react"
+import { GetProductCode, SaveProduct } from "../../services/request"
+import { useEffect, useState } from "react"
 import ClickSubmit from "../../contexts/clickSubmit"
 import { toast } from "react-toastify"
+import { codeMask } from "../../global/utils"
 
-const productCode = '0001'
-const items = [
+const DEFAULT_ITEMS = [
     { type: 'input', tag: 'name', placeholder: 'Digite o nome do produto', label: 'Nome' },
-    { type: 'input', label: 'Código', tag: 'code', value: productCode, disabled: true },
+    { type: 'input', label: 'Código', tag: 'code', disabled: true },
     { type: 'input', label: 'Preço', tag: 'price', placeholder: 'Digite o preço do produto', value: 0 },
     {
         type: 'selectUnity', label: 'Unidade', tag: 'unity', placeholder: 'Escolha a unidade', elements: ['UN']
@@ -20,30 +20,40 @@ const items = [
 ]
 
 function RegisterProduct() {
+    const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
-        isEnabled: true,
-        code: productCode
+        isEnabled: true
     })
-    const handleSubmit = (data) =>
-        SaveProduct({ ...data, company: JSON.parse(localStorage.getItem('company')).id })
-            .then(() => localStorage.setItem('product', JSON.stringify({
-                code: JSON.parse(localStorage.getItem('product'))?.code ? JSON.parse(localStorage.getItem('product'))?.code : 1
-            })))
-            .catch(request => toast.error(request.response.data.message));
+    useEffect(() => {
+        if (formData.code === undefined) {
+            GetProductCode(JSON.parse(localStorage.getItem('company'))?.id).then((response) => {
+                const code = response.data.code
+                setFormData({ ...formData, code: codeMask(code) })
+            })
+        }
+    }, [formData]);
 
+    const handleSubmit = (data) => {
+        SaveProduct({ ...data, company: JSON.parse(localStorage.getItem('company')).id })
+            .then(() => {
+                toast.success("Produto salvo!")
+                setLoading(false)
+            })
+            .catch(request => toast.error(request.response.data.message));
+    }
 
     return (
-        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/product' }, { name: 'Novo Produto', link: '/product/edit'}]}>
-            <ClickSubmit.Provider value={{ handleSubmit: handleSubmit }}>
+        <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/product' }, { name: 'Novo Produto', link: '/product/edit' }]}>
+            <ClickSubmit.Provider value={{ handleSubmit: handleSubmit, loading: loading, setLoading: setLoading }}>
                 <HeaderRegisterForm
                     formData={formData}
                     title='Novo Produto'
-                    path={'../home'} />
+                    path={'../product'} />
                 <FormRegisterUser
                     formData={formData}
                     setFormData={setFormData}
                     rowGap={'10vh'}
-                    items={items} />
+                    items={DEFAULT_ITEMS} />
             </ClickSubmit.Provider>
         </LayoutHome>
     )

@@ -5,6 +5,10 @@ import exceptions.RegisterProductException
 import exceptions.UpdateProductException
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
+import groovy.sql.Sql
+import org.springframework.beans.factory.annotation.Autowired
+
+import javax.sql.DataSource
 
 @Transactional
 class ProductService {
@@ -40,7 +44,7 @@ class ProductService {
         // product.properties = request
         // def requestJSON = request.getJSON()
         product.properties = map
-        product.productImage = requestJSON.productPhoto == null? null : requestJSON.productPhoto.base64
+        product.productImage = requestJSON.productPhoto == null? null : requestJSON.productPhoto.base64.decodeBase64()
         product.contentType = requestJSON.productPhoto == null? null : requestJSON.productPhoto.contentType
         save(product)
     }
@@ -49,8 +53,19 @@ class ProductService {
         Product product = Product.findById(request.id)
         def map = request as Map
         product.properties = map
+        product.productImage = map.productPhoto == null? null : map.productPhoto.base64.decodeBase64()
+        product.contentType = map.productPhoto == null? null : map.productPhoto.contentType
         if(product.hasErrors()) {
            throw new UpdateProductException(product.errors)
         }
+    }
+
+    String getProductCode(Long companyID) {
+        Integer first_value = 0
+
+        def result = Product.executeQuery("select max(code) as code from Product where company = ${Company.findById(companyID)}")
+        def converterToLong = Long.valueOf((result[first_value]) as String)
+        def lastID = (converterToLong?: 0) as Long
+        return Long.toHexString((lastID + 1))
     }
 }

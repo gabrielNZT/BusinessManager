@@ -103,7 +103,7 @@ class UserService{
 
     void registerUser( Object requestJSON ) {
         User user = new User()
-        Role role = new Role(authority: (requestJSON.permission).toUpperCase())
+        Role role = new Role(authority: (requestJSON.permission))
 
         def map = requestJSON as Map
 

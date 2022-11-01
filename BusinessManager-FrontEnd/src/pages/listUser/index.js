@@ -11,7 +11,10 @@ import './style/style.css'
 const SWITCH_ELEMENT_POS = 6
 const width = '200px'
 const INITIAL_COLUMNS = [
-    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width },
+    {
+        key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, defaultSortOrder: 'descend',
+        sorter: (a, b) => a.name.length - b.name.length,
+    },
     { key: 'username', title: 'Nome de usuário', dataIndex: 'username', width: width },
     { key: 'email', title: 'Email', dataIndex: 'email', width: "250px" },
     { key: 'phone', title: 'Telefone', dataIndex: 'phone', width: width },

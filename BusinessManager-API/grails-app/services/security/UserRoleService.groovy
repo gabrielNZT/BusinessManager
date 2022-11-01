@@ -37,13 +37,13 @@ class UserRoleService {
         user.imageBytes = map.user.userPhoto.base64?.decodeBase64()
 
         if(user.hasErrors()) throw new UpdateUserException(user.errors)
-        else user.save()
+        else user.save(flush: true)
 
         userRole.setUser(user)
         userRole.setRole(role)
 
         if (userRole.hasErrors()) throw new UpdateUserException(userRole.errors)
-        else userRole.save()
+        else userRole.save(flush: true)
 
     }
 }

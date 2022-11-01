@@ -18,7 +18,7 @@ const INITIAL_COLUMNS = [
     { key: 'cpf', title: 'CPF', dataIndex: 'cpf', width: width },
     { key: 'birthDate', title: 'Data de Nascimento', dataIndex: 'birthDate', width: width, render: (_, record) => <DateText date={record.birthDate} /> },
     { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width },
-    { key: 'permission', title: 'Permissão', dataIndex: 'permission', width: width, render: (_, record) => <p>{record.permission.toLowerCase()}</p> },
+    { key: 'permission', title: 'Permissão', dataIndex: 'permission', width: width },
     { key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate', width: width, render: (_, record) => <DateText date={record.contractDate} /> },
     { key: 'operation', title: 'Ações', fixed: 'right', width: "150px", render: (_, record) => <ButtonsActions record={record} path={'../user/edit'} listType={'user'} /> }
 ]

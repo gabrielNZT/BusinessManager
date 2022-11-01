@@ -16,9 +16,9 @@ class BootStrap {
     @Transactional
     void addUsers(){
 
-        Role.findByAuthority('ADMINISTRADOR')?: new Role(authority: 'ADMINISTRADOR').save(flush: true)
-
-        Role.findByAuthority('OPERADOR')?: new Role(authority: 'OPERADOR').save(flush: true)
+        Role.findByAuthority('Administrador')?: new Role(authority: 'Administrador').save(flush: true)
+        Role.findByAuthority('Gerente')?: new Role(authority: 'Gerente').save(flush: true)
+        Role.findByAuthority('Operador')?: new Role(authority: 'Operador').save(flush: true)
 
         Company company = Company.findByName("RAV")
         if(company == null){
@@ -39,14 +39,14 @@ class BootStrap {
                     company: company).save(flush: true)
         }
 
-        if(User.findByUsername('gabrielAdmin') != null && Role.findByAuthority('ADMINISTRADOR') != null){
+        if(User.findByUsername('gabrielAdmin') != null && Role.findByAuthority('Administrador') != null){
             new UserRole(user: User.findByUsername('gabrielAdmin'),
-                    role: Role.findByAuthority('ADMINISTRADOR')).save(flush: true)
+                    role: Role.findByAuthority('Administrador')).save(flush: true)
         }
 
-        if(User.findByUsername('gabrielUser') != null && Role.findByAuthority('OPERADOR') != null){
+        if(User.findByUsername('gabrielUser') != null && Role.findByAuthority('Operador') != null){
             new UserRole(user: User.findByUsername('gabrielUser'),
-            role: Role.findByAuthority('OPERADOR')).save(flush: true)
+            role: Role.findByAuthority('Operador')).save(flush: true)
         }
 
     }
@@ -55,7 +55,7 @@ class BootStrap {
     void addProducts() {
         new Product(name: 'maça', code: '000001', company: Company.findById(1), price: 'R$ 10,00',
                 isEnabled: true, stock: 10, minStock: 5, unity: 'KG' ).save(flush: true)
-        new Product(name: 'pera', code: '000002', company: Company.findById(1), price: 'R$ 10,00',
+        new Product(name: 'pera', code: '000002', company: Company.findById(1), price: 'R$ 5,00',
                 isEnabled: true, stock: 20, minStock: 3, unity: 'UN').save(flush: true)
     }
     def destroy = {

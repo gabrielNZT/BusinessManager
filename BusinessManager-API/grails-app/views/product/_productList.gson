@@ -9,6 +9,7 @@ json {
     name product.name
     code product.code
     price product.price
+    unity product.unity
     stock product.stock
     minStock product.minStock
     enabled product.isEnabled

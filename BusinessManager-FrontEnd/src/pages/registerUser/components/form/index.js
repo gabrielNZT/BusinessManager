@@ -59,10 +59,9 @@ function FormRegisterUser(props) {
                             key={index} />)
                     case 'data':
                         return (<DateEntry
-                            name={item.tag}
+                            item={item}
                             handleSetData={handleSetData}
                             formData={formData}
-                            label={item.label}
                             key={index} />)
                     default:
                         return null

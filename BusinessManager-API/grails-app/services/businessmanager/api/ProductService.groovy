@@ -53,6 +53,8 @@ class ProductService {
         Product product = Product.findById(request.id)
         def map = request as Map
         product.properties = map
+        product.productImage = map.productPhoto == null? null : map.productPhoto.base64.decodeBase64()
+        product.contentType = map.productPhoto == null? null : map.productPhoto.contentType
         if(product.hasErrors()) {
            throw new UpdateProductException(product.errors)
         }
@@ -60,8 +62,10 @@ class ProductService {
 
     String getProductCode(Long companyID) {
         Integer first_value = 0
-        def result = Product.executeQuery("select max(id) as id from Product where company = ${Company.findById(companyID)}")
-        def lastID = result[first_value] as Long
+
+        def result = Product.executeQuery("select max(code) as code from Product where company = ${Company.findById(companyID)}")
+        def converterToLong = Long.valueOf((result[first_value]) as String)
+        def lastID = (converterToLong?: 0) as Long
         return Long.toHexString((lastID + 1))
     }
 }

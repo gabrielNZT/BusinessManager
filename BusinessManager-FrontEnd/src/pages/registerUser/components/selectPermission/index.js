@@ -4,15 +4,16 @@ const { Option } = Select;
 
 
 function SelectPermission(props) {
-    const {formData} = props;
+    const {formData, item} = props;
     
     const handleChange = (value) => props.handleSetData({...formData, [props.item.tag]: value})
 
     return (
         <div style={{display: 'flex', flexDirection: 'column', width: '31.6%'}}>
-            <label> {props.item.label} </label>
+            <label> {item.label} </label>
             <Select
             size='large'
+            defaultValue={formData[item.tag]}
             placeholder={props.item.placeholder}
                 style={{
                     width: "100%"

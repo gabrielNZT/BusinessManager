@@ -8,9 +8,8 @@ import { GetImageUser, UpdateUser } from "../../services/request"
 import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
 import './style/style.css'
 
-const NAME_POSITION = 0
 const DEFAULT_ITEMS = [
-    { type: 'input', label: 'Nome' },
+    { type: 'input', label: 'Nome', tag:'name', disabled: true },
     { type: 'input', label: 'Nome de Usuário', placeholder: 'Digite o nome de usuário', tag: 'username' },
     { type: 'input', label: 'Email', placeholder: 'Digite o email', tag: 'email' },
     { type: 'input', label: 'Telefone', placeholder: 'Digite o telefone', tag: 'phone' },
@@ -25,7 +24,7 @@ const DEFAULT_ITEMS = [
     { type: 'switchs', items: [{ label: 'Ativo?', tag: 'isEnable' }, { label: 'Altera Senha', tag: 'passwordLocked' }] },
     { type: 'password', label: 'Senha', placeholder: 'Digite a senha', tag: 'password' },
     { type: 'password', label: 'Confirmar senha', placeholder: 'Confirme a senha', tag: 'repeatPassword' },
-    { type: 'upload', label: 'Imagem de perfil', body: 'Clique ou arraste a imagem para esta área para fazer o upload' },
+    { type: 'upload', label: 'Imagem de perfil', body: 'Clique ou arraste a imagem para esta área para fazer o upload', tag: 'userPhoto', shape: 'round' },
     { type: 'data', label: 'Data de Nascimento', tag: 'birthDate' },
     { type: 'data', label: 'Data de contrato', tag: 'contractDate' }
 ]
@@ -52,8 +51,6 @@ function EditUser() {
     useEffect(() => {
         handleRequest(state.key).then(response => setSrc(response))
     }, [state.key]);
-
-    DEFAULT_ITEMS[NAME_POSITION] = { ...DEFAULT_ITEMS[NAME_POSITION], value: state?.name, disabled: true }
 
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }, { name: state?.name, link: '/user/edit' }]}>

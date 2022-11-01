@@ -6,7 +6,6 @@ import ClickSubmit from "../../contexts/clickSubmit"
 import { toast } from "react-toastify"
 import { codeMask } from "../../global/utils"
 
-const INPUT_CODE_POS = 1
 const DEFAULT_ITEMS = [
     { type: 'input', tag: 'name', placeholder: 'Digite o nome do produto', label: 'Nome' },
     { type: 'input', label: 'Código', tag: 'code', disabled: true },
@@ -25,13 +24,11 @@ function RegisterProduct() {
     const [formData, setFormData] = useState({
         isEnabled: true
     })
-
     useEffect(() => {
         if (formData.code === undefined) {
             GetProductCode(JSON.parse(localStorage.getItem('company'))?.id).then((response) => {
                 const code = response.data.code
                 setFormData({ ...formData, code: codeMask(code) })
-                DEFAULT_ITEMS[INPUT_CODE_POS] = { ...DEFAULT_ITEMS[INPUT_CODE_POS], value: codeMask(code) }
             })
         }
     }, [formData]);

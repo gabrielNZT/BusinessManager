@@ -8,20 +8,21 @@ import { StockNumber } from "../listUser/components"
 import { FetchProductList } from "../listUser/reducer/actions"
 import { SwitchEnableUser } from "../registerUser/components"
 
-const SWITCH_ELEMENT_POS = 5
+const SWITCH_ELEMENT_POS = 6
 const width = 100
 const INITIAL_COLUMNS = [
     { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width },
     { key: 'code', title: 'Código', dataIndex: 'code', width: width },
     { key: 'price', title: 'Preço', dataIndex: 'price', width: width },
     { key: 'stock', title: 'Qtd. estoque', dataIndex: 'stock', width: width, render: (_, record) => <StockNumber record={record} /> },
+    { key: 'unity', title: 'Unidade', dataIndex: 'unity', width: width },
     { key: 'minStock', title: 'Estoque Mínimo', dataIndex: 'minStock', width: width },
     {
         key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width
     },
     {
         key: 'operation', title: 'Ações', fixed: 'right', width: width, render: (_, record) =>
-            <ButtonsActions record={record} path={'../product/edit'} listType={'product'}/>
+            <ButtonsActions record={record} path={'../product/edit'} listType={'product'} />
     }
 ]
 
@@ -33,7 +34,7 @@ const config = {
 
 function ListProduct() {
     const dispatch = useDispatch()
-    
+
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
     const productList = useSelector(state => state.list.productList)
     const handleEnabledUser = (data) => {

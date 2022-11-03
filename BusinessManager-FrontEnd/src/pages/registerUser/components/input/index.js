@@ -20,7 +20,7 @@ function InputLabel(props) {
                 <Form.Control
                     disabled={disabled === true ? true : false}
                     name={name}
-                    value={formData[name]}
+                    value={formData? formData[name] : ''}
                     type={type ? type : 'text'}
                     onChange={(e) => handleState(e)}
                     placeholder={placeholder}

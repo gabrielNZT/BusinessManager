@@ -1,4 +1,5 @@
 import { HeaderList, ButtonsSearch, TableUser } from ".."
+import SearchFields from "../searchFields"
 
 function ContainerList(props) {
     return (
@@ -9,9 +10,13 @@ function ContainerList(props) {
                 defaultColumns={props.defaultColumns}
                 setColumns={props.setColumns}
                 columns={props.columns} />
-            <TableUser 
-            data={props.data}
-            columns={props.columns}/>
+            <SearchFields
+                defaultColumns={props.defaultColumns}
+                columns={props.columns}
+            />
+            <TableUser
+                data={props.data}
+                columns={props.columns} />
         </div>
     )
 }

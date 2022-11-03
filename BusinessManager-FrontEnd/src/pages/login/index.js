@@ -8,6 +8,7 @@ function Login() {
 
     useEffect(() => {
         localStorage.clear()
+        localStorage.removeItem('auth')
     }, []);
     
     return (

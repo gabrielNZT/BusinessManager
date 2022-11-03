@@ -33,8 +33,10 @@ class UserRoleService {
         UserRole userRole = UserRole.findByUser(user)
 
         user.properties = map.user
-        user.contentType = map.user.userPhoto.contentType
-        user.imageBytes = map.user.userPhoto.base64?.decodeBase64()
+        if(map.user.userPhoto != null){
+            user.contentType = map.user.userPhoto.contentType
+            user.imageBytes = map.user.userPhoto.base64?.decodeBase64()
+        }
 
         if(user.hasErrors()) throw new UpdateUserException(user.errors)
         else user.save(flush: true)

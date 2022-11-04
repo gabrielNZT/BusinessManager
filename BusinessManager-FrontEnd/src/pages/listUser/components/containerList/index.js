@@ -15,6 +15,9 @@ function ContainerList(props) {
                 columns={props.columns}
             />
             <TableUser
+                setTableParams={props.setTableParams}
+                tableParams={props.tableParams}
+                handleTableChange={props.handleTableChange}
                 data={props.data}
                 columns={props.columns} />
         </div>

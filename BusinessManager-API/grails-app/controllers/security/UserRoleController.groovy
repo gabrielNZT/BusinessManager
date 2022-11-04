@@ -26,8 +26,13 @@ class UserRoleController {
         respond userRoleService.list(params), model:[userRoleCount: userRoleService.count()]
     }
 
-    def getListUser(Integer max) {
-        respond userRoleService.list(), [status: OK, view: "showList"]
+    def getListUser(Integer pageSize, Integer current, String sort, String field) {
+        def c = UserRole.createCriteria()
+        def max = (pageSize * current)
+        Integer offset = (pageSize * (current - 1))
+        def results = c.list (max: max, offset: offset){}
+
+        respond results, [status: OK, view: "showList"]
     }
 
     def show(Long id) {

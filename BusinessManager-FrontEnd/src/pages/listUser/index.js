@@ -35,6 +35,16 @@ const config = {
 function ListUser() {
     const dispatch = useDispatch()
     const userList = useSelector(state => state.list.userList)
+    const [tableParams, setTableParams] = useState({
+        pagination: {
+            current: 1,
+            pageSize: 10
+        },
+        sorter: {
+            order: 'ascend',
+            filter: 'name'
+        }
+    })
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
     const handleEnabledUser = (data) => console.log(data)
 
@@ -42,6 +52,15 @@ function ListUser() {
         ...INITIAL_COLUMNS[SWITCH_ELEMENT_POS], render: (_, record) =>
             <SwitchEnableUser formData={record} handleSetData={handleEnabledUser} />
     }
+
+    const handleTableChange = (pagination, filters, sorter) => {
+        console.log(pagination)
+        setTableParams({
+            pagination,
+            filter: filters,
+            sorter: sorter,
+        });
+    };
 
     useEffect(() => {
         GetListUser().then(response => dispatch(FetchUserList(response.data)))
@@ -51,6 +70,8 @@ function ListUser() {
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>
             <ContainerList
+                tableParams={tableParams} setTableParams={setTableParams}
+                handleTableChange={handleTableChange}
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
                 config={config} columns={columns}

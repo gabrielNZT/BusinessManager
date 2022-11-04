@@ -2,7 +2,10 @@ import { CLICK_SEARCH_FIELDS, DELETE_PRODUCT_LIST, DELETE_USER_LIST, FETCH_PRODU
 
 const INITIAL_STATE = {
     productList: [],
-    userList: [],
+    userList: {
+        users: [],
+        count: 0
+    },
     currentUser: {},
     currentProduct: {},
     hideSearchFields: false

@@ -32,12 +32,20 @@ class BootStrap {
                     email: 'gabrielnunescesarino@gmail.com', company: company).save(flush: true)
         }
 
-
         if(User.findByUsername('gabrielUser') == null){
             new User(name: "vitor gabriel", birthDate: new Date(),username: 'gabrielUser', phone: "892243",
                     password: 'admin', email: 'user@gmail.com', contractDate: new Date(), cpf: '652.123.125-66',
                     company: company).save(flush: true)
         }
+
+        for(int i in 1..10) {
+            Integer randomNumber = Math.floor((Math.random() * 1000)).toInteger()
+            User user = new User(name: "teste${randomNumber}" ,username: "teste${randomNumber}", password: 'admin', phone: "892243",
+                    birthDate: new Date(), contractDate: new Date(), cpf: '123.222.202-11',
+                    email: "teste${randomNumber}@gmail.com", company: company).save(flush: true)
+            new UserRole(user: user, role: Role.findByAuthority('Operador')).save(flush: true)
+        }
+
 
         if(User.findByUsername('gabrielAdmin') != null && Role.findByAuthority('Administrador') != null){
             new UserRole(user: User.findByUsername('gabrielAdmin'),

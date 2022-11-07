@@ -63,15 +63,17 @@ export const showProduct = (product_id) => {
         .then()
 }
 
-export const GetListUser = _ => {
+export const GetListUser = (pagination) => {
+    const { current, pageSize } = pagination
     return api
-        .get("/getUserList")
+        .get(`/getUserList?current=${current}&pageSize=${pageSize}`)
         .then()
 }
 
-export const GetListProduct = _ => {
+export const GetListProduct = (pagination) => {
+    const { current, pageSize } = pagination
     return api
-        .get("/product")
+        .get(`/product?current=${current}&pageSize=${pageSize}`)
         .then()
 }
 

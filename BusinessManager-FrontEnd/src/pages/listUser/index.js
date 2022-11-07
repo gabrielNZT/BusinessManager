@@ -53,17 +53,25 @@ function ListUser() {
             <SwitchEnableUser formData={record} handleSetData={handleEnabledUser} />
     }
 
+    const fetchData = (pagination, filters, sorter) => {
+        GetListUser(pagination ? pagination : tableParams.pagination).then(response => {
+            setTableParams({
+                ...tableParams, pagination: {
+                    ...pagination,
+                    total: response.data.count
+                },
+                filter: filters,
+                sorter: sorter
+            })
+            dispatch(FetchUserList(response.data))
+        })
+    }
     const handleTableChange = (pagination, filters, sorter) => {
-        console.log(pagination)
-        setTableParams({
-            pagination,
-            filter: filters,
-            sorter: sorter,
-        });
+        fetchData(pagination, filters, sorter)
     };
 
     useEffect(() => {
-        GetListUser().then(response => dispatch(FetchUserList(response.data)))
+        fetchData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -75,7 +83,7 @@ function ListUser() {
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
                 config={config} columns={columns}
-                data={userList}
+                data={userList?.users}
                 setColumns={setColumns} />
         </LayoutHome>
     )

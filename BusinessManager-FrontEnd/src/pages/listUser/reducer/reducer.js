@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     },
     currentUser: {},
     currentProduct: {},
-    hideSearchFields: false
+    hideSearchFields: true
 }
 
 function list(state = INITIAL_STATE, action) {

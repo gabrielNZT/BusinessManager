@@ -53,7 +53,7 @@ function LoginForm() {
     }));
     localStorage.setItem('user', JSON.stringify({
       contentType: response.data.contentType,
-      imageBytes: (response.data.imageBytes)
+      imageBytes: response.data.imageBytes
     }));
     handleNavigate(response.data?.hasTemporaryPassword ? 'CONFIG_PASSWORD' : 'HOME_PAGE')
   }

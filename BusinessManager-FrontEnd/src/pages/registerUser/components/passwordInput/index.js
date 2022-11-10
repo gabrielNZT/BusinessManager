@@ -6,11 +6,11 @@ import { useEffect } from 'react';
 
 function PasswordField(props) {
     const { formData, handleSetData } = props
-    const [disabled, setDisabled] = useState(!formData?.passwordLocked)
+    const [disabled, setDisabled] = useState(false)
 
     useEffect(() => {
         const { password, repeatPassword, ...rest } = formData
-        if (!formData.passwordLocked) {
+        if (formData.passwordLocked === false) {
             handleSetData({ ...rest })
             setDisabled(true)
         } else setDisabled(false)

@@ -13,7 +13,7 @@ const width = '200px'
 const INITIAL_COLUMNS = [
     {
         key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, defaultSortOrder: 'descend',
-        sorter: (a, b) => a.name.length - b.name.length,
+        sorter: () => {}
     },
     { key: 'username', title: 'Nome de usuário', dataIndex: 'username', width: width },
     { key: 'email', title: 'Email', dataIndex: 'email', width: "250px" },
@@ -54,7 +54,7 @@ function ListUser() {
     }
 
     const fetchData = (pagination, filters, sorter) => {
-        GetListUser(pagination ? pagination : tableParams.pagination).then(response => {
+        GetListUser(pagination ? pagination : tableParams.pagination, sorter).then(response => {
             setTableParams({
                 ...tableParams, pagination: {
                     ...pagination,
@@ -67,6 +67,7 @@ function ListUser() {
         })
     }
     const handleTableChange = (pagination, filters, sorter) => {
+        console.log(sorter)
         fetchData(pagination, filters, sorter)
     };
 

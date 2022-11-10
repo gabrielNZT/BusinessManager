@@ -53,8 +53,11 @@ class ProductService {
         Product product = Product.findById(request.id)
         def map = request as Map
         product.properties = map
-        product.productImage = map.productPhoto == null? null : map.productPhoto.base64.decodeBase64()
-        product.contentType = map.productPhoto == null? null : map.productPhoto.contentType
+        if(map.productPhoto != null) {
+            product.productImage = map.productPhoto.base64.decodeBase64()
+            product.contentType = map.productPhoto.contentType
+        }
+
         if(product.hasErrors()) {
            throw new UpdateProductException(product.errors)
         }

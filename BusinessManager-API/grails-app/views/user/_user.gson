@@ -16,6 +16,6 @@ json {
 	hasTemporaryPassword user.hasTemporaryPassword
 	enabled user.enabled
 	imageBytes user.imageBytes
-	cotentType user.contentType
+	contentType user.contentType
 	company g.render(template: 'company', model: [company: user.company])
 }

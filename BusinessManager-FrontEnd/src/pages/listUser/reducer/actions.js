@@ -1,4 +1,4 @@
-import { DELETE_PRODUCT_LIST, DELETE_USER_LIST, FETCH_PRODUCT, FETCH_PRODUCT_LIST, FETCH_USER, FETCH_USER_LIST } from "../../../store/actionTypes";
+import { CLICK_SEARCH_FIELDS, DELETE_PRODUCT_LIST, DELETE_USER_LIST, FETCH_PRODUCT, FETCH_PRODUCT_LIST, FETCH_USER, FETCH_USER_LIST } from "../../../store/actionTypes";
 
 export function CurrentProduct(product) {
     return { type: FETCH_PRODUCT, product }
@@ -22,4 +22,8 @@ export function DeleteUserFromList(user_id) {
 
 export function DeleteProductFromList(product_id) {
     return { type: DELETE_PRODUCT_LIST, product_id }
+}
+
+export function ClickSearchField() {
+    return {type: CLICK_SEARCH_FIELDS}
 }

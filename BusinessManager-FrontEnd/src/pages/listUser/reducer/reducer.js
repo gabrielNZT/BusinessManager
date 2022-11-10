@@ -1,10 +1,14 @@
-import { DELETE_PRODUCT_LIST, DELETE_USER_LIST, FETCH_PRODUCT, FETCH_PRODUCT_LIST, FETCH_USER, FETCH_USER_LIST } from "../../../store/actionTypes"
+import { CLICK_SEARCH_FIELDS, DELETE_PRODUCT_LIST, DELETE_USER_LIST, FETCH_PRODUCT, FETCH_PRODUCT_LIST, FETCH_USER, FETCH_USER_LIST } from "../../../store/actionTypes"
 
 const INITIAL_STATE = {
     productList: [],
-    userList: [],
+    userList: {
+        users: [],
+        count: 0
+    },
     currentUser: {},
-    currentProduct: {}
+    currentProduct: {},
+    hideSearchFields: true
 }
 
 function list(state = INITIAL_STATE, action) {
@@ -21,6 +25,8 @@ function list(state = INITIAL_STATE, action) {
             return { ...state, productList: state.productList.filter(product => product.key !== action.product_id) }
         case DELETE_USER_LIST:
             return { ...state, userList: state.userList.filter(user => user.key !== action.user_id) }
+        case CLICK_SEARCH_FIELDS:
+            return {...state, hideSearchFields: !state.hideSearchFields}
         default:
             return state
     }

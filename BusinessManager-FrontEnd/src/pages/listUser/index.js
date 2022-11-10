@@ -11,7 +11,10 @@ import './style/style.css'
 const SWITCH_ELEMENT_POS = 6
 const width = '200px'
 const INITIAL_COLUMNS = [
-    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width },
+    {
+        key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, defaultSortOrder: 'descend',
+        sorter: () => {}
+    },
     { key: 'username', title: 'Nome de usuário', dataIndex: 'username', width: width },
     { key: 'email', title: 'Email', dataIndex: 'email', width: "250px" },
     { key: 'phone', title: 'Telefone', dataIndex: 'phone', width: width },
@@ -32,6 +35,16 @@ const config = {
 function ListUser() {
     const dispatch = useDispatch()
     const userList = useSelector(state => state.list.userList)
+    const [tableParams, setTableParams] = useState({
+        pagination: {
+            current: 1,
+            pageSize: 10
+        },
+        sorter: {
+            order: 'ascend',
+            filter: 'name'
+        }
+    })
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
     const handleEnabledUser = (data) => console.log(data)
 
@@ -40,18 +53,38 @@ function ListUser() {
             <SwitchEnableUser formData={record} handleSetData={handleEnabledUser} />
     }
 
+    const fetchData = (pagination, filters, sorter) => {
+        GetListUser(pagination ? pagination : tableParams.pagination, sorter).then(response => {
+            setTableParams({
+                ...tableParams, pagination: {
+                    ...pagination,
+                    total: response.data.count
+                },
+                filter: filters,
+                sorter: sorter
+            })
+            dispatch(FetchUserList(response.data))
+        })
+    }
+    const handleTableChange = (pagination, filters, sorter) => {
+        console.log(sorter)
+        fetchData(pagination, filters, sorter)
+    };
+
     useEffect(() => {
-        GetListUser().then(response => dispatch(FetchUserList(response.data)))
+        fetchData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>
             <ContainerList
+                tableParams={tableParams} setTableParams={setTableParams}
+                handleTableChange={handleTableChange}
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
                 config={config} columns={columns}
-                data={userList}
+                data={userList?.users}
                 setColumns={setColumns} />
         </LayoutHome>
     )

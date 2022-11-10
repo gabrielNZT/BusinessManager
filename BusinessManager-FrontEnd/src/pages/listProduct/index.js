@@ -36,27 +36,54 @@ function ListProduct() {
     const dispatch = useDispatch()
 
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
+    const [tableParams, setTableParams] = useState({
+        pagination: {
+            current: 1,
+            pageSize: 10
+        },
+        sorter: {
+            order: 'ascend',
+            filter: 'name'
+        }
+    })
     const productList = useSelector(state => state.list.productList)
     const handleEnabledUser = (data) => {
         console.log(data)
     }
+    const fetchData = (pagination, filters, sorter) => {
+        GetListProduct(pagination ? pagination : tableParams.pagination).then(response => {
+            setTableParams({
+                ...tableParams, pagination: {
+                    ...pagination,
+                    total: response.data.count
+                },
+                filter: filters,
+                sorter: sorter
+            })
+            dispatch(FetchProductList(response.data))
+        })
+    }
+    const handleTableChange = (pagination, filters, sorter) => {
+        fetchData(pagination, filters, sorter)
+    };
     INITIAL_COLUMNS[SWITCH_ELEMENT_POS] = {
         ...INITIAL_COLUMNS[SWITCH_ELEMENT_POS], render: (_, record) =>
             <SwitchEnableUser formData={record} handleSetData={handleEnabledUser} />
     }
 
     useEffect(() => {
-        GetListProduct().then(response => dispatch(FetchProductList(response.data)))
+        fetchData()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/user' }]}>
             <ContainerList
+                tableParams={tableParams} setTableParams={setTableParams}
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
                 config={config}
                 data={productList}
-                columns={columns}
+                columns={columns} handleTableChange={handleTableChange}
                 setColumns={setColumns} />
         </LayoutHome>
     )

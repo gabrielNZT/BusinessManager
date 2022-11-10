@@ -25,7 +25,7 @@ function FormRegisterUser(props) {
                             name={item.tag}
                             formData={formData}
                             handleSetData={handleSetData}
-                            key={index} />)
+                            key={index} />) 
                     case 'password':
                         return (<PasswordField
                             formData={props.formData}
@@ -34,7 +34,7 @@ function FormRegisterUser(props) {
                             key={index}
                         />)
                     case 'switchs':
-                        return (<DoubleSwitch key={index} items={item.items} />)
+                        return (<DoubleSwitch key={index} items={item.items} formData={formData} handleSetData={handleSetData} />)
                     case 'selectUnity':
                         return (<SelectUnity item={item} formData={formData} key={index} handleSetData={handleSetData} />)
                     case 'select':

@@ -9,7 +9,7 @@ import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components
 import './style/style.css'
 
 const DEFAULT_ITEMS = [
-    { type: 'input', label: 'Nome', tag:'name', disabled: true },
+    { type: 'input', label: 'Nome', tag: 'name', disabled: true },
     { type: 'input', label: 'Nome de Usuário', placeholder: 'Digite o nome de usuário', tag: 'username' },
     { type: 'input', label: 'Email', placeholder: 'Digite o email', tag: 'email' },
     { type: 'input', label: 'Telefone', placeholder: 'Digite o telefone', tag: 'phone' },
@@ -36,6 +36,7 @@ function EditUser() {
     const [src, setSrc] = useState()
     const [formData, setFormData] = useState({
         id: id,
+        passwordLocked: false,
         ...rest
     })
     const handleRequest = async (id) => {

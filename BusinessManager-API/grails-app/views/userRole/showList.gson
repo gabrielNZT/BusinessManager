@@ -4,4 +4,7 @@ model {
     Iterable<UserRole> userRoleList
 }
 
-json tmpl.userList(userRoleList?: [])
+json {
+    users tmpl.userList(userRoleList ?: [])
+    count UserRole.count()
+}

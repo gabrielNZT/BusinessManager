@@ -13,7 +13,7 @@ const width = '200px'
 const INITIAL_COLUMNS = [
     {
         key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, defaultSortOrder: 'descend',
-        sorter: () => {}
+        sorter: () => { }
     },
     { key: 'username', title: 'Nome de usuário', dataIndex: 'username', width: width },
     { key: 'email', title: 'Email', dataIndex: 'email', width: "250px" },
@@ -57,7 +57,7 @@ function ListUser() {
         GetListUser(pagination ? pagination : tableParams.pagination, sorter).then(response => {
             setTableParams({
                 ...tableParams, pagination: {
-                    ...pagination,
+                    ...pagination ? pagination : tableParams.pagination,
                     total: response.data.count
                 },
                 filter: filters,

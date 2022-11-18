@@ -1,13 +1,14 @@
 import Form from 'react-bootstrap/Form';
 function InputSearchField(props) {
     const { label, disabled, key: name, placeholder } = props.item
+    const { data, index, setData } = props
     return (
-        <Form.Group key={props.index}>
+        <Form.Group key={index}>
             <Form.Label >
                 {label}
                 <Form.Control
-                    value={props.data?.field === name? props.data.value : ''}
-                    onChange={(e) => props.setData({ field: name, value: e.target.value })}
+                    value={data ? data[name] ? data[name].value : '' : ''}
+                    onChange={(e) => setData({ ...data, [name]: { field: name, value: e.target.value } })}
                     disabled={disabled === true ? true : false}
                     name={name}
                     placeholder={placeholder}

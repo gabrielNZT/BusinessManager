@@ -12,17 +12,23 @@ const SWITCH_ELEMENT_POS = 6
 const width = '200px'
 const INITIAL_COLUMNS = [
     {
-        key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, defaultSortOrder: 'descend',
+        key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, defaultSortOrder: 'descend', type: 'INPUT', placeholder: 'Digite o nome a ser encontrado',
         sorter: () => { }
     },
-    { key: 'username', title: 'Nome de usuário', dataIndex: 'username', width: width },
-    { key: 'email', title: 'Email', dataIndex: 'email', width: "250px" },
-    { key: 'phone', title: 'Telefone', dataIndex: 'phone', width: width },
-    { key: 'cpf', title: 'CPF', dataIndex: 'cpf', width: width },
-    { key: 'birthDate', title: 'Data de Nascimento', dataIndex: 'birthDate', width: width, render: (_, record) => <DateText date={record.birthDate} /> },
-    { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width },
-    { key: 'permission', title: 'Permissão', dataIndex: 'permission', width: width },
-    { key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate', width: width, render: (_, record) => <DateText date={record.contractDate} /> },
+    { key: 'username', title: 'Nome de usuário', dataIndex: 'username', width: width, type: 'INPUT', placeholder: 'Digite o nome de usuário a ser encontrado' },
+    { key: 'email', title: 'Email', dataIndex: 'email', width: "250px", type: 'INPUT', placeholder: 'Digite o email a ser encontrado' },
+    { key: 'phone', title: 'Telefone', dataIndex: 'phone', width: width, type: 'INPUT', placeholder: 'digite o telefone a ser encontrado' },
+    { key: 'cpf', title: 'CPF', dataIndex: 'cpf', width: width, type: 'INPUT', placeholder: 'Digite o cpf a ser encontrado' },
+    {
+        key: 'birthDate', title: 'Data de Nascimento', dataIndex: 'birthDate', width: width, type: 'DATE_PICKER', placeholder: 'Selecione a data de nascimento a ser encontrado',
+        render: (_, record) => <DateText date={record.birthDate} />
+    },
+    { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width, type: 'SELECT', placeholder: 'Selecione o estado da conta', elements: ['Ativo', 'Desativo', 'Todos'] },
+    { key: 'permission', title: 'Permissão', dataIndex: 'permission', width: width, type: 'SELECT', placeholder: 'Selecione a permissão', elements: ['Administrador', 'Gerente', 'Operador'] },
+    {
+        key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate', width: width, type: 'DATE_PICKER', placeholder: 'Selecione a data de contrato',
+        render: (_, record) => <DateText date={record.contractDate} />
+    },
     { key: 'operation', title: 'Ações', fixed: 'right', width: "150px", render: (_, record) => <ButtonsActions record={record} path={'../user/edit'} listType={'user'} /> }
 ]
 
@@ -40,11 +46,13 @@ function ListUser() {
             current: 1,
             pageSize: 10
         },
+        filter: null,
         sorter: {
             order: 'ascend',
             filter: 'name'
         }
     })
+    console.log(tableParams)
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
     const handleEnabledUser = (data) => console.log(data)
 
@@ -54,27 +62,24 @@ function ListUser() {
     }
 
     const fetchData = (pagination, filters, sorter) => {
-        GetListUser(pagination ? pagination : tableParams.pagination, sorter).then(response => {
+        GetListUser(pagination ? pagination : tableParams.pagination, sorter, tableParams.filter).then(response => {
             setTableParams({
-                ...tableParams, pagination: {
+                ...tableParams,
+                pagination: {
                     ...pagination ? pagination : tableParams.pagination,
                     total: response.data.count
                 },
-                filter: filters,
-                sorter: sorter
+                sorter: sorter ? sorter : tableParams.sorter
             })
             dispatch(FetchUserList(response.data))
         })
     }
-    const handleTableChange = (pagination, filters, sorter) => {
-        console.log(sorter)
-        fetchData(pagination, filters, sorter)
-    };
+    const handleTableChange = (pagination, filters, sorter) => fetchData(pagination, filters, sorter);
 
     useEffect(() => {
-        fetchData()
+        fetchData(tableParams.pagination, tableParams.filter, tableParams.sorter)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [tableParams.filter]);
 
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>

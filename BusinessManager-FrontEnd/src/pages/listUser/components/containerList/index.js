@@ -13,7 +13,7 @@ function ContainerList(props) {
             <SearchFields
                 defaultColumns={props.defaultColumns}
                 columns={props.columns}
-                tableParams={props.tableParams}
+                tableParams={props.tableParams} setTableParams={props.setTableParams}
             />
             <TableUser
                 setTableParams={props.setTableParams}

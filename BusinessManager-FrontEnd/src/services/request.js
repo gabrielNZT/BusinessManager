@@ -63,15 +63,17 @@ export const showProduct = (product_id) => {
         .then()
 }
 
-export const GetListUser = (pagination, sorter) => {
+export const GetListUser = (pagination, sorter, filters) => {
     const { current, pageSize } = pagination
     const { order: sort } = sorter ? sorter : { order: 'asc' }
+    console.log(filters)
     return api
         .get(`/getUserList`, {
             params: {
                 current: current,
                 pageSize: pageSize,
-                sort: sort === 'ascend' ? 'asc' : sort === 'descend' ? 'desc' : 'asc'
+                sort: sort === 'ascend' ? 'asc' : sort === 'descend' ? 'desc' : 'asc',
+                filters: JSON.stringify(filters)
             }
         })
         .then()

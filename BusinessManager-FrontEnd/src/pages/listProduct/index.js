@@ -11,7 +11,7 @@ import { SwitchEnableUser } from "../registerUser/components"
 const SWITCH_ELEMENT_POS = 6
 const width = 100
 const INITIAL_COLUMNS = [
-    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width },
+    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, sorter: () => {}, defaultSortOrder: 'descend' },
     { key: 'code', title: 'Código', dataIndex: 'code', width: width },
     { key: 'price', title: 'Preço', dataIndex: 'price', width: width },
     { key: 'stock', title: 'Qtd. estoque', dataIndex: 'stock', width: width, render: (_, record) => <StockNumber record={record} /> },
@@ -51,7 +51,7 @@ function ListProduct() {
         console.log(data)
     }
     const fetchData = (pagination, filters, sorter) => {
-        GetListProduct(pagination ? pagination : tableParams.pagination).then(response => {
+        GetListProduct(pagination ? pagination : tableParams.pagination, sorter).then(response => {
             setTableParams({
                 ...tableParams, pagination: {
                     ...pagination,

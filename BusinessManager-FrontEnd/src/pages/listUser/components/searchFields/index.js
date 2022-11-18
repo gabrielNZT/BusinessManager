@@ -18,7 +18,6 @@ function SearchFields(props) {
                         const props = defaultColumns.find(element => element.key === item?.key);
                         return item?.key !== 'operation' ?
                             (<InputSearchField
-
                                 item={{ key: props?.key, placeholder: 'campo de pesquisa', label: props?.title }}
                                 index={index} />) : null
                     })}

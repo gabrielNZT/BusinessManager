@@ -77,10 +77,17 @@ export const GetListUser = (pagination, sorter) => {
         .then()
 }
 
-export const GetListProduct = (pagination) => {
+export const GetListProduct = (pagination, sorter) => {
     const { current, pageSize } = pagination
+    const { order: sort } = sorter ? sorter : { order: 'asc' }
     return api
-        .get(`/product?current=${current}&pageSize=${pageSize}`)
+        .get(`/product`, {
+            params: {
+                current: current,
+                pageSize: pageSize,
+                sort: sort === 'ascend' ? 'asc' : sort === 'descend' ? 'desc' : 'asc'
+            }
+        })
         .then()
 }
 

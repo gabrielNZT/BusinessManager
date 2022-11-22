@@ -12,22 +12,37 @@ const SWITCH_ELEMENT_POS = 6
 const width = '200px'
 const INITIAL_COLUMNS = [
     {
-        key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, defaultSortOrder: 'descend', type: 'INPUT', placeholder: 'Digite o nome a ser encontrado',
-        sorter: () => { }
+        key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, defaultSortOrder: 'descend',
+        type: 'INPUT', placeholder: 'Digite o nome a ser encontrado', sorter: () => { }
     },
-    { key: 'username', title: 'Nome de usuário', dataIndex: 'username', width: width, type: 'INPUT', placeholder: 'Digite o nome de usuário a ser encontrado' },
-    { key: 'email', title: 'Email', dataIndex: 'email', width: "250px", type: 'INPUT', placeholder: 'Digite o email a ser encontrado' },
-    { key: 'phone', title: 'Telefone', dataIndex: 'phone', width: width, type: 'INPUT', placeholder: 'digite o telefone a ser encontrado' },
+    {
+        key: 'username', title: 'Nome de usuário', dataIndex: 'username', width: width, type: 'INPUT',
+        placeholder: 'Digite o nome de usuário a ser encontrado'
+    },
+    {
+        key: 'email', title: 'Email', dataIndex: 'email', width: "250px", type: 'INPUT',
+        placeholder: 'Digite o email a ser encontrado'
+    },
+    {
+        key: 'phone', title: 'Telefone', dataIndex: 'phone', width: width, type: 'INPUT',
+        placeholder: 'digite o telefone a ser encontrado'
+    },
     { key: 'cpf', title: 'CPF', dataIndex: 'cpf', width: width, type: 'INPUT', placeholder: 'Digite o cpf a ser encontrado' },
     {
-        key: 'birthDate', title: 'Data de Nascimento', dataIndex: 'birthDate', width: width, type: 'DATE_PICKER', placeholder: 'Selecione a data de nascimento a ser encontrado',
-        render: (_, record) => <DateText date={record.birthDate} />
+        key: 'birthDate', title: 'Data de Nascimento', dataIndex: 'birthDate', width: width, type: 'DATE_PICKER',
+        placeholder: 'Selecione a data de nascimento a ser encontrado', render: (_, record) => <DateText date={record.birthDate} />
     },
-    { key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width, type: 'SELECT', placeholder: 'Selecione o estado da conta', elements: ['Ativo', 'Desativo', 'Todos'] },
-    { key: 'permission', title: 'Permissão', dataIndex: 'permission', width: width, type: 'SELECT', placeholder: 'Selecione a permissão', elements: ['Administrador', 'Gerente', 'Operador'] },
     {
-        key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate', width: width, type: 'DATE_PICKER', placeholder: 'Selecione a data de contrato',
-        render: (_, record) => <DateText date={record.contractDate} />
+        key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width, type: 'SELECT',
+        placeholder: 'Selecione o estado da conta', elements: ['Ativo', 'Desativado', 'Todos']
+    },
+    {
+        key: 'permission', title: 'Permissão', dataIndex: 'permission', width: width, type: 'SELECT',
+        placeholder: 'Selecione a permissão', elements: ['Administrador', 'Gerente', 'Operador']
+    },
+    {
+        key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate', width: width, type: 'DATE_PICKER',
+        placeholder: 'Selecione a data de contrato', render: (_, record) => <DateText date={record.contractDate} />
     },
     { key: 'operation', title: 'Ações', fixed: 'right', width: "150px", render: (_, record) => <ButtonsActions record={record} path={'../user/edit'} listType={'user'} /> }
 ]
@@ -52,13 +67,13 @@ function ListUser() {
             filter: 'name'
         }
     })
-    console.log(tableParams)
+
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
     const handleEnabledUser = (data) => console.log(data)
 
     INITIAL_COLUMNS[SWITCH_ELEMENT_POS] = {
         ...INITIAL_COLUMNS[SWITCH_ELEMENT_POS], render: (_, record) =>
-            <SwitchEnableUser formData={record} handleSetData={handleEnabledUser} />
+            <SwitchEnableUser formData={record} name={'enabled'} handleSetData={handleEnabledUser} />
     }
 
     const fetchData = (pagination, filters, sorter) => {

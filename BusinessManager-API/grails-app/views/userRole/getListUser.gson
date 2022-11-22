@@ -1,10 +1,11 @@
 import security.UserRole
 
 model {
-    Iterable<UserRole> userRoleList
+    Object userRoleList
+    Integer totalCount
 }
 
 json {
     users tmpl.userList(userRoleList ?: [])
-    count UserRole.count()
+    count totalCount
 }

@@ -66,7 +66,7 @@ export const showProduct = (product_id) => {
 export const GetListUser = (pagination, sorter, filters) => {
     const { current, pageSize } = pagination
     const { order: sort } = sorter ? sorter : { order: 'asc' }
-    console.log(filters)
+
     return api
         .get(`/getUserList`, {
             params: {
@@ -79,15 +79,17 @@ export const GetListUser = (pagination, sorter, filters) => {
         .then()
 }
 
-export const GetListProduct = (pagination, sorter) => {
+export const GetListProduct = (pagination, sorter, filters) => {
     const { current, pageSize } = pagination
     const { order: sort } = sorter ? sorter : { order: 'asc' }
+
     return api
-        .get(`/product`, {
+        .get(`/getProductList`, {
             params: {
                 current: current,
                 pageSize: pageSize,
-                sort: sort === 'ascend' ? 'asc' : sort === 'descend' ? 'desc' : 'asc'
+                sort: sort === 'ascend' ? 'asc' : sort === 'descend' ? 'desc' : 'asc',
+                filters: JSON.stringify(filters)
             }
         })
         .then()
@@ -141,7 +143,6 @@ export const DeleteProduct = (product_id) => {
 }
 
 export const GetProductCode = (company_id) => {
-    console.log(company_id)
     return api
         .get("/getProductCode/" + company_id)
         .then()

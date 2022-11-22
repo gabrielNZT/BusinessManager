@@ -1,0 +1,11 @@
+import businessmanager.api.Product
+
+model {
+    Object listProducts
+    Integer totalCount
+}
+
+json {
+    products tmpl.productList(listProducts ?: [])
+    count totalCount
+}

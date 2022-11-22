@@ -1,7 +1,10 @@
 import { CLICK_SEARCH_FIELDS, DELETE_PRODUCT_LIST, DELETE_USER_LIST, FETCH_PRODUCT, FETCH_PRODUCT_LIST, FETCH_USER, FETCH_USER_LIST } from "../../../store/actionTypes"
 
 const INITIAL_STATE = {
-    productList: [],
+    productList: {
+        products: [],
+        count: 0
+    },
     userList: {
         users: [],
         count: 0
@@ -26,7 +29,7 @@ function list(state = INITIAL_STATE, action) {
         case DELETE_USER_LIST:
             return { ...state, userList: state.userList.filter(user => user.key !== action.user_id) }
         case CLICK_SEARCH_FIELDS:
-            return {...state, hideSearchFields: !state.hideSearchFields}
+            return { ...state, hideSearchFields: !state.hideSearchFields }
         default:
             return state
     }

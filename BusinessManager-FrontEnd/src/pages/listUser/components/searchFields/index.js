@@ -20,26 +20,26 @@ function SearchFields(props) {
         (
             <div style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '12vh' }}>
                 <div style={{ display: 'flex', flexDirection: 'row', gap: '4vh', width: '100%', overflowX: 'auto', overflowY: 'hidden' }}>
-                    {columns.map((item, index) => {
-                        const props = defaultColumns.find(element => element.key === item?.key);
-                        switch (props.type) {
-                            case 'INPUT':
-                                return <InputSearchField
-                                    data={data} setData={setData}
-                                    item={{ key: props.key, placeholder: props.placeholder, label: props.title }}
-                                    index={index}
-                                />
-                            case 'SELECT':
-                                return <SelectANT
-                                    item={{ key: props.key, label: props.title, elements: props.elements }}
-                                    placeholder={props.placeholder}
-                                    onChange={onChangeSelect}
-                                    index={index}
-                                />
-                            default:
-                                return null
-                        }
-                    })}
+                        {columns.map((item, index) => {
+                            const props = defaultColumns.find(element => element.key === item?.key);
+                            switch (props.type) {
+                                case 'INPUT':
+                                    return <InputSearchField
+                                        data={data} setData={setData}
+                                        item={{ key: props.key, placeholder: props.placeholder, label: props.title }}
+                                        index={index}
+                                    />
+                                case 'SELECT':
+                                    return <SelectANT
+                                        item={{ key: props.key, label: props.title, elements: props.elements }}
+                                        placeholder={props.placeholder}
+                                        onChange={onChangeSelect}
+                                        index={index}
+                                    />
+                                default:
+                                    return null
+                            }
+                        })}
                 </div>
                 <div style={{ ...row, marginLeft: '5vh' }}>
                     <div style={{ background: '#831e81', height: '50px', width: '50px', borderRadius: '15px', cursor: 'pointer' }}>

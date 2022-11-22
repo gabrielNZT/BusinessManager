@@ -11,14 +11,21 @@ import { SwitchEnableUser } from "../registerUser/components"
 const SWITCH_ELEMENT_POS = 6
 const width = 100
 const INITIAL_COLUMNS = [
-    { key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width, sorter: () => {}, defaultSortOrder: 'descend' },
-    { key: 'code', title: 'Código', dataIndex: 'code', width: width },
-    { key: 'price', title: 'Preço', dataIndex: 'price', width: width },
-    { key: 'stock', title: 'Qtd. estoque', dataIndex: 'stock', width: width, render: (_, record) => <StockNumber record={record} /> },
-    { key: 'unity', title: 'Unidade', dataIndex: 'unity', width: width },
-    { key: 'minStock', title: 'Estoque Mínimo', dataIndex: 'minStock', width: width },
     {
-        key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width
+        key: 'name', title: 'Nome', dataIndex: 'name', fixed: 'left', width: width,
+        sorter: () => { }, defaultSortOrder: 'descend', type: 'INPUT', placeholder: 'Digite o nome'
+    },
+    { key: 'code', title: 'Código', dataIndex: 'code', width: width, type: 'INPUT', placeholder: 'Digite o código' },
+    { key: 'price', title: 'Preço', dataIndex: 'price', width: width, type: 'INPUT', placeholder: 'Digite o preço' },
+    {
+        key: 'stock', title: 'Qtd. estoque', dataIndex: 'stock', width: width, type: 'INPUT', placeholder: 'Digite a quantidade',
+        render: (_, record) => <StockNumber record={record} />
+    },
+    { key: 'unity', title: 'Unidade', dataIndex: 'unity', width: width, type: 'INPUT', placeholder: 'Digite a unidade' },
+    { key: 'minStock', title: 'Estoque Mínimo', dataIndex: 'minStock', width: width, type: 'INPUT', placeholder: 'Digite a quantidade mínima em estoque' },
+    {
+        key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width, type: 'SELECT', elements: ['Ativo', 'Desativado', 'Todos'],
+        placeholder: 'Selecione o estado do produto'
     },
     {
         key: 'operation', title: 'Ações', fixed: 'right', width: width, render: (_, record) =>
@@ -41,6 +48,7 @@ function ListProduct() {
             current: 1,
             pageSize: 10
         },
+        filter: null,
         sorter: {
             order: 'ascend',
             filter: 'name'
@@ -51,14 +59,14 @@ function ListProduct() {
         console.log(data)
     }
     const fetchData = (pagination, filters, sorter) => {
-        GetListProduct(pagination ? pagination : tableParams.pagination, sorter).then(response => {
+        GetListProduct(pagination ? pagination : tableParams.pagination, sorter, tableParams.filter).then(response => {
             setTableParams({
-                ...tableParams, pagination: {
-                    ...pagination,
+                ...tableParams,
+                pagination: {
+                    ...pagination ? pagination : tableParams.pagination,
                     total: response.data.count
                 },
-                filter: filters,
-                sorter: sorter
+                sorter: sorter ? sorter : tableParams.sorter
             })
             dispatch(FetchProductList(response.data))
         })
@@ -72,9 +80,9 @@ function ListProduct() {
     }
 
     useEffect(() => {
-        fetchData()
+        fetchData(tableParams.pagination, tableParams.filter, tableParams.sorter)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [tableParams.filter]);
     return (
         <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/user' }]}>
             <ContainerList
@@ -82,7 +90,7 @@ function ListProduct() {
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
                 config={config}
-                data={productList}
+                data={productList?.products}
                 columns={columns} handleTableChange={handleTableChange}
                 setColumns={setColumns} />
         </LayoutHome>

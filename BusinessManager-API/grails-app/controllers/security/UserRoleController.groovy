@@ -9,7 +9,6 @@ import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY
 
 import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
@@ -28,22 +27,12 @@ class UserRoleController {
     }
 
     def getListUser(Integer pageSize, Integer current, String sort  , String filters) {
-        getParams()
-        def listFilters = JSON.parse(filters)
-        def c = UserRole.createCriteria()
-        def max = (pageSize * current)
-        Integer offset = (pageSize * (current - 1))
-        def results = c.list (max: max, offset: offset){
-            createAlias("user","_user")
-            if(listFilters != null) {
-                listFilters.name? like("_user.name", "%${listFilters.name.value}%") : null
-                listFilters.username? like("_user.username", "%${listFilters.username.value}%") : null
-            }
-            order("_user.name", sort)
-
-        }
-
-        respond results, [status: OK, view: "showList"]
+        Object results = userRoleService.getList(pageSize, current, sort ,filters)
+        def model = [
+                userRoleList: results,
+                totalCount: results.totalCount as Integer
+        ]
+        respond model
     }
 
     def show(Long id) {

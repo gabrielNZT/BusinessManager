@@ -5,13 +5,13 @@ function SelectANT(props) {
     const { placeholder, onChange, defaultValue, item } = props
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }} key={props.index}>
-            <label> {item.label}
+            <label> <p style={{ fontWeight: 'bold', marginBottom: '0px' }}>{item.label}</p>
                 <Select
                     size="large"
                     placeholder={placeholder}
                     defaultValue={defaultValue}
                     style={{
-                        width: "310px"
+                        width: "300px"
                     }}
                     onChange={(value) => onChange({ value: value, key: item.key })}
                 >

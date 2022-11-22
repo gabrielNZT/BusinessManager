@@ -2,8 +2,8 @@ import { Switch } from 'antd';
 import React, { useState } from 'react';
 
 function SwitchEnableUser(props) {
-    const { formData, label } = props
-    const [color, setColor] = useState({ background: 'green' })
+    const { formData, label, defaultValue } = props
+    const [color, setColor] = useState({ background: formData?.enabled? 'green' : 'red' })
 
     const handleChange = (value) => {
         setColor(value ? { background: 'green' } : { background: 'red' })
@@ -16,7 +16,7 @@ function SwitchEnableUser(props) {
             onChange={handleChange}
             checkedChildren="Sim"
             unCheckedChildren="Não"
-            defaultChecked />) :
+            defaultChecked={defaultValue} />) :
             (<div className='div-custom-label'>
                 <div className='div-label'>
                     <label> {props.label} </label>

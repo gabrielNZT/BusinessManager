@@ -27,7 +27,7 @@ function list(state = INITIAL_STATE, action) {
         case DELETE_PRODUCT_LIST:
             return { ...state, productList: state.productList.filter(product => product.key !== action.product_id) }
         case DELETE_USER_LIST:
-            return { ...state, userList: state.userList.filter(user => user.key !== action.user_id) }
+            return { ...state, userList: state.userList.users.filter(user => user.key !== action.user_id) }
         case CLICK_SEARCH_FIELDS:
             return { ...state, hideSearchFields: !state.hideSearchFields }
         default:

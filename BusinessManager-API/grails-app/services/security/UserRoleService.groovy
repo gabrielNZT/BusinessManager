@@ -53,7 +53,7 @@ class UserRoleService {
     void updateUser(Object request) throws UpdateUserException{
         def map = request as Map
         Role role = Role.findByAuthority(map.role.authority)
-        User user = User.findById(map.user.id)
+        User user = User.findById(map.user.id?: map.user.key)
         UserRole userRole = UserRole.findByUser(user)
 
         user.properties = map.user

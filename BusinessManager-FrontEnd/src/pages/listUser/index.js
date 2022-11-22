@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LayoutHome from "../../global/components/layout";
-import { GetListUser } from "../../services/request";
+import { GetListUser, UpdateUser } from "../../services/request";
 import { SwitchEnableUser } from "../registerUser/components";
 import { ButtonsActions, ContainerList } from "./components";
 import DateText from "./components/dateText";
-import { FetchUserList } from "./reducer/actions";
+import { DeleteUserFromList, FetchUserList } from "./reducer/actions";
 import './style/style.css'
 
 const SWITCH_ELEMENT_POS = 6
@@ -67,13 +67,22 @@ function ListUser() {
             filter: 'name'
         }
     })
-
+    const { filter } = tableParams
+    console.log(filter?.enabled)
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
-    const handleEnabledUser = (data) => console.log(data)
+    const handleEnabledUser = (data) => {
+        UpdateUser(data).then(() => {
+            console.log(filter, data)
+            if ((data.enabled && filter?.enabled?.value === 'Desativado') || (!data.enabled && filter?.enabled?.value === 'Ativado')) {
+                console.log(`deletar usuário ${data.key}`)
+                dispatch(DeleteUserFromList(data.key))
+            }
+        })
+    }
 
     INITIAL_COLUMNS[SWITCH_ELEMENT_POS] = {
         ...INITIAL_COLUMNS[SWITCH_ELEMENT_POS], render: (_, record) =>
-            <SwitchEnableUser formData={record} name={'enabled'} handleSetData={handleEnabledUser} />
+            <SwitchEnableUser defaultValue={record.enabled} formData={record} name={'enabled'} handleSetData={handleEnabledUser} />
     }
 
     const fetchData = (pagination, filters, sorter) => {

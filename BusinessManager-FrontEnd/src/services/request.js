@@ -108,7 +108,6 @@ export const GetProductImage = (image_id) => {
 }
 
 export const UpdateProduct = (product) => {
-    console.log(product)
     return api
         .put("/updateProduct", product)
         .then()

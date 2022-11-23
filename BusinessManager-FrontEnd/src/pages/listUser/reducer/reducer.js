@@ -1,4 +1,4 @@
-import { CLICK_SEARCH_FIELDS, DELETE_PRODUCT_LIST, DELETE_USER_LIST, FETCH_PRODUCT, FETCH_PRODUCT_LIST, FETCH_USER, FETCH_USER_LIST } from "../../../store/actionTypes"
+import { CLICK_SEARCH_FIELDS, DELETE_PRODUCT_LIST, DELETE_USER_LIST, FETCH_PRODUCT, FETCH_PRODUCT_LIST, FETCH_USER, FETCH_USER_LIST, SET_TABLE_PARAMS } from "../../../store/actionTypes"
 
 const INITIAL_STATE = {
     productList: {
@@ -11,6 +11,17 @@ const INITIAL_STATE = {
     },
     currentUser: {},
     currentProduct: {},
+    tableParams: {
+        pagination: {
+            current: 1,
+            pageSize: 10
+        },
+        filter: null,
+        sorter: {
+            order: 'ascend',
+            filter: 'name'
+        }
+    },
     hideSearchFields: true
 }
 
@@ -30,6 +41,8 @@ function list(state = INITIAL_STATE, action) {
             return { ...state, userList: state.userList.users.filter(user => user.key !== action.user_id) }
         case CLICK_SEARCH_FIELDS:
             return { ...state, hideSearchFields: !state.hideSearchFields }
+        case SET_TABLE_PARAMS:
+            return { ...state, tableParams: action.tableParams }
         default:
             return state
     }

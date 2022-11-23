@@ -40,7 +40,7 @@ class UserRoleService {
                 listFilters.username? like("_user.username", "%${listFilters.username.value}%") : null
                 listFilters.email? like("_user.email", "${listFilters.email.value}%") : null
                 listFilters.phone? like("_user.phone", "${listFilters.phone.value}%") : null
-                listFilters.enabled? eq("_user.enabled", listFilters.enabled.value != "Desativado") : null
+                listFilters.enabled? (listFilters.enabled.value != "Todos"? eq("_user.enabled", listFilters.enabled.value != "Desativado") : null) : null
                 listFilters.permission? eq("_role.authority", "${listFilters.permission.value}") : null
             }
             order("_user.name", sort)

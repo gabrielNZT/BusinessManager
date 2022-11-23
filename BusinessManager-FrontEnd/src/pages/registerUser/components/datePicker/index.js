@@ -18,6 +18,7 @@ function DateEntry(props) {
             <Space direction="vertical" size={12}>
                 <ConfigProvider locale={locale}>
                     <DatePicker
+                    style={{width: '100%'}}
                     defaultValue={handleDefaultValue()}
                     inputReadOnly={true}
                     onChange={(value) => handleChange(value)}

@@ -14,7 +14,7 @@ const DEFAULT_ITEMS = [
     { type: 'selectUnity', label: 'Unidade', tag: 'unity', placeholder: 'Escolha a unidade', elements: ['UN'] },
     { type: 'input', label: 'Quantidade em Estoque', placeholder: 'Digite a quantidade em estoque', tag: 'stock' },
     { type: 'input', label: 'Estoque Mínimo', tag: 'minStock', placeholder: 'Digite a quantidade de estoque mínimo' },
-    { type: 'switch', label: 'Ativo?', tag: 'enabled' },
+    { type: 'switch', label: 'Ativo?', tag: 'isEnabled' },
     { type: 'upload', label: 'Imagem', body: 'Clique ou arraste a imagem para esta área para fazer o upload', tag: 'productPhoto' }
 ]
 

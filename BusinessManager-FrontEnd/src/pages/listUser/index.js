@@ -5,7 +5,7 @@ import { GetListUser, UpdateUser } from "../../services/request";
 import { SwitchEnableUser } from "../registerUser/components";
 import { ButtonsActions, ContainerList } from "./components";
 import DateText from "./components/dateText";
-import { DeleteUserFromList, FetchUserList } from "./reducer/actions";
+import { FetchUserList, SetTableParams } from "./reducer/actions";
 import './style/style.css'
 
 const SWITCH_ELEMENT_POS = 6
@@ -29,7 +29,7 @@ const INITIAL_COLUMNS = [
     },
     { key: 'cpf', title: 'CPF', dataIndex: 'cpf', width: width, type: 'INPUT', placeholder: 'Digite o cpf a ser encontrado' },
     {
-        key: 'birthDate', title: 'Data de Nascimento', dataIndex: 'birthDate', width: width, type: 'DATE_PICKER',
+        key: 'birthDate', title: 'Data de Nascimento', dataIndex: 'birthDate', width: width, type: 'DATE',
         placeholder: 'Selecione a data de nascimento a ser encontrado', render: (_, record) => <DateText date={record.birthDate} />
     },
     {
@@ -41,7 +41,7 @@ const INITIAL_COLUMNS = [
         placeholder: 'Selecione a permissão', elements: ['Administrador', 'Gerente', 'Operador']
     },
     {
-        key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate', width: width, type: 'DATE_PICKER',
+        key: 'contractDate', title: 'Data de Contrato', dataIndex: 'contractDate', width: width, type: 'DATE',
         placeholder: 'Selecione a data de contrato', render: (_, record) => <DateText date={record.contractDate} />
     },
     { key: 'operation', title: 'Ações', fixed: 'right', width: "150px", render: (_, record) => <ButtonsActions record={record} path={'../user/edit'} listType={'user'} /> }
@@ -56,29 +56,15 @@ const config = {
 function ListUser() {
     const dispatch = useDispatch()
     const userList = useSelector(state => state.list.userList)
-    const [tableParams, setTableParams] = useState({
-        pagination: {
-            current: 1,
-            pageSize: 10
-        },
-        filter: null,
-        sorter: {
-            order: 'ascend',
-            filter: 'name'
-        }
-    })
-    const { filter } = tableParams
-    console.log(filter?.enabled)
+    const tableParams = useSelector(state => state.list.tableParams)
+
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
-    const handleEnabledUser = (data) => {
-        UpdateUser(data).then(() => {
-            console.log(filter, data)
-            if ((data.enabled && filter?.enabled?.value === 'Desativado') || (!data.enabled && filter?.enabled?.value === 'Ativado')) {
-                console.log(`deletar usuário ${data.key}`)
-                dispatch(DeleteUserFromList(data.key))
-            }
-        })
-    }
+    const handleEnabledUser = (data, params) => UpdateUser(data)
+        .then(() => {
+            const { pagination, sorter, filter } = params
+            GetListUser(pagination, sorter, filter)
+                .then(response => dispatch(FetchUserList(response.data)));
+        });
 
     INITIAL_COLUMNS[SWITCH_ELEMENT_POS] = {
         ...INITIAL_COLUMNS[SWITCH_ELEMENT_POS], render: (_, record) =>
@@ -87,14 +73,14 @@ function ListUser() {
 
     const fetchData = (pagination, filters, sorter) => {
         GetListUser(pagination ? pagination : tableParams.pagination, sorter, tableParams.filter).then(response => {
-            setTableParams({
+            dispatch(SetTableParams({
                 ...tableParams,
                 pagination: {
                     ...pagination ? pagination : tableParams.pagination,
                     total: response.data.count
                 },
                 sorter: sorter ? sorter : tableParams.sorter
-            })
+            }))
             dispatch(FetchUserList(response.data))
         })
     }
@@ -108,7 +94,7 @@ function ListUser() {
     return (
         <LayoutHome currentPage={['3']} breadCrumb={[{ name: 'Usuários', link: '/user' }]}>
             <ContainerList
-                tableParams={tableParams} setTableParams={setTableParams}
+                tableParams={tableParams}
                 handleTableChange={handleTableChange}
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}

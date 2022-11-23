@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import LayoutHome from "../../global/components/layout"
-import { GetListProduct } from "../../services/request"
+import { GetListProduct, UpdateProduct } from "../../services/request"
 import { ButtonsActions, ContainerList } from "../listUser/components"
 import { StockNumber } from "../listUser/components"
-import { FetchProductList } from "../listUser/reducer/actions"
+import { FetchProductList, SetTableParams } from "../listUser/reducer/actions"
 import { SwitchEnableUser } from "../registerUser/components"
 
 const SWITCH_ELEMENT_POS = 6
@@ -24,7 +24,7 @@ const INITIAL_COLUMNS = [
     { key: 'unity', title: 'Unidade', dataIndex: 'unity', width: width, type: 'INPUT', placeholder: 'Digite a unidade' },
     { key: 'minStock', title: 'Estoque Mínimo', dataIndex: 'minStock', width: width, type: 'INPUT', placeholder: 'Digite a quantidade mínima em estoque' },
     {
-        key: 'enabled', title: 'Ativo', dataIndex: 'enabled', width: width, type: 'SELECT', elements: ['Ativo', 'Desativado', 'Todos'],
+        key: 'isEnabled', title: 'Ativo', dataIndex: 'isEnabled', width: width, type: 'SELECT', elements: ['Ativo', 'Desativado', 'Todos'],
         placeholder: 'Selecione o estado do produto'
     },
     {
@@ -43,31 +43,26 @@ function ListProduct() {
     const dispatch = useDispatch()
 
     const [columns, setColumns] = useState(INITIAL_COLUMNS)
-    const [tableParams, setTableParams] = useState({
-        pagination: {
-            current: 1,
-            pageSize: 10
-        },
-        filter: null,
-        sorter: {
-            order: 'ascend',
-            filter: 'name'
-        }
-    })
+    const tableParams = useSelector(state => state.list.tableParams)
     const productList = useSelector(state => state.list.productList)
-    const handleEnabledUser = (data) => {
-        console.log(data)
+
+    const handleEnabledProduct = (data, params) => {
+        UpdateProduct(data).then(() => {
+            const { pagination, filter, sorter } = params
+            GetListProduct(pagination, sorter, filter)
+                .then(response => dispatch(FetchProductList(response.data)));
+        })
     }
     const fetchData = (pagination, filters, sorter) => {
         GetListProduct(pagination ? pagination : tableParams.pagination, sorter, tableParams.filter).then(response => {
-            setTableParams({
+            dispatch(SetTableParams({
                 ...tableParams,
                 pagination: {
                     ...pagination ? pagination : tableParams.pagination,
                     total: response.data.count
                 },
                 sorter: sorter ? sorter : tableParams.sorter
-            })
+            }))
             dispatch(FetchProductList(response.data))
         })
     }
@@ -76,7 +71,7 @@ function ListProduct() {
     };
     INITIAL_COLUMNS[SWITCH_ELEMENT_POS] = {
         ...INITIAL_COLUMNS[SWITCH_ELEMENT_POS], render: (_, record) =>
-            <SwitchEnableUser formData={record} handleSetData={handleEnabledUser} />
+            <SwitchEnableUser defaultValue={record.isEnabled} name={'isEnabled'} formData={record} handleSetData={handleEnabledProduct} />
     }
 
     useEffect(() => {
@@ -86,7 +81,7 @@ function ListProduct() {
     return (
         <LayoutHome currentPage={['2']} breadCrumb={[{ name: 'Produto', link: '/user' }]}>
             <ContainerList
-                tableParams={tableParams} setTableParams={setTableParams}
+                tableParams={tableParams}
                 defaultColumns={INITIAL_COLUMNS}
                 checkBoxItems={INITIAL_COLUMNS}
                 config={config}

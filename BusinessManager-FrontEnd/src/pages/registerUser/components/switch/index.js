@@ -1,13 +1,16 @@
 import { Switch } from 'antd';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function SwitchEnableUser(props) {
     const { formData, label, defaultValue } = props
-    const [color, setColor] = useState({ background: formData?.enabled? 'green' : 'red' })
+    const tableParams = useSelector(state => state.list.tableParams)
+    const [color, setColor] = useState({ background: (formData?.enabled || formData?.isEnabled ) ? 'green' : 'red' })
 
     const handleChange = (value) => {
         setColor(value ? { background: 'green' } : { background: 'red' })
-        props.handleSetData({ ...formData, [props.name]: value })
+        console.log(tableParams)
+        props.handleSetData({ ...formData, [props.name]: value }, tableParams)
     }
 
     return (

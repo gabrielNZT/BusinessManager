@@ -51,7 +51,7 @@ class ProductService {
     }
 
     void updateProduct(Object request) throws UpdateProductException {
-        Product product = Product.findById(request.id)
+        Product product = Product.findById(request.id?: request.key)
         def map = request as Map
         product.properties = map
         if(map.productPhoto != null) {
@@ -83,10 +83,10 @@ class ProductService {
             productFilters.name? like("name", "%${productFilters.name.value}%") : null
             productFilters.code? eq("code", productFilters.code.value) : null
             productFilters.price? like("price", "${productFilters.price.value}") : null
-            productFilters.stock? eq("stock", productFilters.stock.value) : null
+            productFilters.stock? (productFilters.stock.value? eq("stock", Integer.valueOf(productFilters.stock.value as String)) : null) : null
             productFilters.unity? eq("unity", productFilters.unity.value) : null
-            productFilters.minStock? eq("minStock", productFilters.minStock.value) : null
-            productFilters.enabled? eq("isEnabled", productFilters.enabled.value != "Desativado") : null
+            productFilters.minStock? ( productFilters.minStock.value? eq("minStock", Integer.valueOf(productFilters.minStock.value as String)) : null) : null
+            productFilters.isEnabled? (productFilters.isEnabled.value != "Todos"? eq("isEnabled", productFilters.isEnabled.value != "Desativado") : null) : null
         }
         return results
     }

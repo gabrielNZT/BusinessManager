@@ -3,7 +3,8 @@ package security
 import exceptions.UpdateUserException
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
-import org.hibernate.criterion.Projections
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 class UserRoleService {
 
@@ -42,6 +43,8 @@ class UserRoleService {
                 listFilters.phone? like("_user.phone", "${listFilters.phone.value}%") : null
                 listFilters.enabled? (listFilters.enabled.value != "Todos"? eq("_user.enabled", listFilters.enabled.value != "Desativado") : null) : null
                 listFilters.permission? eq("_role.authority", "${listFilters.permission.value}") : null
+                listFilters.contractDate? eq("_user.contractDate", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(listFilters.contractDate.value as String)) : null
+                listFilters.birthDate? eq("_user.birthDate", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(listFilters.birthDate.value as String)) : null
             }
             order("_user.name", sort)
         }

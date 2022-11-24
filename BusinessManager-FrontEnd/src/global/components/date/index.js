@@ -3,15 +3,17 @@ import React from 'react';
 const dateFormat = 'DD/MM/YYYY';
 
 function DateANT(props) {
-    const { title, onChange } = props
+    const { onChange } = props
+    const { key, title } = props.item
+
     return (
         <div key={props.index}>
-            <div  className='div-search-fields'>
+            <div className='div-search-fields'>
                 <label style={{ fontWeight: 'bold' }}>{title}</label>
                 <Space direction="vertical" size={12}>
                     <DatePicker style={{ width: '320px' }}
                         inputReadOnly={true}
-                        onChange={onChange}
+                        onChange={(value) => onChange({ key: key, value: value.toJSON() })}
                         size='large'
                         format={dateFormat}
                         dateRender={(current) => {

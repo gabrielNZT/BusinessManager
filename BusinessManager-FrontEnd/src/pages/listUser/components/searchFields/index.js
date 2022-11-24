@@ -14,10 +14,9 @@ function SearchFields(props) {
     const tableParams = useSelector(state => state.list.tableParams)
     const hideSearchFields = useSelector(state => state.list.hideSearchFields)
     const [data, setData] = useState()
-
+    console.log(data)
     const onFilter = () => dispatch(SetTableParams({ ...tableParams, filter: { ...data } }));
-    const onChangeSelect = ({ value, key: name }) => setData({ ...data, [name]: { field: name, value: value } })
-    const onChangeDate = (value) => console.log(value)
+    const onChange = ({ value, key: name }) => setData({ ...data, [name]: { field: name, value: value } })
 
     return (
         !hideSearchFields &&
@@ -29,7 +28,8 @@ function SearchFields(props) {
                         switch (props.type) {
                             case 'INPUT':
                                 return <InputSearchField
-                                    data={data} setData={setData}
+                                    data={data}
+                                    onChange={onChange}
                                     item={{ key: props.key, placeholder: props.placeholder, label: props.title }}
                                     index={index}
                                 />
@@ -37,13 +37,13 @@ function SearchFields(props) {
                                 return <SelectANT
                                     item={{ key: props.key, label: props.title, elements: props.elements }}
                                     placeholder={props.placeholder}
-                                    onChange={onChangeSelect}
+                                    onChange={onChange}
                                     index={index}
                                 />
                             case 'DATE':
                                 return <DateANT
-                                    title={props.title}
-                                    onChange={onChangeDate}
+                                    item={{ key: props.key, title: props.title }}
+                                    onChange={onChange}
                                     index={index}
                                 />
                             default:

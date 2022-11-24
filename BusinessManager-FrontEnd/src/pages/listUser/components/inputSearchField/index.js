@@ -1,7 +1,7 @@
 import Form from 'react-bootstrap/Form';
 function InputSearchField(props) {
     const { label, disabled, key: name, placeholder } = props.item
-    const { data, setData, index } = props
+    const { data, onChange, index } = props
 
     return (
         <Form.Group key={index}>
@@ -9,7 +9,7 @@ function InputSearchField(props) {
                 {label}
                 <Form.Control
                     value={data ? data[name] ? data[name].value : '' : ''}
-                    onChange={(e) => setData({ ...data, [name]: { field: name, value: e.target.value } })}
+                    onChange={(e) => onChange({ key: name, value: e.target.value })}
                     disabled={disabled === true ? true : false}
                     name={name}
                     placeholder={placeholder}

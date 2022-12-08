@@ -34,7 +34,7 @@ function UserPage() {
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         isEnabled: true
-    })
+    });
 
     const handleSubmit = (data) => {
         if (data.password !== data.repeatPassword) {
@@ -43,12 +43,14 @@ function UserPage() {
         }
         else {
             RegisterUser({ ...data, company: JSON.parse((localStorage.getItem('company'))).id })
-            .then(() => {
-                toast.success("Usuário salvo!")
-                setLoading(false)
-            })
-                .catch((request) =>
-                    toast.error(request.response.data.message));
+                .then(() => {
+                    toast.success("Usuário salvo!")
+                    setLoading(false)
+                })
+                .catch((request) => {
+                    toast.error(request.response.data.message);
+                    setLoading(false)
+                })
         }
     }
 

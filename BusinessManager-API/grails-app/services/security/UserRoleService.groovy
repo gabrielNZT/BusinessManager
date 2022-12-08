@@ -7,7 +7,6 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 class UserRoleService {
-
     UserRole get(Long id) {
         return UserRole.findById(id)
     }
@@ -29,6 +28,7 @@ class UserRoleService {
     }
 
     Object getList (Integer pageSize, Integer current, String sort  , String filters) {
+        def pattern = "dd/MM/yyyy" as String
         def listFilters = JSON.parse(filters)
         def c = UserRole.createCriteria()
         def max = (pageSize * current)
@@ -37,14 +37,14 @@ class UserRoleService {
             createAlias("role","_role")
             createAlias("user","_user")
             if(listFilters != null)  {
-                listFilters.name? like("_user.name", "%${listFilters.name.value}%") : null
-                listFilters.username? like("_user.username", "%${listFilters.username.value}%") : null
-                listFilters.email? like("_user.email", "${listFilters.email.value}%") : null
-                listFilters.phone? like("_user.phone", "${listFilters.phone.value}%") : null
-                listFilters.enabled? (listFilters.enabled.value != "Todos"? eq("_user.enabled", listFilters.enabled.value != "Desativado") : null) : null
-                listFilters.permission? eq("_role.authority", "${listFilters.permission.value}") : null
-                listFilters.contractDate? eq("_user.contractDate", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(listFilters.contractDate.value as String)) : null
-                listFilters.birthDate? eq("_user.birthDate", new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(listFilters.birthDate.value as String)) : null
+                listFilters.name?.value ? like("_user.name", "%${listFilters.name.value}%") : null
+                listFilters.username?.value ? like("_user.username", "%${listFilters.username.value}%") : null
+                listFilters.email?.value ? like("_user.email", "${listFilters.email.value}%") : null
+                listFilters.phone?.value ? like("_user.phone", "${listFilters.phone.value}%") : null
+                listFilters.enabled?.value ? (listFilters.enabled.value != "Todos"? eq("_user.enabled", listFilters.enabled.value != "Desativado") : null) : null
+                listFilters.permission?.value ? eq("_role.authority", "${listFilters.permission.value}") : null
+                listFilters.contractDate?.value ? eq("_user.contractDate", new SimpleDateFormat(pattern).parse(listFilters.contractDate.value as String)) : null
+                listFilters.birthDate?.value ? eq("_user.birthDate", new SimpleDateFormat(pattern).parse(listFilters.birthDate.value as String)) : null
             }
             order("_user.name", sort)
         }

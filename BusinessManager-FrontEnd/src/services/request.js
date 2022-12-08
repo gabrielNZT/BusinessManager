@@ -30,7 +30,8 @@ export const SignIn = (user) => {
     return api
         .post("/login", {
             username: user.name,
-            password: user.password
+            password: user.password,
+            headers: {}
         })
         .then()
 }

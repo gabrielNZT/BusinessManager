@@ -1,9 +1,12 @@
 package security
 
-
+import businessmanager.api.Company
+import businessmanager.api.Product
 import exceptions.RegisterCompanyException
 import grails.gorm.transactions.Transactional
 import grails.plugins.mail.MailService
+import java.time.LocalDate
+import java.text.SimpleDateFormat
 
 @Transactional
 class UserService{
@@ -105,9 +108,20 @@ class UserService{
         User user = new User()
         Role role = new Role(authority: (requestJSON.permission))
 
+        String pattern = "dd/MM/yyyy" as String
         def map = requestJSON as Map
 
-        user.properties = map
+        Date birthDate = new SimpleDateFormat(pattern).parse(requestJSON.contractDate as String)
+        Date contractDate = new SimpleDateFormat(pattern).parse(requestJSON.birthDate as String)
+        user.setContractDate(contractDate)
+        user.setBirthDate(birthDate)
+        user.username = requestJSON.username
+        user.password = requestJSON.password
+        user.name = requestJSON.name
+        user.company = Company.findById(requestJSON.company as Long)
+        user.phone = requestJSON.phone
+        user.cpf = requestJSON.cpf
+        user.email = requestJSON.email
         user.enabled = requestJSON.isEnabled
         user.imageBytes = requestJSON.userPhoto == null? null : requestJSON.userPhoto.base64.decodeBase64()
         user.contentType = requestJSON.userPhoto == null? null : requestJSON.userPhoto.contentType

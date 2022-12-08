@@ -13,7 +13,7 @@ function DateANT(props) {
                 <Space direction="vertical" size={12}>
                     <DatePicker style={{ width: '320px' }}
                         inputReadOnly={true}
-                        onChange={(value) => onChange({ key: key, value: value.toJSON() })}
+                        onChange={(_, dateString) => onChange({ key: key, value: dateString })}
                         size='large'
                         format={dateFormat}
                         dateRender={(current) => {

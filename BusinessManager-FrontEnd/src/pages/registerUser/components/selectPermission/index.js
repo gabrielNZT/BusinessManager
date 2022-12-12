@@ -7,7 +7,7 @@ function SelectPermission(props) {
     const { formData, item } = props;
 
     const handleChange = (value) => props.handleSetData({ ...formData, [props.item.tag]: value })
-
+    
     return (
         <div style={{ display: 'flex', flexDirection: 'column', width: '31.6%' }}>
             <label> {item.label} </label>

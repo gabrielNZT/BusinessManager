@@ -3,7 +3,6 @@ package security
 import exceptions.UpdateUserException
 import grails.converters.JSON
 import grails.gorm.transactions.Transactional
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 
 class UserRoleService {
@@ -58,8 +57,18 @@ class UserRoleService {
         Role role = Role.findByAuthority(map.role.authority)
         User user = User.findById(map.user.id?: map.user.key)
         UserRole userRole = UserRole.findByUser(user)
+        String pattern = 'dd/MM/yyyy'
 
-        user.properties = map.user
+        map.user.each { key, value -> {
+            def valor = user.getProperty(key)
+            if(value != valor) {
+                if (key == 'contractDate' || key == 'birthDate') {
+                    user."$key" = new SimpleDateFormat(pattern).parse(value as String)
+                } else user."$key" = valor
+            }
+          }
+        }
+
         if(map.user.userPhoto != null){
             user.contentType = map.user.userPhoto.contentType
             user.imageBytes = map.user.userPhoto.base64?.decodeBase64()

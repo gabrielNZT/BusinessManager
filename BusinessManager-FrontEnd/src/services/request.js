@@ -26,12 +26,14 @@ export function ChangePassword(name, newPassword) {
 }
 
 export const SignIn = (user) => {
-
     return api
         .post("/login", {
             username: user.name,
-            password: user.password,
-            headers: {}
+            password: user.password
+        }, {
+            headers: {
+                authorization: ''
+            }
         })
         .then()
 }
@@ -83,7 +85,6 @@ export const GetListUser = (pagination, sorter, filters) => {
 export const GetListProduct = (pagination, sorter, filters) => {
     const { current, pageSize } = pagination
     const { order: sort } = sorter ? sorter : { order: 'asc' }
-
     return api
         .get(`/getProductList`, {
             params: {
@@ -115,7 +116,7 @@ export const UpdateProduct = (product) => {
 }
 
 export const UpdateUser = (data) => {
-    const { permission, ...user } = data
+    const { permission, passwordLocked, ...user } = data
     const user_role = permission ? {
         user: {
             ...user

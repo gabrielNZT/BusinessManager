@@ -11,7 +11,7 @@ function DateEntry(props) {
 
     const handleChange = (value) => props.handleSetData({ ...formData, [item.tag]: value })
     const handleDefaultValue = () => formData[item.tag] ? moment(formData[item.tag]) : null
-
+    
     return (
         <div className='div-custom-label'>
             <label>{item.label}</label>

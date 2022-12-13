@@ -2,7 +2,7 @@ import {LOGIN,
     HAS_TEMPORARY_PASSWORD, 
     FETCH_USER_DATA, 
     FETCH_COMPANY_NAME,
-    FETCH_COMPANY_NAME_CONFIG_PAGE} from '../../../store/actionTypes.js'
+    FETCH_COMPANY_NAME_CONFIG_PAGE} from '../actionTypes.js'
 
 export function LogIn(user) {
     return {type: LOGIN, user}

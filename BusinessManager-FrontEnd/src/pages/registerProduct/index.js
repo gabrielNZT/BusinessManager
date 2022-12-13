@@ -1,5 +1,5 @@
 import LayoutHome from "../../global/components/layout"
-import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
+import { FormRegisterUser, HeaderRegisterForm } from "../../global/components"
 import { GetProductCode, SaveProduct } from "../../services/request"
 import { useEffect, useState } from "react"
 import ClickSubmit from "../../contexts/clickSubmit"

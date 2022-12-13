@@ -1,10 +1,9 @@
-import LayoutHome from "../../global/components/layout"
-import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
 import { useEffect, useState } from "react"
 import ClickSubmit from "../../contexts/clickSubmit"
 import { useLocation } from "react-router-dom"
 import { GetProductImage, UpdateProduct } from "../../services/request"
 import { binToBase64 } from "../../global/utils"
+import { FormRegisterUser, HeaderRegisterForm, LayoutHome } from "../../global/components"
 import { toast } from "react-toastify"
 
 const DEFAULT_ITEMS = [

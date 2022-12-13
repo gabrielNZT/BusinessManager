@@ -1,4 +1,4 @@
-import { SwitchEnableUser } from "../../../registerUser/components";
+import { SwitchEnableUser } from "..";
 
 function DoubleSwitch(props) {
     return (

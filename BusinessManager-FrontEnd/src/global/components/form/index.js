@@ -1,7 +1,6 @@
 import { Form } from "react-bootstrap"
-import { DateEntry, InputLabel, SelectPermission, UploadUserPhoto, SwitchEnableUser, PasswordField, SelectUnity } from '..'
-import DoubleSwitch from "../../../editUser/components/doubleSwitch";
-import ClickSubmit from "../../../../contexts/clickSubmit";
+import { DateEntry, InputLabel, SelectPermission, UploadUserPhoto, SwitchEnableUser, PasswordField, SelectUnity, DoubleSwitch } from '..'
+import ClickSubmit from "../../../contexts/clickSubmit";
 import { useContext } from "react";
 
 function FormRegisterUser(props) {

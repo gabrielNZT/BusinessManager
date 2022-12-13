@@ -38,7 +38,8 @@
 }
 
 .div-search-fields {
-    width: 320px !important;
+    width: 300px !important;
+    margin-top: 6px;
 }
 
 .ant-picker {

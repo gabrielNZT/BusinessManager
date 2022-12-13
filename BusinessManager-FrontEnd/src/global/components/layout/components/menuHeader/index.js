@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react";
 import { GetCurrentUser } from "../../../../../services/request.js";
-import { FetchCompanyName } from "../../../../../pages/login/reducer/actions.js"
+import { FetchCompanyName } from "../../../../../store/login/actions.js"
 
 
 function MenuHeader() {

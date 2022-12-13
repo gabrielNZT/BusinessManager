@@ -2,10 +2,9 @@ import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { toast } from "react-toastify"
 import ClickSubmit from "../../contexts/clickSubmit"
-import LayoutHome from "../../global/components/layout"
 import { binToBase64 } from "../../global/utils"
 import { GetImageUser, UpdateUser } from "../../services/request"
-import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
+import { FormRegisterUser, HeaderRegisterForm, LayoutHome } from "../../global/components"
 import './style/style.css'
 
 const DEFAULT_ITEMS = [

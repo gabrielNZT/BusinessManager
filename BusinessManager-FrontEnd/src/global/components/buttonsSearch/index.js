@@ -1,7 +1,7 @@
 import { TbZoomCancel } from "react-icons/tb"
 import { BiSearch } from 'react-icons/bi'
 import { useDispatch, useSelector } from "react-redux"
-import { ClickSearchField } from "../../reducer/actions"
+import { ClickSearchField } from "../../../store/listUser/actions"
 import PopOver from "../popover"
 
 function ButtonsSearch(props) {

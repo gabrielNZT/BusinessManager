@@ -4,8 +4,8 @@ import { AiFillWarning } from 'react-icons/ai'
 import { useNavigate } from "react-router-dom"
 import { Popconfirm } from 'antd'
 import { useDispatch } from "react-redux"
-import { DeleteProduct, DeleteUser } from "../../../../services/request"
-import { DeleteProductFromList, DeleteUserFromList } from "../../reducer/actions"
+import { DeleteProduct, DeleteUser } from "../../../services/request"
+import { DeleteProductFromList, DeleteUserFromList } from "../../../store/listUser/actions"
 
 function ButtonsActions(props) {
     const { record } = props

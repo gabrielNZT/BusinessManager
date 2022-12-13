@@ -1,6 +1,6 @@
 import { useState } from "react"
 import LayoutHome from "../../global/components/layout"
-import { FormRegisterUser, HeaderRegisterForm } from "./components"
+import { FormRegisterUser, HeaderRegisterForm } from "../../global/components"
 import ClickSubmit from "../../contexts/clickSubmit"
 import "./style/style.css"
 import { toast } from "react-toastify"

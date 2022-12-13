@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { useContext } from "react";
 import { AiOutlineCheck } from 'react-icons/ai'
-import ClickSubmit from "../../../../contexts/clickSubmit";
+import ClickSubmit from "../../../contexts/clickSubmit";
 
 function ButtonSubmit(props) {
     const { handleSubmit, loading, setLoading } = useContext(ClickSubmit)

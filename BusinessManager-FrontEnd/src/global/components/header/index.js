@@ -1,5 +1,5 @@
 import ButtonSubmit from '../buttonSubmit'
-import HeaderArrow from "../../../../global/components/headerBackToLogin"
+import HeaderArrow from "../headerBackToLogin"
 
 function HeaderRegisterForm(props) {
     return (

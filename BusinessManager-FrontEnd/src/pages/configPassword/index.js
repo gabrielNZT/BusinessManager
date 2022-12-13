@@ -3,9 +3,9 @@ import { useEffect, useState } from "react"
 import './style/style.css'
 import { useDispatch, useSelector } from "react-redux"
 import { ChangePassword } from "../../services/request"
-import { FetchCompanyNameConfigPage } from "../login/reducer/actions"
-import HeaderArrow from "../../global/components/headerBackToLogin"
-import ConfigPasswordForm from "./components/form";
+import { FetchCompanyNameConfigPage } from "../../store/login/actions"
+import { HeaderArrow } from "../../global/components"
+import ConfigPasswordForm from "./form";
 import { useNavigate } from "react-router-dom"
 
 function ConfigPassword() {

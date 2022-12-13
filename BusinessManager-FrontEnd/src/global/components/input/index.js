@@ -1,5 +1,5 @@
 import { Form } from 'react-bootstrap'
-import { cpfMask, moneyMask, phoneMask } from '../../../../global/utils'
+import { cpfMask, moneyMask, phoneMask } from '../../utils'
 
 function InputLabel(props) {
     const { formData } = props

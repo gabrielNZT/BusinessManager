@@ -1,4 +1,4 @@
-import ButtonsVertical from "../../../global/components/buttonsVertical"
+import ButtonsVertical from "../../global/components/buttonsVertical"
 import {Form} from 'react-bootstrap'
 
 function ForgetPasswordForm(props) {

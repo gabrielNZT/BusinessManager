@@ -1,7 +1,7 @@
 import { toast } from "react-toastify"
-import { PasswordRecover, RegisterCompany, SignIn } from "../../services/request"
+import { PasswordRecover, RegisterCompany, SignIn } from "../../../services/request"
 
-export function ToastNotify(action, callBack) {
+function ToastNotify(action, callBack) {
     const payload = action.payload
 
     switch (action.type) {
@@ -42,3 +42,4 @@ export function ToastNotify(action, callBack) {
             return
     }
 }
+export default ToastNotify

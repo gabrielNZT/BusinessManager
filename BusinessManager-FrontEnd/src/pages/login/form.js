@@ -2,11 +2,11 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useState } from 'react';
-import { FetchCompanyName, FetchUserData, LogIn } from '../reducer/actions.js'
+import { FetchCompanyName, FetchUserData, LogIn } from '../../store/login/actions.js'
 import { useDispatch } from 'react-redux';
-import { ToastNotify } from '../../../global/toast/index.js';
+import { ToastNotify } from '../../global/components';
 import { useNavigate } from 'react-router-dom';
-import { GetUserProperties } from '../../../services/request.js';
+import { GetUserProperties } from '../../services/request.js';
 
 function LoginForm() {
   const dispatch = useDispatch()

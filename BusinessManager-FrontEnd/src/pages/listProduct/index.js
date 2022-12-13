@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-
-import LayoutHome from "../../global/components/layout"
 import { GetListProduct, UpdateProduct } from "../../services/request"
-import { ButtonsActions, ContainerList } from "../listUser/components"
-import { StockNumber } from "../listUser/components"
-import { FetchProductList, SetTableParams } from "../listUser/reducer/actions"
-import { SwitchEnableUser } from "../registerUser/components"
+import { ButtonsActions, ContainerList, SwitchEnableUser, StockNumber, LayoutHome } from "../../global/components"
+import { FetchProductList, SetTableParams } from "../../store/listUser/actions"
 
 const SWITCH_ELEMENT_POS = 6
 const width = 100

@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { BsSearch } from 'react-icons/bs'
-import InputSearchField from "../inputSearchField";
 import { useState } from "react";
-import { DateANT, SelectANT } from "../../../../global/components";
-import { SetTableParams } from "../../reducer/actions";
+import { DateANT, SelectANT, InputSearchField } from "..";
+import { SetTableParams } from "../../../store/listUser/actions";
 
 const column = { display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }
 const row = { display: 'flex', flexDirection: 'row', justifyContent: 'center' }

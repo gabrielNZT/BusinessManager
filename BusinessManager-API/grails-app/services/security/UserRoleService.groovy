@@ -27,7 +27,6 @@ class UserRoleService {
     }
 
     Object getList (Integer pageSize, Integer current, String sort  , String filters) {
-        def pattern = "dd/MM/yyyy" as String
         def listFilters = JSON.parse(filters)
         def c = UserRole.createCriteria()
         def max = (pageSize * current)
@@ -42,13 +41,18 @@ class UserRoleService {
                 listFilters.phone?.value ? like("_user.phone", "${listFilters.phone.value}%") : null
                 listFilters.enabled?.value ? (listFilters.enabled.value != "Todos"? eq("_user.enabled", listFilters.enabled.value != "Desativado") : null) : null
                 listFilters.permission?.value ? eq("_role.authority", "${listFilters.permission.value}") : null
-                listFilters.contractDate?.value ? eq("_user.contractDate", new SimpleDateFormat(pattern).parse(listFilters.contractDate.value as String)) : null
-                listFilters.birthDate?.value ? eq("_user.birthDate", new SimpleDateFormat(pattern).parse(listFilters.birthDate.value as String)) : null
+                listFilters.contractDate?.value ? between("_user.contractDate", formatDate(listFilters.contractDate.value.initialDate as String), formatDate(listFilters.contractDate.value.endDate as String)) : null
+                listFilters.birthDate?.value ? between("_user.birthDate", formatDate(listFilters.birthDate.value.initialDate as String), formatDate(listFilters.birthDate.value.endDate as String)) : null
             }
             order("_user.name", sort)
         }
 
         return results
+    }
+
+    Date formatDate(String date) {
+        String pattern = "dd/MM/yyyy"
+        return new SimpleDateFormat(pattern).parse(date)
     }
 
     @Transactional

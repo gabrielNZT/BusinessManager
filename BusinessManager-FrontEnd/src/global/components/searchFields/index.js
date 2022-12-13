@@ -4,6 +4,8 @@ import { useState } from "react";
 import { DateANT, SelectANT, InputSearchField } from "..";
 import { SetTableParams } from "../../../store/listUser/actions";
 
+const INITIAL = 0
+const END = 1
 const column = { display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }
 const row = { display: 'flex', flexDirection: 'row', justifyContent: 'center' }
 
@@ -15,7 +17,7 @@ function SearchFields(props) {
     const [data, setData] = useState()
     console.log(data)
     const onFilter = () => dispatch(SetTableParams({ ...tableParams, filter: { ...data } }));
-    const onChange = ({ value, key: name }) => setData({ ...data, [name]: { field: name, value: value } })
+    const onChange = ({ value, key: name }) => setData({ ...data, [name]: { field: name, value: { initialDate: value[INITIAL], endDate: value[END] } } })
 
     return (
         !hideSearchFields &&

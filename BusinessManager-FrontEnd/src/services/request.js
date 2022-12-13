@@ -69,7 +69,6 @@ export const showProduct = (product_id) => {
 export const GetListUser = (pagination, sorter, filters) => {
     const { current, pageSize } = pagination
     const { order: sort } = sorter ? sorter : { order: 'asc' }
-
     return api
         .get(`/getUserList`, {
             params: {

@@ -3,6 +3,8 @@ import React from 'react';
 
 const { RangePicker } = DatePicker;
 
+const DATE_FORMAT = 'DD/MM/YYYY'
+
 function DateANT(props) {
     const { onChange } = props
     const { key, title } = props.item
@@ -13,8 +15,8 @@ function DateANT(props) {
                 <label style={{ fontWeight: 'bold' }}>{title}</label>
                 <Space direction="vertical" size={12}>
                     <RangePicker
-                        picker="year"
-                        onChange={(_, value) => onChange({ key: key, value: value })} />
+                        onChange={(_, value) => onChange({ key: key, value: value })}
+                        format={DATE_FORMAT} />
                 </Space>
             </div>
         </div>

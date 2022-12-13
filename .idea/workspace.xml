@@ -4,7 +4,60 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78c7a88b-0707-4daf-b107-1e3758951d93" name="Changes" comment="" />
+    <list default="true" id="78c7a88b-0707-4daf-b107-1e3758951d93" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/layout/components/menuHeader/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/layout/components/menuHeader/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/modal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/modal/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/modal/styleSheets.css" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/modal/styleSheets.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/toast/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/toast/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/configPassword/components/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/configPassword/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/configPassword/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/configPassword/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/editProduct/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/editProduct/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/editUser/components/doubleSwitch/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/doubleSwitch/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/editUser/components/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/editUser/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/editUser/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/forgetPassword/components/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/forgetPassword/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/forgetPassword/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/forgetPassword/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listProduct/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listProduct/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/buttonsActions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/buttonsActions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/buttonsSearch/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/buttonsSearch/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/checkBox/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/checkBox/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/containerList/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/containerList/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/dateText/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/dateText/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/headerList/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/headerList/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/inputSearchField/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/inputSearchField/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/popover/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/popover/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/searchFields/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/searchFields/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/stockNumber/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/stockNumber/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/components/table/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/table/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/reducer/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/store/listUser/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/listUser/reducer/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/store/listUser/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/login/components/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/login/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/login/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/login/reducer/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/store/login/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/login/reducer/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/store/login/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/login/reducer/sagas.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/store/login/sagas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerCompany/components/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerCompany/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerCompany/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerCompany/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerProduct/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerProduct/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/buttonSubmit/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/buttonSubmit/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/datePicker/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/datePicker/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/form/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/form/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/header/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/input/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/input/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/passwordInput/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/passwordInput/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/selectPermission/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/selectPermission/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/selectUnity/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/selectUnity/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/switch/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/switch/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/components/upload/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/global/components/upload/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/pages/registerUser/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/services/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/services/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/store/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/BusinessManager-FrontEnd/src/store/store.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +65,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2HHSGQzVgoQKk9BQJFPSeRfAwta" />
   <component name="ProjectViewState">
@@ -23,10 +79,19 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/ravtec/Desktop/Repository/BusinessManager/BusinessManager-API",
+    "last_opened_file_path": "C:/Users/ravtec/Desktop/Repository/BusinessManager",
     "nodejs_package_manager_path": "npm"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ravtec\Desktop\Repository\BusinessManager\BusinessManager-FrontEnd\src\global\components" />
+      <recent name="C:\Users\ravtec\Desktop\Repository\BusinessManager\BusinessManager-FrontEnd\src\pages\registerCompany" />
+      <recent name="C:\Users\ravtec\Desktop\Repository\BusinessManager\BusinessManager-FrontEnd\src\pages\login" />
+      <recent name="C:\Users\ravtec\Desktop\Repository\BusinessManager\BusinessManager-FrontEnd\src\pages\forgetPassword" />
+      <recent name="C:\Users\ravtec\Desktop\Repository\BusinessManager\BusinessManager-FrontEnd\src\pages\configPassword" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -36,6 +101,7 @@
       <option name="presentableId" value="Default" />
       <updated>1667940422797</updated>
       <workItem from="1667940427679" duration="45000" />
+      <workItem from="1670869281965" duration="2189000" />
     </task>
     <servers />
   </component>

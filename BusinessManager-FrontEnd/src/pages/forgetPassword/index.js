@@ -2,12 +2,12 @@ import { Background, Logo } from "../../assets"
 import './style/stylesheets.css'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom"
-import ModalNotification from "../../global/modal"
-import { ToastNotify } from "../../global/toast";
+import ModalNotification from "../../global/components/modal"
+import { ToastNotify } from "../../global/components";
 import { useDispatch } from "react-redux";
-import { HasTemporaryPassword } from '../login/reducer/actions'
+import { HasTemporaryPassword } from '../../store/login/actions'
 import HeaderArrow from "../../global/components/headerBackToLogin";
-import ForgetPasswordForm from "./components/form";
+import ForgetPasswordForm from "./form";
 
 
 export function ForgetPassword() {
@@ -48,7 +48,7 @@ export function ForgetPassword() {
                     <p>Para recuperar sua senha, informe seu email. Enviaremos
                         uma nova senha temporária, lembre-se de alterá-la na
                         próxima vez que acessar o sistema. </p>
-                    <ForgetPasswordForm handleSubmit={handleSubmit} setEmail={setEmail} email={email}/>
+                    <ForgetPasswordForm handleSubmit={handleSubmit} setEmail={setEmail} email={email} />
                 </div>
             </div>
         </>

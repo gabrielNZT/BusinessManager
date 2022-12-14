@@ -26,11 +26,14 @@ export function ChangePassword(name, newPassword) {
 }
 
 export const SignIn = (user) => {
-
     return api
         .post("/login", {
             username: user.name,
             password: user.password
+        }, {
+            headers: {
+                authorization: ''
+            }
         })
         .then()
 }
@@ -63,7 +66,7 @@ export const showProduct = (product_id) => {
         .then()
 }
 
-export const GetListUser = (pagination, sorter) => {
+export const GetListUser = (pagination, sorter, filters) => {
     const { current, pageSize } = pagination
     const { order: sort } = sorter ? sorter : { order: 'asc' }
     return api
@@ -71,16 +74,25 @@ export const GetListUser = (pagination, sorter) => {
             params: {
                 current: current,
                 pageSize: pageSize,
-                sort: sort === 'ascend' ? 'asc' : sort === 'descend' ? 'desc' : 'asc'
+                sort: sort === 'ascend' ? 'asc' : sort === 'descend' ? 'desc' : 'asc',
+                filters: JSON.stringify(filters)
             }
         })
         .then()
 }
 
-export const GetListProduct = (pagination) => {
+export const GetListProduct = (pagination, sorter, filters) => {
     const { current, pageSize } = pagination
+    const { order: sort } = sorter ? sorter : { order: 'asc' }
     return api
-        .get(`/product?current=${current}&pageSize=${pageSize}`)
+        .get(`/getProductList`, {
+            params: {
+                current: current,
+                pageSize: pageSize,
+                sort: sort === 'ascend' ? 'asc' : sort === 'descend' ? 'desc' : 'asc',
+                filters: JSON.stringify(filters)
+            }
+        })
         .then()
 }
 
@@ -97,14 +109,13 @@ export const GetProductImage = (image_id) => {
 }
 
 export const UpdateProduct = (product) => {
-    console.log(product)
     return api
         .put("/updateProduct", product)
         .then()
 }
 
 export const UpdateUser = (data) => {
-    const { permission, ...user } = data
+    const { permission, passwordLocked, ...user } = data
     const user_role = permission ? {
         user: {
             ...user
@@ -132,7 +143,6 @@ export const DeleteProduct = (product_id) => {
 }
 
 export const GetProductCode = (company_id) => {
-    console.log(company_id)
     return api
         .get("/getProductCode/" + company_id)
         .then()

@@ -12,5 +12,5 @@ json {
     unity product.unity
     stock product.stock
     minStock product.minStock
-    enabled product.isEnabled
+    isEnabled product.isEnabled
 }

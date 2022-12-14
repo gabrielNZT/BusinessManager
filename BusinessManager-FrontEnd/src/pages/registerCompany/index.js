@@ -1,14 +1,14 @@
 import { Background, Logo } from '../../assets/index.js'
 import { useNavigate } from 'react-router-dom'
 import './style/styleSheets.css'
-import ModalNotification from "../../global/modal"
+import ModalNotification from "../../global/components/modal"
 import { useState } from 'react';
-import { ToastNotify } from '../../global/toast/index.js'
+import { ToastNotify } from '../../global/components'
 import { cnpjIsValid } from '../../utils/index.js';
 import { toast } from 'react-toastify'
-import HeaderArrow from '../../global/components/headerBackToLogin/index.js'
-import RegisterForm from './components/form.js';
-import {cnpjMask, phoneMask} from '../../global/utils'
+import { HeaderArrow } from '../../global/components'
+import RegisterForm from './form.js';
+import { cnpjMask, phoneMask } from '../../global/utils'
 
 
 function Register() {
@@ -69,7 +69,7 @@ function Register() {
                             else if ((element.message).indexOf("cnpj") > 0) {
                                 toast.error(element.message)
                                 setCompany({ ...company, cnpj: '' })
-                            }   
+                            }
                         })
                     } else {
                         if ((request.response.data.message).indexOf("cnpj") > 0) setCompany({ ...company, cnpj: '' });

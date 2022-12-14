@@ -1,8 +1,8 @@
 import { legacy_createStore as createStore, applyMiddleware } from 'redux'
 import { combineReducers } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import auth from '../pages/login/reducer/reducer.js'
-import list from '../pages/listUser/reducer/reducer.js'
+import auth from './login/reducer.js'
+import list from './listUser/reducer.js'
 import siderCollapsed from '../global/components/layout/reducer/reducer.js'
 
 const sagaMiddleware = createSagaMiddleware()

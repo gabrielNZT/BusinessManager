@@ -1,6 +1,7 @@
 package security
 
 import exceptions.UpdateUserException
+import grails.converters.JSON
 import grails.validation.ValidationException
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST
@@ -8,7 +9,6 @@ import static org.springframework.http.HttpStatus.CREATED
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.NO_CONTENT
 import static org.springframework.http.HttpStatus.OK
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY
 
 import grails.gorm.transactions.ReadOnly
 import grails.gorm.transactions.Transactional
@@ -26,16 +26,13 @@ class UserRoleController {
         respond userRoleService.list(params), model:[userRoleCount: userRoleService.count()]
     }
 
-    def getListUser(Integer pageSize, Integer current, String sort  , String field) {
-        def c = UserRole.createCriteria()
-        def max = (pageSize * current)
-        Integer offset = (pageSize * (current - 1))
-        def results = c.list (max: max, offset: offset){
-            createAlias("user","_user")
-            order("_user.name", sort)
-        }
-
-        respond results, [status: OK, view: "showList"]
+    def getListUser(Integer pageSize, Integer current, String sort  , String filters) {
+        Object results = userRoleService.getList(pageSize, current, sort ,filters)
+        def model = [
+                userRoleList: results,
+                totalCount: results.totalCount as Integer
+        ]
+        respond model
     }
 
     def show(Long id) {

@@ -3,6 +3,7 @@ package businessmanager.api
 import exceptions.RegisterCompanyException
 import exceptions.RegisterProductException
 import exceptions.UpdateProductException
+import grails.converters.JSON
 import grails.gorm.services.Service
 import grails.gorm.transactions.Transactional
 import groovy.sql.Sql
@@ -50,7 +51,7 @@ class ProductService {
     }
 
     void updateProduct(Object request) throws UpdateProductException {
-        Product product = Product.findById(request.id)
+        Product product = Product.findById(request.id?: request.key)
         def map = request as Map
         product.properties = map
         if(map.productPhoto != null) {
@@ -70,5 +71,23 @@ class ProductService {
         def converterToLong = Long.valueOf((result[first_value]) as String)
         def lastID = (converterToLong?: 0) as Long
         return Long.toHexString((lastID + 1))
+    }
+
+    Object listProducts(Integer pageSize, Integer current, String sort, String filters) {
+        def productFilters = JSON.parse(filters)
+        def c = Product.createCriteria()
+        def offset = (pageSize * (current - 1))
+        def max = (pageSize * current)
+        def results = c.list(max: max, offset: offset) {
+            order("name", sort)
+            productFilters.name? like("name", "%${productFilters.name.value}%") : null
+            productFilters.code? eq("code", productFilters.code.value) : null
+            productFilters.price? like("price", "${productFilters.price.value}") : null
+            productFilters.stock? (productFilters.stock.value? eq("stock", Integer.valueOf(productFilters.stock.value as String)) : null) : null
+            productFilters.unity? eq("unity", productFilters.unity.value) : null
+            productFilters.minStock? ( productFilters.minStock.value? eq("minStock", Integer.valueOf(productFilters.minStock.value as String)) : null) : null
+            productFilters.isEnabled? (productFilters.isEnabled.value != "Todos"? eq("isEnabled", productFilters.isEnabled.value != "Desativado") : null) : null
+        }
+        return results
     }
 }

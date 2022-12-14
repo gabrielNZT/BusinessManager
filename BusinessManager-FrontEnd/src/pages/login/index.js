@@ -1,7 +1,7 @@
 import {Background} from "../../assets";
 import { useEffect } from "react";
 import { Logo } from "../../assets";
-import LoginForm from "./components/form";
+import LoginForm from "./form";
 import './style/style.css'
 
 function Login() {

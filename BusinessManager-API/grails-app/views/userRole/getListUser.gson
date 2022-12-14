@@ -1,0 +1,11 @@
+import security.UserRole
+
+model {
+    Object userRoleList
+    Integer totalCount
+}
+
+json {
+    users tmpl.userList(userRoleList ?: [])
+    count totalCount
+}

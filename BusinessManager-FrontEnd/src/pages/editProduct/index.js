@@ -1,10 +1,9 @@
-import LayoutHome from "../../global/components/layout"
-import { FormRegisterUser, HeaderRegisterForm } from "../registerUser/components"
 import { useEffect, useState } from "react"
 import ClickSubmit from "../../contexts/clickSubmit"
 import { useLocation } from "react-router-dom"
 import { GetProductImage, UpdateProduct } from "../../services/request"
 import { binToBase64 } from "../../global/utils"
+import { FormRegisterUser, HeaderRegisterForm, LayoutHome } from "../../global/components"
 import { toast } from "react-toastify"
 
 const DEFAULT_ITEMS = [
@@ -14,7 +13,7 @@ const DEFAULT_ITEMS = [
     { type: 'selectUnity', label: 'Unidade', tag: 'unity', placeholder: 'Escolha a unidade', elements: ['UN'] },
     { type: 'input', label: 'Quantidade em Estoque', placeholder: 'Digite a quantidade em estoque', tag: 'stock' },
     { type: 'input', label: 'Estoque Mínimo', tag: 'minStock', placeholder: 'Digite a quantidade de estoque mínimo' },
-    { type: 'switch', label: 'Ativo?', tag: 'enabled' },
+    { type: 'switch', label: 'Ativo?', tag: 'isEnabled' },
     { type: 'upload', label: 'Imagem', body: 'Clique ou arraste a imagem para esta área para fazer o upload', tag: 'productPhoto' }
 ]
 

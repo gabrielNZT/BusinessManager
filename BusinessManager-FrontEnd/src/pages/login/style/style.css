@@ -149,6 +149,6 @@ label{
 }
 
 .form-label{
-    font-weight: bold;
+    font-weight: bold !important;
     width: 320px;
 }

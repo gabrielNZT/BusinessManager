@@ -22,8 +22,13 @@ class ProductController {
     static responseFormats = ['json', 'xml']
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index() {
-        respond productService.list(), [status: OK, view: "showList"]
+    def getProductList(Integer pageSize, Integer current, String sort, String filters ) {
+        def results = productService.listProducts(pageSize, current, sort, filters)
+        def model = [
+                listProducts: results as Object,
+                totalCount: results.totalCount as Integer
+        ]
+        respond model
     }
 
     def getImage(Long id) {

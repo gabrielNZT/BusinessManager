@@ -7,7 +7,7 @@ export function handleNavigate(key, collapsed) {
         case '3':
             return "../user" // Usuários
         case '4':
-            return "../home" // Configurações
+            return "../editCompany" // Configurações
         default:
             return
     };

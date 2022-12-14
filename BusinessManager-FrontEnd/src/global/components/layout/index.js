@@ -2,7 +2,7 @@ import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     HomeFilled,
-    SettingFilled
+    ShopFilled
 } from '@ant-design/icons';
 import './style/style.css'
 import { Layout, Menu } from 'antd';
@@ -49,8 +49,8 @@ function LayoutHome(props) {
                         },
                         {
                             key: '4',
-                            icon: <SettingFilled />,
-                            label: 'Configurações',
+                            icon: <ShopFilled />,
+                            label: 'Empresa',
                         }
                     ]}
                 />

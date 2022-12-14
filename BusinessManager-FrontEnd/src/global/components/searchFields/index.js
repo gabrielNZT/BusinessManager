@@ -15,10 +15,10 @@ function SearchFields(props) {
     const tableParams = useSelector(state => state.list.tableParams)
     const hideSearchFields = useSelector(state => state.list.hideSearchFields)
     const [data, setData] = useState()
-    console.log(data)
-    const onFilter = () => dispatch(SetTableParams({ ...tableParams, filter: { ...data } }));
-    const onChange = ({ value, key: name }) => setData({ ...data, [name]: { field: name, value: { initialDate: value[INITIAL], endDate: value[END] } } })
 
+    const onFilter = () => dispatch(SetTableParams({ ...tableParams, filter: { ...data } }));
+    const onChangeDate = ({ value, key: name }) => setData({ ...data, [name]: { field: name, value: { initialDate: value[INITIAL], endDate: value[END] } } })
+    const onChange = ({ value, key: name }) => setData({ ...data, [name]: { field: name, value: value } })
     return (
         !hideSearchFields &&
         (
@@ -44,7 +44,7 @@ function SearchFields(props) {
                             case 'DATE':
                                 return <DateANT
                                     item={{ key: props.key, title: props.title }}
-                                    onChange={onChange}
+                                    onChange={onChangeDate}
                                     index={index}
                                 />
                             default:

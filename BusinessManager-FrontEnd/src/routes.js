@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import {
     Login, Register, ForgetPassword, ConfigPassword, HomePage, UserPage,
-    RegisterProduct, EditProduct, EditUser, ListUser, ListProduct
+    RegisterProduct, EditProduct, EditUser, ListUser, ListProduct, EditEmpresa
 } from './pages'
 
 export default function PagesRoutes() {
@@ -20,6 +20,7 @@ export default function PagesRoutes() {
                 <Route element={(<EditUser />)} path={'/user/edit'} />
                 <Route element={(<ListUser />)} path={'/user'} />
                 <Route element={(<ListProduct />)} path={'/product'} />
+                <Route element={(<EditEmpresa />)} path={'/editCompany'} />
             </Routes>
         </Router>
     )

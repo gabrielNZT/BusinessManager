@@ -11,8 +11,8 @@ json {
     username userRole.user.username
     cpf userRole.user.cpf
     phone userRole.user.phone
-    birthDate userRole.user.birthDate
-    contractDate userRole.user.contractDate
+    birthDate userRole.user.birthDate.format("dd/MM/yyyy")
+    contractDate userRole.user.contractDate.format("dd/MM/yyyy")
     enabled userRole.user.enabled
     permission userRole.role.authority
 }

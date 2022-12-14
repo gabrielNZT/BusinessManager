@@ -41,8 +41,8 @@ class UserRoleService {
                 listFilters.phone?.value ? like("_user.phone", "${listFilters.phone.value}%") : null
                 listFilters.enabled?.value ? (listFilters.enabled.value != "Todos"? eq("_user.enabled", listFilters.enabled.value != "Desativado") : null) : null
                 listFilters.permission?.value ? eq("_role.authority", "${listFilters.permission.value}") : null
-                listFilters.contractDate?.value ? between("_user.contractDate", formatDate(listFilters.contractDate.value.initialDate as String), formatDate(listFilters.contractDate.value.endDate as String)) : null
-                listFilters.birthDate?.value ? between("_user.birthDate", formatDate(listFilters.birthDate.value.initialDate as String), formatDate(listFilters.birthDate.value.endDate as String)) : null
+                listFilters.contractDate?.value?.initialDate ? between("_user.contractDate", formatDate(listFilters.contractDate.value.initialDate as String), formatDate(listFilters.contractDate.value.endDate as String)) : null
+                listFilters.birthDate?.value?.initialDate ? between("_user.birthDate", formatDate(listFilters.birthDate.value.initialDate as String), formatDate(listFilters.birthDate.value.endDate as String)) : null
             }
             order("_user.name", sort)
         }

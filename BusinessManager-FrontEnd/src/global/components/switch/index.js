@@ -9,7 +9,6 @@ function SwitchEnableUser(props) {
 
     const handleChange = (value) => {
         setColor(value ? { background: 'green' } : { background: 'red' })
-        console.log(tableParams)
         props.handleSetData({ ...formData, [props.name]: value }, tableParams)
     }
 

@@ -8,7 +8,7 @@ function ToastNotify(action, callBack) {
         case 'LOGIN_PROMISE':
             return (
                 toast.promise(
-                    SignIn(payload?.user).then(callBack()),
+                    SignIn(payload?.user),
                     {
                         pending: '...loading',
                         error: 'Campos inválidos'

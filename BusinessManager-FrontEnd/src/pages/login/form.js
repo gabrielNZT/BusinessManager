@@ -38,11 +38,6 @@ function LoginForm() {
     }
   }
 
-  function callBack() {
-    const access_token = JSON.parse(localStorage.getItem('auth'))?.access_token
-    dispatch(LogIn({ ...user, access_token: access_token }))
-  }
-
   async function getHasTemporaryPassword(username) {
     const response = await GetUserProperties(username)
     dispatch(FetchCompanyName(response.data.company))
@@ -59,12 +54,11 @@ function LoginForm() {
   }
 
   async function handleToast() {
-    await ToastNotify({ type: 'LOGIN_PROMISE', payload: { user: { name: user.name, password: user.password } } }, callBack)
-      .then((response) => {
-        localStorage.setItem('auth', JSON.stringify({ access_token: response.data.access_token }))
-        getHasTemporaryPassword(response.data.username)
-      })
-      .finally(() => setUser({ name: '', password: '' }))
+    const response = await ToastNotify({ type: 'LOGIN_PROMISE', payload: { user: { name: user.name, password: user.password } } })
+    dispatch(LogIn({ ...user, access_token: response.data.access_token }))
+    localStorage.setItem('auth', JSON.stringify({ access_token: response.data.access_token }))
+    getHasTemporaryPassword(response.data.username)
+    setUser({ name: '', password: '' })
   }
 
   const handleSubmit = (e) => {

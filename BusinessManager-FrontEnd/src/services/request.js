@@ -35,7 +35,6 @@ export const SignIn = (user) => {
                 authorization: ''
             }
         })
-        .then()
 }
 
 export const GetUserProperties = (username) => {

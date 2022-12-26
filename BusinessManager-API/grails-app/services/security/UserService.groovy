@@ -61,14 +61,11 @@ class UserService{
     }
 
     def sendEmailPassword(String email, String password){
-        String passwordToSend
         if(email != null){
-        passwordToSend = (password == null? generatePassword() : password )
-
             mailService.sendMail {
                 to email
                 subject "NOVA SENHA"
-                text "Sua senha de acesso temporária é: $passwordToSend"
+                text "Sua senha de acesso temporária é: $password"
             }
         }
     }
@@ -80,7 +77,6 @@ class UserService{
         String newPassowrd = generatePassword()
         user.setPassword(newPassowrd)
         user.setHasTemporaryPassword(true)
-        user.setVersion(user.version + 1)
 
         sendEmailPassword(user.email, newPassowrd)
 

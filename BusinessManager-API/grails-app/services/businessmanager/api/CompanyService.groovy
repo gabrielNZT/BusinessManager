@@ -49,13 +49,16 @@ class CompanyService{
             transactionStatus.setRollbackOnly()
             throw new RegisterCompanyException(company.errors)
         }
+        String userPassword = userService.generatePassword()
         user.setCompany(company)
+        user.name = user.name?: user.email
+        user.password = userPassword
         user.save()
         if(user.hasErrors()){
             transactionStatus.setRollbackOnly()
             throw new RegisterCompanyException(user.errors)
         }
         company.addToUsers(user)
-        userService.sendEmailPassword(user.email, user.password)
+        userService.sendEmailPassword(user.email, userPassword)
     }
 }

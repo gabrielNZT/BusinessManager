@@ -12,7 +12,6 @@ api.interceptors.request.use(function (config) {
     const auth = localStorage.getItem('auth')
     const token = auth ? JSON.parse(auth)?.access_token : ''
     config.headers.Authorization =  token;
-    console.log(config)
     return config;
 });
 
